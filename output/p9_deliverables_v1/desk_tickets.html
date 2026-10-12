@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs: Desk Tickets Plan (Homework 5, Problem 6)</title>
+<style>
+  :root {
+    --ink: #1d2433; --muted: #5b6475; --line: #d9dee8; --bg: #f5f7fb; --card: #ffffff;
+    --brand: #0f3d6e; --brand-soft: #e7eef8; --expected: #1f6f43; --expected-soft: #e8f5ee;
+    --actual: #8a5a00; --actual-soft: #fff7e6; --warn: #9b2c2c; --warn-soft: #fdecec;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.55 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+         color: var(--ink); background: var(--bg); }
+  header { background: var(--brand); color: #fff; padding: 22px 32px 18px; }
+  header h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: .2px; }
+  header p { margin: 0; color: #d5e2f2; font-size: 13.5px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; font-size: 12.5px; color: #d5e2f2; }
+  .meta b { color: #fff; font-weight: 600; }
+  nav[role="tablist"] { display: flex; gap: 4px; padding: 0 24px; background: #0b2f55; overflow-x: auto; }
+  nav button { appearance: none; border: 0; background: transparent; color: #c9d7ea; font: inherit; font-weight: 600;
+               padding: 12px 18px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+  nav button:hover { color: #fff; }
+  nav button[aria-selected="true"] { color: #fff; border-bottom-color: #7fb3ff; background: rgba(255,255,255,.06); }
+  nav button:focus-visible { outline: 2px solid #7fb3ff; outline-offset: -2px; }
+  main { max-width: 1060px; margin: 0 auto; padding: 24px 24px 48px; }
+  section[role="tabpanel"] > h2 { margin: 0 0 4px; font-size: 21px; color: var(--brand); }
+  .lede { margin: 0 0 18px; color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }
+  .card h3 { margin: 0 0 10px; font-size: 16px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: .4px; }
+  code { font-family: Consolas, "Cascadia Mono", Menlo, monospace; font-size: 13px; background: #f0f2f7;
+         padding: 1px 5px; border-radius: 4px; }
+  .badge { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+           padding: 3px 9px; border-radius: 999px; vertical-align: middle; }
+  .badge.expected { background: var(--expected-soft); color: var(--expected); border: 1px solid #b7dcc6; }
+  .badge.actual { background: var(--actual-soft); color: var(--actual); border: 1px solid #f0d49b; }
+  .badge.optional { background: #eef0f6; color: var(--muted); border: 1px solid var(--line); }
+  .expected-block { border-left: 5px solid var(--expected); }
+  .expected-block > h3 { color: var(--expected); }
+  .first { background: var(--brand-soft); border-radius: 8px; padding: 12px 14px; margin: 0 0 14px; }
+  .first strong { color: var(--brand); }
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; }
+  ol.steps > li { counter-increment: s; position: relative; padding: 12px 12px 12px 54px; border: 1px solid var(--line);
+                  border-radius: 8px; margin: 0 0 10px; background: #fff; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 14px; top: 12px; width: 26px; height: 26px;
+                          border-radius: 50%; background: var(--brand); color: #fff; font-weight: 700; text-align: center;
+                          line-height: 26px; font-size: 13px; }
+  ol.steps > li.optional { border-style: dashed; background: #fbfcfe; }
+  ol.steps > li.optional::before { background: #8a94a8; }
+  .step-head { font-weight: 700; }
+  .route { color: var(--muted); font-weight: 600; }
+  .tools { margin: 6px 0 0; font-size: 13.5px; }
+  .why { margin: 4px 0 0; }
+  .expect { margin: 4px 0 0; color: #2c3a52; }
+  ul.tight { margin: 6px 0 0; padding-left: 20px; }
+  ul.tight li { margin: 3px 0; }
+  .not-involved { background: #fafbfd; }
+  .boundary { background: var(--warn-soft); border: 1px solid #f3c2c2; }
+  .boundary h3 { color: var(--warn); }
+  .actual-block { border: 2px dashed #e0b45e; background: var(--actual-soft); }
+  .actual-block h3 { color: var(--actual); }
+  .actual-empty { min-height: 90px; border-radius: 8px; background: rgba(255,255,255,.6); border: 1px solid #f0d49b;
+                  display: flex; align-items: center; justify-content: center; color: var(--actual); font-style: italic;
+                  text-align: center; padding: 16px; }
+  .later { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           text-align: center; color: var(--muted); }
+  .later .big { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 6px; }
+  .actual-done h4 { margin: 14px 0 6px; font-size: 14.5px; color: var(--actual); }
+  .actual-done .small, .small { font-size: 12.5px; color: var(--muted); }
+  blockquote.record { margin: 6px 0 10px; padding: 8px 12px; background: #fff; border-left: 3px solid #e0b45e; font-size: 13.5px; }
+  ol.dlist { margin: 4px 0 8px; padding-left: 20px; font-size: 13.5px; }
+  footer { max-width: 1060px; margin: 0 auto; padding: 0 24px 32px; color: var(--muted); font-size: 12.5px; }
+  [hidden] { display: none !important; }
+  @media print {
+    nav { display: none; } section[role="tabpanel"] { display: block !important; page-break-after: always; }
+    body { background: #fff; } .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Campus Customs: Desk Tickets Plan</h1>
+  <p>Homework 5, Problem 6: Plan the three tickets. This is the plan of what we <b>expect</b> the agent team to do, written before any live run.</p>
+  <div class="meta">
+    <span><b>Shop business date:</b> 2026-08-31 (<code>desk.date_today</code>)</span>
+    <span><b>Plan written:</b> 2026-10-10</span>
+    <span><b>Model for the live runs:</b> gpt-6-luna via Portkey</span>
+    <span><span class="badge expected">Expected</span> = planned &nbsp; <span class="badge actual">Actual</span> = filled in after the live runs</span>
+    <span><b>Actual and Cash completed:</b> 2026-10-11, generated from the recorded evidence by <code>scripts/build_p9_evidence.py</code> (Problem 9)</span>
+  </div>
+</header>
+
+<nav role="tablist" aria-label="Desk tickets">
+  <button role="tab" id="tab-101" aria-controls="panel-101" aria-selected="true" tabindex="0" data-hash="ticket-101">Ticket 101</button>
+  <button role="tab" id="tab-102" aria-controls="panel-102" aria-selected="false" tabindex="-1" data-hash="ticket-102">Ticket 102</button>
+  <button role="tab" id="tab-103" aria-controls="panel-103" aria-selected="false" tabindex="-1" data-hash="ticket-103">Ticket 103</button>
+  <button role="tab" id="tab-cash" aria-controls="panel-cash" aria-selected="false" tabindex="-1" data-hash="cash">Cash</button>
+  <button role="tab" id="tab-reflection" aria-controls="panel-reflection" aria-selected="false" tabindex="-1" data-hash="reflection">Reflection</button>
+</nav>
+
+<main>
+
+<!-- ============================== TICKET 101 ============================== -->
+<section role="tabpanel" id="panel-101" aria-labelledby="tab-101" data-ticket="101">
+  <h2>Ticket 101: Tauhid Zaman wants a Classic Bulldog Tee in size S</h2>
+  <p class="lede">Customer order. The ticket is linked to vendor invoice #501.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The request</h3>
+      <table>
+        <tr><th>Requester</th><td>Tauhid Zaman (customer)</td></tr>
+        <tr><th>Item</th><td><code>CC-TEE-WHITE</code>, size S, quantity 1</td></tr>
+        <tr><th>Note</th><td>"Needs a tee in size S."</td></tr>
+        <tr><th>Status</th><td>Open when planned (2026-10-10); now <b>resolved</b> (see Actual)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Verified facts the agents will find</h3>
+      <table>
+        <tr><th>Fact</th><th>Tool</th></tr>
+        <tr><td>Size S on hand: <b>0</b> (M 5, L 3, XL 2). Cost $8, list $28.</td><td><code>check_inventory</code></td></tr>
+        <tr><td>Invoice #501, Bulldog Print Co, <b>$840</b>, "Rush reprint CC-TEE-WHITE S", due 2026-08-28, <b>open, 3 days overdue</b></td><td><code>get_ticket</code>, <code>get_financial_position</code></td></tr>
+        <tr><td>Bulldog Print Co is <b>blocked</b> (open unpaid invoice, rule R3); no arrival date can be estimated</td><td><code>list_vendors</code></td></tr>
+        <tr><td>Whether the goods on #501 were delivered is <b>not recorded</b></td><td><code>get_ticket</code> (unknowns)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card expected-block">
+    <h3><span class="badge expected">Expected</span>&nbsp; How I expect the team to handle it</h3>
+    <div class="first">
+      <strong>First contact: Inventory.</strong> The customer is asking for a product, so the first question is whether we have it and, if not, why it isn't coming. Inventory owns stock and vendors. It will find size S at zero, and that the only restock record for this item is invoice #501, which its description identifies as a rush reprint of the size-S tee. Bulldog Print Co is blocked because that invoice is unpaid. The records do not show whether those tees were delivered. Until this is known, a reply or a payment would be premature.
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-head">Boss reads the ticket <span class="route">· Boss</span></div>
+        <div class="tools">Tools: <code>get_ticket(101)</code></div>
+        <p class="expect">Sees a customer order linked to invoice #501, and delegates to Inventory.</p>
+      </li>
+      <li>
+        <div class="step-head">Check stock and the restock path <span class="route">· Boss → Inventory</span></div>
+        <div class="tools">Tools: <code>check_inventory("CC-TEE-WHITE")</code>, <code>list_vendors</code></div>
+        <p class="expect">Reports size S = 0, and that Bulldog Print Co is blocked by #501. Inventory should <b>not</b> propose a second order yet. The invoice description associates #501 with a reprint of this exact item, but the records do not show whether those goods were delivered or what their fulfillment status is. A second order should wait until a human clarifies that status.</p>
+      </li>
+      <li>
+        <div class="step-head">Address the unpaid invoice <span class="route">· Inventory → Accounting</span></div>
+        <div class="tools">Tools: <code>get_financial_position</code>, <code>list_pending_actions</code>, <code>propose_payment(kind="invoice", ref_id=501, amount=840, ticket_id=101)</code></div>
+        <p class="why"><b>Why Accounting:</b> the blocker is a payables problem, and only Accounting can prepare a payment.</p>
+        <p class="expect">Confirms cash of $3,400 covers the $840 invoice, checks that no duplicate proposal exists, and creates a <b>payment proposal</b> that waits for human approval. Nothing is paid.</p>
+      </li>
+      <li class="optional">
+        <div class="step-head">Optional: an honest status reply <span class="route">· Boss → Customer Service</span> <span class="badge optional">only if needed</span></div>
+        <div class="tools">Tools: <code>draft_message(ticket_id=101, …)</code></div>
+        <p class="expect">Only if the Boss decides the customer should hear from us now. An unsent draft: "size S is out of stock and a restock is in progress", with no promised date. A human reviews it before anything is sent.</p>
+      </li>
+    </ol>
+    <div class="grid">
+      <div class="card not-involved">
+        <h3>Not involved, and why</h3>
+        <ul class="tight">
+          <li><b>Facilities:</b> nothing about the lease or the premises.</li>
+          <li><b>Customer Service:</b> only for the optional reply, not for the diagnosis.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Expected end state</h3>
+        <ul class="tight">
+          <li>One payment proposal (invoice #501, $840) <b>awaiting human approval</b></li>
+          <li>Possibly one unsent customer draft</li>
+          <li>Size S still 0; ticket still <b>open</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card boundary">
+      <h3>Where the agents must stop (a human decides)</h3>
+      <ul class="tight">
+        <li>Approving or rejecting the $840 payment (R2)</li>
+        <li>Finding out whether the #501 tees were already delivered (not in the records)</li>
+        <li>Approving any customer message (R7: nothing is sent automatically)</li>
+        <li>Any new shipment from Bulldog is an outside event; it can happen only after #501 is paid (R3)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card actual-block" data-section="actual" data-ticket="101">
+    <h3><span class="badge actual">Actual</span>&nbsp; What the agents actually did</h3>
+    <div class="actual-done" id="actual-101">
+<p><b>Final status:</b> resolved &nbsp;·&nbsp; <b>Resolution type:</b> Simulated workflow complete; fulfilment not verified (<code>simulated_workflow_complete</code>) &nbsp;·&nbsp; by Ryan Suspanic, 2026-10-11 19:17:18 UTC</p>
+<p><b>Not verified by anyone:</b> physical production, shipment, delivery or receipt of goods; acceptance by the customer or counterparty; that any message was actually sent (drafts are never sent, R7). The person confirmed only that the desk's simulated workflow is complete.</p>
+<p class="small">The person's own resolution summary, as recorded in <code>data/audit.db</code> (event 15):</p><blockquote class="record">Ticket 101&#x27;s simulated workflow is complete. The agents reviewed the customer&#x27;s request for one white Classic Bulldog Tee in size S, identified the inventory shortage, examined the linked overdue invoice #501, and prepared a payment proposal and customer message draft. I approved and executed payment #2 of $840 to Bulldog Print Co, reducing checking from $1,000 to $160. Invoice #501 is now paid, removing the vendor&#x27;s unpaid-invoice shipping restriction. However, size-S inventory remains at zero. Production, shipment, delivery, customer acceptance, and customer communication are not verified. The customer message remains an unsent draft. This resolution records completion of the simulated administrative workflow, not fulfillment of the customer&#x27;s order.</blockquote>
+<h4>Agent runs</h4><table><tr><th>Run</th><th>When (UTC)</th><th>Outcome</th><th>Usage</th><th>Evidence</th></tr>
+<tr><td>Attempt 1<br><code>53e4f001…</code></td><td>2026-10-10 20:57:26 UTC<br>to 20:57:39 UTC</td><td>error<br><span class='small'>status_code: 400, model_name: gpt-6-luna, body: {&#x27;message&#x27;: &quot;azure-openai error: Function tools with reasoning_effort are not supported for gpt-6-luna-global in…</span></td><td>0 requests, 0 tool calls, 0 tokens; 5 trail events (seq 4–8)</td><td><code>101_run.json</code><br><code>101_events.json</code><br><code>101_after_run_state.json</code><br><code>101_attempt1_incident.md</code><br><span class='small'>saved by the read-only observer while and right after the run. Full agent replies: not stored (this run predates the full-response recorder; only 300-character summaries exist in the trail).</span></td></tr>
+<tr><td>Attempt 2<br><code>ae8d9bf4…</code></td><td>2026-10-10 21:44:10 UTC<br>to 21:44:46 UTC</td><td>completed</td><td>12 requests, 18 tool calls, 29,652 tokens; 46 trail events (seq 9–54)</td><td><code>101_attempt2_run.json</code><br><code>101_attempt2_events.json</code><br><code>101_attempt2_after_run_state.json</code><br><span class='small'>saved by the read-only observer while and right after the run. Full agent replies: not stored (this run predates the full-response recorder; only 300-character summaries exist in the trail).</span></td></tr>
+<tr><td>Attempt 3<br><code>84270c9b…</code></td><td>2026-10-11 03:25:55 UTC<br>to 03:26:44 UTC</td><td>completed</td><td>14 requests, 18 tool calls, 38,646 tokens; 46 trail events (seq 55–100)</td><td><code>101_attempt3_run.json</code><br><code>101_attempt3_events.json</code><br><code>101_attempt3_after_run_state.json</code><br><span class='small'>saved by the read-only observer while and right after the run. Full agent replies: not stored (this run predates the full-response recorder; only 300-character summaries exist in the trail).</span></td></tr>
+</table>
+<h4>Attempt 2 (<code>ae8d9bf4…</code>): delegations and tool calls</h4><ol class='dlist'>
+<li>21:44:23 · <b>Boss → Customer Service</b>: <span class='small'>Handle customer order ticket 101 only. Review ticket and existing actions/drafts; investigate tee size S availability and prepare any appropriate customer quote/draft under your authority. Clearly report proposed options, blockers (including vendor issue if relevant), and human decisions. Do not ...</span></li>
+<li>21:44:26 · <b>Customer Service → Inventory</b>: <span class='small'>For customer order ticket 101, investigate whether size S can be replenished and report any relevant vendor status/blocker and available options. Do not place orders.</span></li>
+<li>21:44:37 · <b>Boss → Inventory</b>: <span class='small'>For ticket 101 only, review the existing ticket/action state and investigate replenishment/vendor status for CC-TEE-WHITE size S. Report stock, possible sourcing/replenishment, relevant blocks, and human decisions. Do not place an order.</span></li>
+</ol><table><tr><th>Agent</th><th>Tools called (count)</th><th>Records created or refused</th></tr>
+<tr><td>Boss</td><td><code>get_ticket</code>×1, <code>list_pending_actions</code>×1, <code>check_inventory</code>×1, <code>get_financial_position</code>×1, <code>list_vendors</code>×1</td><td>—</td></tr>
+<tr><td>Inventory</td><td><code>get_ticket</code>×2, <code>check_inventory</code>×2, <code>list_vendors</code>×2, <code>list_pending_actions</code>×1</td><td>—</td></tr>
+<tr><td>Customer Service</td><td><code>check_inventory</code>×1, <code>get_ticket</code>×1, <code>list_pending_actions</code>×1</td><td>—</td></tr>
+</table>
+<h4>Attempt 3 (<code>84270c9b…</code>): delegations and tool calls</h4><ol class='dlist'>
+<li>03:26:13 · <b>Boss → Accounting</b>: <span class='small'>Ticket 101 only. Review linked overdue open invoice #501 ($840 due 2026-08-28) and current cash/rent implications. Prepare any supported payment proposal or report why not executable/not advised; don&#x27;t execute. State relevant unknowns.</span></li>
+<li>03:26:22 · <b>Boss → Inventory</b>: <span class='small'>Ticket 101 only. Check stock and determine whether an inventory purchase proposal is supportable for requested CC-TEE-WHITE size S qty 1, considering vendor status and linked invoice. Do not create unsupported order; report blocked state/unknowns.</span></li>
+<li>03:26:30 · <b>Boss → Customer Service</b>: <span class='small'>Ticket 101 only. Review customer order for Tauhid Zaman requesting one CC-TEE-WHITE size S. Draft an unsent customer update explaining what can/cannot be done now based on stock 0 and linked invoice/vendor status, without promising delivery or claiming shipment. Mention uncertainty about whether ...</span></li>
+</ol><table><tr><th>Agent</th><th>Tools called (count)</th><th>Records created or refused</th></tr>
+<tr><td>Boss</td><td><code>get_ticket</code>×1, <code>list_pending_actions</code>×1, <code>check_inventory</code>×1, <code>get_financial_position</code>×1, <code>list_vendors</code>×1</td><td>—</td></tr>
+<tr><td>Inventory</td><td><code>check_inventory</code>×1, <code>get_ticket</code>×1, <code>list_vendors</code>×1</td><td>—</td></tr>
+<tr><td>Accounting</td><td><code>get_ticket</code>×1, <code>get_financial_position</code>×1, <code>list_pending_actions</code>×1, <code>propose_payment</code>×1</td><td>propose_payment → action_id 1</td></tr>
+<tr><td>Customer Service</td><td><code>get_ticket</code>×1, <code>check_inventory</code>×1, <code>draft_message</code>×1</td><td>draft_message → draft_id 1</td></tr>
+</table>
+<h4>Human decisions (from the audit trail)</h4><ul class='tight'>
+<li>2026-10-11 14:04:53 UTC: Ryan Suspanic approved proposal #1 (payment_executed, payment #2) (trail seq 188)</li>
+<li>2026-10-11 19:17:18 UTC: Ryan Suspanic resolved ticket 101 (simulated_workflow_complete) (trail seq 190)</li>
+</ul>
+<h4>Business records for this ticket (database)</h4><ul class='tight'>
+<li>Proposal #1: payment, $840.00, status <b>executed</b>, payment #2</li>
+<li>Draft #1 to Tauhid Zaman: <b>unsent</b> (created 2026-10-11 03:26:36 UTC; the system never sends messages, R7)</li>
+</ul>
+<h4>Actual compared with Expected</h4><ul class='tight'><li>3 runs were needed; the plan assumed one (see the attempts listed above).</li><li>Attempt 1 ended error before any tool call (provider configuration error; corrected offline).</li><li>Attempt 2 ended completed with no proposal or draft.</li><li>The comparison below is for the final attempt (3).</li><li>First contact differed: the plan named Inventory; the Boss delegated first to Accounting.</li><li>Planned hand-off Boss → Inventory happened.</li><li>Planned hand-off Inventory → Accounting did not happen (delegations to Accounting: Boss → Accounting).</li><li>Optional hand-off Boss → Customer Service was used.</li><li>Delegations not in the plan: Boss → Accounting.</li><li>Facilities was not involved, as planned.</li><li>Planned propose_payment by Accounting: done.</li><li>Optional draft_message by Customer Service: done.</li></ul>
+<p class='small'>Final-state dashboard screenshot: <code>output/p9_screenshots/101_final.png</code> (SHA-256 <code>da05ce2822f03769…</code>, captured 2026-10-11 20:10:24 UTC); shown in <code>output/resolved_board.html</code>.</p></div>
+  </div>
+</section>
+
+<!-- ============================== TICKET 102 ============================== -->
+<section role="tabpanel" id="panel-102" aria-labelledby="tab-102" data-ticket="102" hidden>
+  <h2>Ticket 102: Elm City Properties rent notice</h2>
+  <p class="lede">The landlord's email: "shop rent due in 2 days". The ticket is linked to lease 1.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The request</h3>
+      <table>
+        <tr><th>Requester</th><td>Elm City Properties (landlord)</td></tr>
+        <tr><th>Subject</th><td>Rent due</td></tr>
+        <tr><th>Linked record</th><td>Lease 1, Chapel Street shop</td></tr>
+        <tr><th>Status</th><td>Open when planned (2026-10-10); now <b>resolved</b> (see Actual)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Verified facts the agents will find</h3>
+      <table>
+        <tr><th>Fact</th><th>Tool</th></tr>
+        <tr><td>Monthly rent <b>$2,400</b>, next due <b>2026-09-02</b> (2 days after the business date)</td><td><code>get_ticket</code>, <code>get_financial_position</code></td></tr>
+        <tr><td>Landlord on the lease: Elm City Properties, matching the requester</td><td><code>get_ticket</code></td></tr>
+        <tr><td>Cash: <b>$3,400</b> in checking</td><td><code>get_financial_position</code></td></tr>
+        <tr><td>Also owed: invoice #501, $840 (overdue)</td><td><code>get_financial_position</code></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card expected-block">
+    <h3><span class="badge expected">Expected</span>&nbsp; How I expect the team to handle it</h3>
+    <div class="first">
+      <strong>First contact: Facilities.</strong> A rent notice is about the lease, and Facilities owns the lease and the landlord relationship. Facilities should first confirm the notice against the stored lease (amount, due date, landlord) before any money is considered. Only then does it bring in Accounting, the one agent allowed to prepare a payment.
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-head">Boss reads the ticket <span class="route">· Boss</span></div>
+        <div class="tools">Tools: <code>get_ticket(102)</code></div>
+        <p class="expect">Sees a rent notice linked to lease 1, and delegates to Facilities.</p>
+      </li>
+      <li>
+        <div class="step-head">Verify the notice against the lease <span class="route">· Boss → Facilities</span></div>
+        <div class="tools">Tools: <code>get_ticket(102)</code>, <code>get_financial_position</code>, <code>list_pending_actions</code></div>
+        <p class="expect">Confirms $2,400 due 2026-09-02 to Elm City Properties, and that no rent proposal already exists.</p>
+      </li>
+      <li>
+        <div class="step-head">Assess and prepare the rent payment <span class="route">· Facilities → Accounting</span></div>
+        <div class="tools">Tools: <code>get_financial_position</code>, <code>list_pending_actions</code>, <code>propose_payment(kind="lease", ref_id=1, amount=2400, ticket_id=102)</code></div>
+        <p class="why"><b>Why Accounting:</b> only Accounting can prepare payments, and it can see what else is competing for the same cash.</p>
+        <p class="expect">The rent is fundable from $3,400 on its own. If invoice #501 is also proposed, Accounting will show that only <b>$160</b> would remain if both were paid. That is a hypothetical figure, not the current balance. The result is a <b>payment proposal</b> awaiting human approval; nothing is paid.</p>
+      </li>
+      <li>
+        <div class="step-head">Acknowledge the landlord <span class="route">· Facilities</span></div>
+        <div class="tools">Tools: <code>draft_message(ticket_id=102, related_action_id=&lt;the rent proposal&gt;, …)</code></div>
+        <p class="expect">An <b>unsent</b> draft to the landlord recorded on the lease, acknowledging the notice. It must not promise a payment date before approval; the tool will flag any amount or date as a warning.</p>
+      </li>
+    </ol>
+    <div class="grid">
+      <div class="card not-involved">
+        <h3>Not involved, and why</h3>
+        <ul class="tight">
+          <li><b>Inventory:</b> no stock or vendor question.</li>
+          <li><b>Customer Service:</b> the landlord is not a customer. Landlord messages belong to Facilities, and the system enforces this.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Expected end state</h3>
+        <ul class="tight">
+          <li>One rent payment proposal ($2,400) <b>awaiting human approval</b></li>
+          <li>One unsent landlord draft</li>
+          <li>Ticket still <b>open</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card boundary">
+      <h3>Where the agents must stop (a human decides)</h3>
+      <ul class="tight">
+        <li>Approving the rent payment (R2), and checking that cash never goes negative (R1)</li>
+        <li>Deciding priority if both #501 and the rent are proposed</li>
+        <li>Approving and sending the landlord message (R7)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card actual-block" data-section="actual" data-ticket="102">
+    <h3><span class="badge actual">Actual</span>&nbsp; What the agents actually did</h3>
+    <div class="actual-done" id="actual-102">
+<p><b>Final status:</b> resolved &nbsp;·&nbsp; <b>Resolution type:</b> Business outcome confirmed (<code>business_outcome</code>) &nbsp;·&nbsp; by Ryan Suspanic, 2026-10-11 13:32:18 UTC</p>
+<p class="small">The person's own resolution summary, as recorded in <code>data/audit.db</code> (event 9):</p><blockquote class="record">September rent for lease #1 (Elm City Properties, Chapel Street shop) was paid in the Campus Customs simulation. I approved and executed proposal #2, recording payment #1 of $2,400 on the shop date of August 31, 2026, before the September 2 due date. Checking decreased from $3,400 to $1,000. The lease&#x27;s next due date advanced to October 2 under our documented simulation convention (D6). No real bank transfer occurred. Landlord draft #2 was prepared before payment and remains unsent; it is superseded by the executed transaction. No landlord acknowledgment was recorded.</blockquote>
+<h4>Agent runs</h4><table><tr><th>Run</th><th>When (UTC)</th><th>Outcome</th><th>Usage</th><th>Evidence</th></tr>
+<tr><td>Attempt 1<br><code>f2412172…</code></td><td>2026-10-11 05:44:55 UTC<br>to 05:45:52 UTC</td><td>completed</td><td>17 requests, 20 tool calls, 43,787 tokens; 52 trail events (seq 101–152)</td><td><code>102_attempt1_run.json</code><br><code>102_attempt1_events.json</code><br><code>102_attempt1_responses.json</code><br><code>102_attempt1_after_run_state.json</code><br><span class='small'>saved by the read-only observer while and right after the run. Full agent replies: <code>f2412172-0e32-4e74-96d4-31b9228e9c19.jsonl</code>.</span></td></tr>
+</table>
+<h4>Attempt 1 (<code>f2412172…</code>): delegations and tool calls</h4><ol class='dlist'>
+<li>05:45:23 · <b>Boss → Facilities</b>: <span class='small'>Handle rent-notice ticket 102 only. Check the ticket/context for existing work (ticket shows no drafts/proposals, but verify as needed), review lease/rent and prepare an unsent landlord draft if supported. Report any proposed action, human decisions, and unknowns; do not send or pay.</span></li>
+<li>05:45:23 · <b>Boss → Accounting</b>: <span class='small'>Assess financial position relevant to rent ticket 102 (rent $2,400 due 2026-09-02 per ticket; use shop date and stored cash/open obligations). Prepare a payment proposal only if supported and within available cash; otherwise report blocked/not executable and human decision. Do not pay.</span></li>
+<li>05:45:27 · <b>Facilities → Accounting</b>: <span class='small'>For rent-notice ticket 102, review the stored cash/obligation position and prepare a rent payment proposal if records support it. Do not pay. Return proposal ID/status and any constraints or unknowns.</span></li>
+<li>05:45:41 · <b>Boss → Accounting</b>: <span class='small'>Ticket 102 only. A parallel delegation reported proposal ID 2 already created and marked executable:false, but Facilities reported it as existing before their review; verify current pending actions for ticket 102, clarify whether proposal 2 is newly created or pre-existing, its status/executabili...</span></li>
+</ol><table><tr><th>Agent</th><th>Tools called (count)</th><th>Records created or refused</th></tr>
+<tr><td>Boss</td><td><code>get_ticket</code>×1, <code>list_pending_actions</code>×1, <code>get_financial_position</code>×1</td><td>—</td></tr>
+<tr><td>Accounting</td><td><code>get_ticket</code>×3, <code>get_financial_position</code>×3, <code>list_pending_actions</code>×2, <code>propose_payment</code>×2</td><td>propose_payment → action_id 2; propose_payment refused (DUPLICATE)</td></tr>
+<tr><td>Facilities</td><td><code>get_ticket</code>×1, <code>get_financial_position</code>×1, <code>draft_message</code>×1</td><td>draft_message → draft_id 2</td></tr>
+</table>
+<h4>Human decisions (from the audit trail)</h4><ul class='tight'>
+<li>2026-10-11 13:23:08 UTC: Ryan Suspanic approved proposal #2 (payment_executed, payment #1) (trail seq 154)</li>
+<li>2026-10-11 13:32:18 UTC: Ryan Suspanic resolved ticket 102 (business_outcome) (trail seq 156)</li>
+</ul>
+<h4>Business records for this ticket (database)</h4><ul class='tight'>
+<li>Proposal #2: payment, $2,400.00, status <b>executed</b>, payment #1</li>
+<li>Draft #2 to Elm City Properties: <b>unsent</b> (created 2026-10-11 05:45:35 UTC; the system never sends messages, R7)</li>
+</ul>
+<h4>Actual compared with Expected</h4><ul class='tight'><li>First contact matched the plan: the Boss delegated first to Facilities.</li><li>Planned hand-off Boss → Facilities happened.</li><li>Planned hand-off Facilities → Accounting happened.</li><li>Delegations not in the plan: Boss → Accounting (2 in total).</li><li>Inventory was not involved, as planned.</li><li>Customer Service was not involved, as planned.</li><li>Planned propose_payment by Accounting: done.</li><li>Planned draft_message by Facilities: done.</li><li>Accounting&#x27;s propose_payment call was refused (DUPLICATE); nothing was created by it.</li></ul>
+<p class='small'>Final-state dashboard screenshot: <code>output/p9_screenshots/102_final.png</code> (SHA-256 <code>a99cee9da342b6d8…</code>, captured 2026-10-11 20:10:45 UTC); shown in <code>output/resolved_board.html</code>.</p></div>
+  </div>
+</section>
+
+<!-- ============================== TICKET 103 ============================== -->
+<section role="tabpanel" id="panel-103" aria-labelledby="tab-103" data-ticket="103" hidden>
+  <h2>Ticket 103: Yale AI Club wants 20 hoodies (size M) at a bulk discount</h2>
+  <p class="lede">A price override request from a student organization. No invoice or lease is linked.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The request</h3>
+      <table>
+        <tr><th>Requester</th><td>Yale AI Club (customer)</td></tr>
+        <tr><th>Item</th><td><code>CC-HOOD-NAVY</code>, size M, quantity 20</td></tr>
+        <tr><th>Note</th><td>"Student org wants 20 hoodies, size M, asking for a bulk discount."</td></tr>
+        <tr><th>Status</th><td>Open when planned (2026-10-10); now <b>resolved</b> (see Actual)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Verified facts the agents will find</h3>
+      <table>
+        <tr><th>Fact</th><th>Tool</th></tr>
+        <tr><td>Size M on hand: <b>8</b>, so <b>12 short</b> (S 4, L 14, XL 6)</td><td><code>check_inventory</code></td></tr>
+        <tr><td>Unit cost <b>$22</b>, list price <b>$58</b></td><td><code>check_inventory</code></td></tr>
+        <tr><td>No vendor is recorded as able to supply navy hoodies. Bulldog Print Co ("apparel reprint") is blocked by #501, and its only record is a <i>tee</i> reprint.</td><td><code>list_vendors</code></td></tr>
+        <tr><td>Restock <i>estimate</i>: 12 × $22 = <b>$264</b> (stored unit cost; not a vendor quote)</td><td><code>propose_purchase</code> (if used)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card expected-block">
+    <h3><span class="badge expected">Expected</span>&nbsp; How I expect the team to handle it</h3>
+    <div class="first">
+      <strong>First contact: Customer Service.</strong> This is a customer asking for a price. Customer Service owns the customer relationship and is the only agent allowed to propose a quote. It must first see what we can actually supply, so it checks stock, then brings in Inventory for the 12-hoodie shortage. It brings in Accounting only if a restock purchase or a margin-versus-cash question comes up.
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-head">Boss reads the ticket <span class="route">· Boss</span></div>
+        <div class="tools">Tools: <code>get_ticket(103)</code></div>
+        <p class="expect">Sees a bulk discount request from a customer, and delegates to Customer Service.</p>
+      </li>
+      <li>
+        <div class="step-head">Check what we can supply <span class="route">· Boss → Customer Service</span></div>
+        <div class="tools">Tools: <code>get_ticket(103)</code>, <code>check_inventory("CC-HOOD-NAVY")</code></div>
+        <p class="expect">Finds 8 of the 20 in stock (12 short), and the $22 cost and $58 list price that bound any quote.</p>
+      </li>
+      <li>
+        <div class="step-head">Ask about the shortage <span class="route">· Customer Service → Inventory</span></div>
+        <div class="tools">Tools: <code>list_vendors</code>, <code>check_inventory</code>; <code>propose_purchase</code> only if a supplier is a reasonable hypothesis</div>
+        <p class="why"><b>Why Inventory:</b> only Inventory can judge restocking and vendor blocks.</p>
+        <p class="expect">Reports that no vendor is recorded as a hoodie supplier and that Bulldog Print Co is blocked. Any purchase proposal must be flagged <i>blocked</i>, labeled an <i>estimate</i> ($264), and left for a human to confirm the supplier.</p>
+      </li>
+      <li class="optional">
+        <div class="step-head">Only if a purchase or margin question arises <span class="route">· Customer Service (or Inventory) → Accounting</span> <span class="badge optional">conditional</span></div>
+        <div class="tools">Tools: <code>get_financial_position</code>, <code>list_pending_actions</code></div>
+        <p class="expect">Compares the $264 estimate with the cash left after other proposals. If #501 and the rent are both proposed, only $160 would remain (hypothetical), so the restock cannot be funded as well, and a human must set priorities. Revenue from the sale is not counted (R6).</p>
+      </li>
+      <li>
+        <div class="step-head">Prepare the quote and the reply <span class="route">· Customer Service</span></div>
+        <div class="tools">Tools: <code>propose_quote(ticket_id=103, sku="CC-HOOD-NAVY", size="M", qty=20, unit_price=&lt;between $22 and $58&gt;)</code>, <code>draft_message(ticket_id=103, related_action_id=&lt;the quote&gt;, …)</code></div>
+        <p class="expect">A <b>quote proposal</b> for exactly 20 × M (the tool refuses anything else), priced between cost and list. The discount level is a business decision for a human. Then an <b>unsent</b> draft that promises no delivery date and does not treat the quote as accepted.</p>
+      </li>
+    </ol>
+    <div class="grid">
+      <div class="card not-involved">
+        <h3>Not involved, and why</h3>
+        <ul class="tight">
+          <li><b>Facilities:</b> nothing about the lease or the premises.</li>
+          <li><b>Accounting:</b> only if a purchase or a cash and margin question actually arises (step 4).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Expected end state</h3>
+        <ul class="tight">
+          <li>One quote proposal <b>awaiting human approval</b></li>
+          <li>Possibly one purchase proposal, flagged blocked and estimated</li>
+          <li>One unsent customer draft; ticket still <b>open</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card boundary">
+      <h3>Where the agents must stop (a human decides, or an outside event is needed)</h3>
+      <ul class="tight">
+        <li>The discount level, and approving the quote</li>
+        <li>Identifying a real supplier for navy hoodies and getting a vendor quote (neither exists in the records)</li>
+        <li>Approving any purchase (R2), after any vendor block is cleared (R3) and only if cash allows (R1)</li>
+        <li>Customer acceptance, which the system never records on its own; and any shipment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card actual-block" data-section="actual" data-ticket="103">
+    <h3><span class="badge actual">Actual</span>&nbsp; What the agents actually did</h3>
+    <div class="actual-done" id="actual-103">
+<p><b>Final status:</b> resolved &nbsp;·&nbsp; <b>Resolution type:</b> Simulated workflow complete; fulfilment not verified (<code>simulated_workflow_complete</code>) &nbsp;·&nbsp; by Ryan Suspanic, 2026-10-11 19:37:00 UTC</p>
+<p><b>Not verified by anyone:</b> physical production, shipment, delivery or receipt of goods; acceptance by the customer or counterparty; that any message was actually sent (drafts are never sent, R7). The person confirmed only that the desk's simulated workflow is complete.</p>
+<p class="small">The person's own resolution summary, as recorded in <code>data/audit.db</code> (event 16):</p><blockquote class="record">Ticket 103&#x27;s simulated workflow is complete. The agents reviewed Yale AI Club&#x27;s request for a bulk discount on 20 navy size-M hoodies. Customer Service proposed quote #3 at $50 per hoodie ($1,000 total), compared with the $58 list price and $22 unit cost. I approved the proposed pricing internally. The approval did not generate revenue, reserve inventory, or communicate with the customer. Only 8 hoodies are in stock, leaving a shortage of 12, and no verified supplier or replenishment is recorded. Customer acceptance, inventory replenishment, shipment, and delivery remain unverified. Customer draft #3 remains unsent. This resolution records completion of the simulated pricing and administrative workflow, not customer acceptance or fulfillment of the order.</blockquote>
+<h4>Agent runs</h4><table><tr><th>Run</th><th>When (UTC)</th><th>Outcome</th><th>Usage</th><th>Evidence</th></tr>
+<tr><td>Attempt 1<br><code>fa38a75b…</code></td><td>2026-10-11 13:37:27 UTC<br>to 13:37:57 UTC</td><td>completed</td><td>8 requests, 11 tool calls, 20,678 tokens; 28 trail events (seq 157–184)</td><td><code>103_attempt1_run.json</code><br><code>103_attempt1_events.json</code><br><code>103_attempt1_responses.json</code><br><code>103_attempt1_after_run_state.json</code><br><code>103_attempt1_recovery_record.json</code><br><span class='small'>reconstructed after the run from the trail, the response file and the database (no observer was running; see the recovery record). Full agent replies: <code>fa38a75b-6dcc-4e75-a18b-feb0d0007c11.jsonl</code>.</span></td></tr>
+</table>
+<h4>Attempt 1 (<code>fa38a75b…</code>): delegations and tool calls</h4><ol class='dlist'>
+<li>13:37:44 · <b>Boss → Customer Service</b>: <span class='small'>Handle ticket 103 only. Ticket is price_override for Yale AI Club: requests bulk discount on 20 CC-HOOD-NAVY size M. Prepare an appropriate customer quote/draft if supported by records; clearly state current availability/limitations and any unknowns. No sending.</span></li>
+</ol><table><tr><th>Agent</th><th>Tools called (count)</th><th>Records created or refused</th></tr>
+<tr><td>Boss</td><td><code>get_ticket</code>×1, <code>list_pending_actions</code>×1, <code>check_inventory</code>×1, <code>get_financial_position</code>×1, <code>list_vendors</code>×1</td><td>—</td></tr>
+<tr><td>Customer Service</td><td><code>check_inventory</code>×1, <code>get_ticket</code>×1, <code>list_pending_actions</code>×1, <code>propose_quote</code>×1, <code>draft_message</code>×1</td><td>propose_quote → action_id 3; draft_message → draft_id 3</td></tr>
+</table>
+<h4>Human decisions (from the audit trail)</h4><ul class='tight'>
+<li>2026-10-11 13:56:39 UTC: Ryan Suspanic approved proposal #3 (quote_approved) (trail seq 186)</li>
+<li>2026-10-11 19:37:00 UTC: Ryan Suspanic resolved ticket 103 (simulated_workflow_complete) (trail seq 192)</li>
+</ul>
+<h4>Business records for this ticket (database)</h4><ul class='tight'>
+<li>Proposal #3: quote, $1,000.00, status <b>approved</b> — an internal price approval: no revenue, no cash, nothing sent (R6, R7)</li>
+<li>Draft #3 to Yale AI Club: <b>unsent</b> (created 2026-10-11 13:37:50 UTC; the system never sends messages, R7)</li>
+</ul>
+<h4>Actual compared with Expected</h4><ul class='tight'><li>First contact matched the plan: the Boss delegated first to Customer Service.</li><li>Planned hand-off Boss → Customer Service happened.</li><li>Planned hand-off Customer Service → Inventory did not happen (delegations to Inventory: none).</li><li>Facilities was not involved, as planned.</li><li>Planned propose_quote by Customer Service: done.</li><li>Planned draft_message by Customer Service: done.</li><li>Optional propose_purchase by Inventory: not done.</li></ul>
+<p class='small'>Final-state dashboard screenshot: <code>output/p9_screenshots/103_final.png</code> (SHA-256 <code>0a6baa2500fdc682…</code>, captured 2026-10-11 20:11:06 UTC); shown in <code>output/resolved_board.html</code>.</p></div>
+  </div>
+</section>
+
+<!-- ============================== CASH ============================== -->
+<section role="tabpanel" id="panel-cash" aria-labelledby="tab-cash" hidden>
+  <h2>Cash</h2>
+<div data-section="cash-reconciliation">
+<p class="lede">Checking balance from the controlled reset to the end of the three-ticket run. Only executed payments change cash; proposals, approved quotes and estimates never do (R1, R6).</p>
+<div class="card"><table><tr><th>Step</th><th>Ticket</th><th>Transaction</th><th>Change</th><th>Balance</th></tr>
+<tr><td>Opening balance after the reset</td><td>—</td><td>Recorded in <code>output/p9_runs/g1_reset_record.json</code></td><td>—</td><td><b>$3,400.00</b></td></tr>
+<tr><td>Payment #1</td><td>102</td><td>Rent, lease #1 (Elm City Properties); proposal #2, approved and executed by Ryan Suspanic at 2026-10-11 13:23:08 UTC; audit.db events 8</td><td>-$2,400.00</td><td>$1,000.00</td></tr>
+<tr><td>Payment #2</td><td>101</td><td>Invoice #501 (Bulldog Print Co); proposal #1, approved and executed by Ryan Suspanic at 2026-10-11 14:04:53 UTC; audit.db events 14</td><td>-$840.00</td><td>$160.00</td></tr>
+<tr><td>Quote #3</td><td>103</td><td>$1,000.00 quote, status <b>approved</b>: an internal price approval only. It generated no revenue and moved no cash (R6); nothing was sent to the customer (R7); customer acceptance is not recorded.</td><td>$0.00</td><td>$160.00</td></tr>
+<tr><td><b>Ending balance</b></td><td>—</td><td>Equals <code>cash_accounts</code> (checking) in the working database: $160.00</td><td>-$3,240.00</td><td><b>$160.00</b></td></tr></table></div>
+<div class='card'><h3>Cash by ticket</h3><ul class='tight'><li>Ticket 101: -$840.00</li><li>Ticket 102: -$2,400.00</li><li>Ticket 103: $0.00 (no payment; quote approved internally, no revenue)</li></ul><p>$3,400.00 − $2,400.00 − $840.00 = <b>$160.00</b>. These are recorded payments within the simulated Campus Customs system; no real bank transfer occurred.</p></div></div>
+</section>
+
+<!-- ============================== REFLECTION ============================== -->
+<section role="tabpanel" id="panel-reflection" aria-labelledby="tab-reflection" hidden>
+  <h2>Reflection</h2>
+  <div class="card later" data-section="coming-later"><div class="big">Coming later</div><div>This tab will be completed in a later problem.</div></div>
+</section>
+
+</main>
+
+<footer>
+  The Expected sections are the plan written before any live agent run (Problem 6), kept exactly as written. The Actual sections and the Cash tab were generated after the runs from <code>output/audit_trail.json</code>, <code>data/audit.db</code>, the working database and the run evidence in <code>output/p9_runs/</code> (Problem 9). The Reflection tab is Problem 10.
+</footer>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(tab, setFocus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (setFocus) tab.focus();
+    if (history.replaceState) history.replaceState(null, '', '#' + tab.dataset.hash);
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { select(tab, false); });
+    tab.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === 'Home') n = tabs[0];
+      if (e.key === 'End') n = tabs[tabs.length - 1];
+      if (n) { e.preventDefault(); select(n, true); }
+    });
+  });
+  var start = tabs.filter(function (t) { return '#' + t.dataset.hash === location.hash; })[0];
+  if (start) select(start, false);
+})();
+</script>
+</body>
+</html>

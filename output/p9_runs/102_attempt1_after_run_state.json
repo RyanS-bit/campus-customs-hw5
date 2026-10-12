@@ -1,0 +1,321 @@
+{
+ "saved_utc": "2026-10-11T05:45:55+00:00",
+ "attempt": "attempt1",
+ "ticket": {
+  "business_date": "2026-08-31",
+  "ticket": {
+   "id": 102,
+   "type": "rent_notice",
+   "requester": "Elm City Properties",
+   "subject": "Rent due",
+   "sku": null,
+   "size": null,
+   "qty": null,
+   "lease_id": 1,
+   "invoice_id": null,
+   "status": "open",
+   "notes": "Email: shop rent due in 2 days.",
+   "created_at": "2026-08-31T11:05:00-04:00",
+   "linked_invoice": null,
+   "linked_lease": {
+    "id": 1,
+    "space_name": "Chapel Street shop",
+    "landlord": "Elm City Properties",
+    "monthly_rent": 2400.0,
+    "next_due": "2026-09-02",
+    "notes": null
+   },
+   "is_open": true,
+   "is_resolved": false
+  },
+  "pending_actions": [
+   {
+    "id": 2,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 102,
+    "invoice_id": null,
+    "lease_id": 1,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 2400.0,
+    "amount_basis": "lease_rent",
+    "account": "checking",
+    "rationale": "Ticket 102 and the lease record show $2,400 rent due 2026-09-02. Stored checking cash is $3,400 as of the shop date 2026-08-31; this full-amount proposal is within that stored balance. An open $840 invoice is also recorded, so if both rent and invoice are paid, hypothetical remaining cash is $160. This proposal does not execute payment; human approval is required.",
+    "proposed_by": "accounting",
+    "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T05:45:27.981175+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T05:45:27.981175+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "drafts": [
+   {
+    "id": 2,
+    "ticket_id": 102,
+    "recipient": "Elm City Properties",
+    "recipient_source": "leases.landlord",
+    "channel": "email",
+    "subject": "Rent due September 2",
+    "body": "Hello Elm City Properties,\n\nWe\u2019re writing regarding the Chapel Street shop lease. Our records show monthly rent of $2,400 due September 2, 2026. We are reviewing the rent position and the existing proposed payment internally; no payment is being confirmed by this message. Please let us know if there is any additional information we should consider regarding this rent notice.\n\nRegards,\nCampus Customs",
+    "related_action_id": null,
+    "warnings": [
+     "Body contains 'confirmed', which may assert a commitment. Human review required.",
+     "Body asserts a price or amount ($2400.00).",
+     "Body mentions a date or time ('September 2'), which may imply a delivery or payment commitment."
+    ],
+    "status": "draft",
+    "created_by": "facilities",
+    "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "call_id": "e76bf417-363c-4c8f-adb8-45065eb1a797",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T05:45:35.804690+00:00",
+    "sent": false
+   }
+  ],
+  "runs": [
+   {
+    "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "mode": "live",
+    "phase": "completed",
+    "outcome": "awaiting_human_approval",
+    "started_at": "2026-10-11T05:44:55.745919+00:00",
+    "finished_at": "2026-10-11T05:45:52.836953+00:00"
+   }
+  ],
+  "inventory": null
+ },
+ "all_tickets": {
+  "business_date": "2026-08-31",
+  "open_count": 3,
+  "resolved_count": 0,
+  "tickets": [
+   {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "invoice_id": 501,
+    "lease_id": null,
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "proposals": {
+     "proposed": 1,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 1,
+    "drafts": 1,
+    "latest_run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "latest_run_phase": "completed"
+   },
+   {
+    "id": 102,
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "subject": "Rent due",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "invoice_id": null,
+    "lease_id": 1,
+    "notes": "Email: shop rent due in 2 days.",
+    "created_at": "2026-08-31T11:05:00-04:00",
+    "proposals": {
+     "proposed": 1,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 1,
+    "drafts": 1,
+    "latest_run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "latest_run_phase": "completed"
+   },
+   {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "invoice_id": null,
+    "lease_id": null,
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "proposals": {
+     "proposed": 0,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 0,
+    "drafts": 0,
+    "latest_run_id": null,
+    "latest_run_phase": null
+   }
+  ]
+ },
+ "pending": {
+  "business_date": "2026-08-31",
+  "count": 2,
+  "actions": [
+   {
+    "id": 1,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 101,
+    "invoice_id": 501,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 840.0,
+    "amount_basis": "invoice_amount",
+    "account": "checking",
+    "rationale": "Full stored amount of open, overdue invoice #501. Checking balance is $3,400; the proposal is within stored cash. The invoice is linked to ticket 101. Whether the invoiced goods were delivered is not recorded; human review should resolve that before deciding whether to approve payment. If this invoice and next rent of $2,400 are both paid, hypothetical cash remaining is $160.",
+    "proposed_by": "accounting",
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T03:26:17.480860+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T03:26:17.480860+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   },
+   {
+    "id": 2,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 102,
+    "invoice_id": null,
+    "lease_id": 1,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 2400.0,
+    "amount_basis": "lease_rent",
+    "account": "checking",
+    "rationale": "Ticket 102 and the lease record show $2,400 rent due 2026-09-02. Stored checking cash is $3,400 as of the shop date 2026-08-31; this full-amount proposal is within that stored balance. An open $840 invoice is also recorded, so if both rent and invoice are paid, hypothetical remaining cash is $160. This proposal does not execute payment; human approval is required.",
+    "proposed_by": "accounting",
+    "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T05:45:27.981175+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T05:45:27.981175+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+ },
+ "cash": {
+  "business_date": "2026-08-31",
+  "checking_balance": 3400.0,
+  "checking_as_of": "2026-08-31",
+  "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+  "accounts": [
+   {
+    "name": "checking",
+    "balance": 3400.0,
+    "as_of": "2026-08-31"
+   }
+  ],
+  "payments_executed": [],
+  "not_counted_as_cash": {
+   "proposed_payments_total": 3240.0,
+   "approved_unexecuted_payments_total": 0,
+   "proposed_or_approved_purchase_estimates": 0,
+   "proposed_purchase_estimates": 0,
+   "approved_unexecuted_purchases_total": 0,
+   "proposed_or_approved_quotes_total": 0,
+   "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+  },
+  "available": {
+   "for_obligations": 3400.0,
+   "for_purchases": 3400.0,
+   "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+  }
+ },
+ "audit": {
+  "consistent": true,
+  "run_active": false,
+  "json_trail": {
+   "events": 152,
+   "valid": true,
+   "problems": [],
+   "exists": true
+  },
+  "audit_db": {
+   "events": 6,
+   "valid": true,
+   "problems": []
+  },
+  "incomplete": [],
+  "cross_reference_problems": [],
+  "note": "The JSON trail and the SQLite databases cannot be committed atomically together. Gaps are detected here and reconciled from audit.db and the working copy's reset stamp, never assumed."
+ }
+}

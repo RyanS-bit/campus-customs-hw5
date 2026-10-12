@@ -1,0 +1,39 @@
+{
+  "label": "LIVE connectivity check: one request to the operational model. Not an agent run; no tools, MCP, database, proposals, drafts, or audit-trail events.",
+  "authorization": "Dr. Ryan, AI_prompts.md Problem 5 follow-up 25",
+  "check_id": "66a0eee7-0f49-4d5e-b432-402b29ddd2d3",
+  "requested_model": "gpt-6-luna",
+  "gateway_host": "api.portkey.ai",
+  "api_key": "present (value never recorded)",
+  "settings": {
+    "max_tokens": 80,
+    "timeout_seconds": 30,
+    "client_max_retries": 0,
+    "requests_sent": 1,
+    "portkey_trace_id": "66a0eee7-0f49-4d5e-b432-402b29ddd2d3"
+  },
+  "prompt": "Connectivity test in a software test environment. Do not use tools. Reply with JSON only, exactly this shape: {\"role\": \"<a short phrase describing your role in this test>\", \"status\": \"ok\"}",
+  "sent_utc": "2026-10-10T00:31:34+00:00",
+  "result": {
+    "gateway_accepted_model": true,
+    "category": "success",
+    "response_text": "{\"role\":\"AI assistant\",\"status\":\"ok\"}",
+    "response_model_name": "gpt-6-luna-2026-09-22",
+    "finish_reason": "stop",
+    "provider_response_id": "chatcmpl-EXFHsA1rFRYI1PpkrZvj9D0i5ZfDv",
+    "usage": {
+      "input_tokens": 48,
+      "output_tokens": 13,
+      "source": "provider-reported, via PydanticAI"
+    },
+    "response_json_valid": true
+  },
+  "duration_seconds": 3.09,
+  "project_files_unchanged": true,
+  "project_file_hashes": {
+    "data/campus_customs.db": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+    "data/campus_customs_new.db": "dbaf24cb083ec7b3f41420b18f59026eaafbaa511f233c2ed181557076228ede",
+    "output/audit_trail.json": "ec8e507a06a123b99a976992693820669c6b7971f05ad1a1e26e82566ca1c75e",
+    "output/mcp_smoke.json": "64a0c1b364cd49f4f09020088ab26ff9638a426201be6868ec4e55a1a7521f08"
+  }
+}

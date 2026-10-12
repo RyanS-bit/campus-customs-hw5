@@ -1,0 +1,64 @@
+{
+ "saved_utc": "2026-10-10T21:44:51+00:00",
+ "attempt": "attempt2",
+ "source": "GET /api/runs/ae8d9bf4-f61f-4117-b7f4-f08b8626e139",
+ "run": {
+  "run_id": "ae8d9bf4-f61f-4117-b7f4-f08b8626e139",
+  "ticket_id": 101,
+  "mode": "live",
+  "phase": "completed",
+  "outcome": "completed_nothing_proposed",
+  "started_at": "2026-10-10T21:44:10.314241+00:00",
+  "finished_at": "2026-10-10T21:44:46.898051+00:00",
+  "error": null,
+  "awaiting_human_action": false,
+  "proposals_awaiting_decision": [],
+  "proposals_decided": [],
+  "drafts_unsent": [],
+  "ticket_status": "open",
+  "ticket_resolved": false,
+  "usage": {
+   "requests": 12,
+   "input_tokens": 27179,
+   "output_tokens": 2473,
+   "tool_calls": 18,
+   "source": "provider-reported, via PydanticAI"
+  },
+  "agent_report": {
+   "summary": "Ticket 101 only: the requested size S tee is out of stock. No quote, purchase, payment proposal, or draft was created. Bulldog Print Co is blocked from new shipments by open invoice 501, so replenishment from that vendor is blocked until the invoice is paid. No transaction or message was sent.",
+   "facts": [
+    "Ticket 101 is an open customer order for one CC-TEE-WHITE size S tee, requested by Tauhid Zaman. (get_ticket)",
+    "Ticket 101 links to open invoice 501 for $840, due 2026-08-28, described as a rush reprint of CC-TEE-WHITE size S. (get_ticket)",
+    "The business date is 2026-08-31. (get_ticket; get_financial_position; list_vendors)",
+    "CC-TEE-WHITE size S stock is 0; recorded unit cost is $8 and list price is $28. (check_inventory)",
+    "Checking balance is $3,400. (get_financial_position)",
+    "Invoice 501 is three days overdue as of the business date; Bulldog Print Co is blocked under R3 while this invoice is open. (get_financial_position; list_vendors)",
+    "Bulldog Print Co is listed as an apparel reprint vendor with a 5-day lead time; no arrival estimate is available while blocked. (list_vendors)",
+    "The ticket had no existing pending actions or drafts. (get_ticket; list_pending_actions)",
+    "The ticket record says whether the goods billed on invoice 501 were delivered is not recorded. (get_ticket)"
+   ],
+   "proposals_created": [],
+   "drafts_created": [],
+   "estimates": [
+    "One unit at recorded unit cost has an estimated cost of $8 (quantity \u00d7 unit cost); this is not a vendor quote."
+   ],
+   "needs_human": [
+    "Decide how to address open invoice 501 and verify whether the billed goods were delivered before considering a payment decision; the vendor cannot ship new products while blocked.",
+    "Decide how to handle the customer request while size S is unavailable, including whether to consider another source. No confirmed alternative supplier capability, quote, or availability was established.",
+    "If resolving the vendor block, decide separately whether replenishment is appropriate; no order or quote proposal exists."
+   ],
+   "unknowns": [
+    "Whether invoice 501's goods were delivered is not recorded.",
+    "No supplier quote, confirmed product availability, replenishment order, shipment, or delivery date is known.",
+    "Arrival from Bulldog Print Co cannot be estimated while the vendor is blocked."
+   ],
+   "delegations": [
+    "Customer Service: asked to assess the customer order and whether a customer quote/draft was appropriate; it reported size S unavailable and created no quote or draft.",
+    "Inventory: asked to investigate size S stock, replenishment, and vendor status; it confirmed zero stock and the invoice-related shipping block."
+   ]
+  },
+  "agent_report_source": "entry agent's final report (its own claim; verify against events)",
+  "events": 46,
+  "events_url": "/api/events?run_id=ae8d9bf4-f61f-4117-b7f4-f08b8626e139"
+ }
+}

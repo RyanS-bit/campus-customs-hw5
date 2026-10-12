@@ -1,0 +1,372 @@
+{
+ "provenance": {
+  "capture": "RECONSTRUCTED AFTER THE RUN — not an observer capture",
+  "reconstructed_utc": "2026-10-11T13:51:45+00:00",
+  "reconstructed_by": "Claude (vibe coder), Problem 9 follow-up 32, at Dr. Ryan's request",
+  "why": "The live run was started from the dashboard without the read-only observer running, so no contemporaneous observer files exist.",
+  "contemporaneous_sources": [
+   "output/audit_trail.json (append-only, hash-chained; written during the run by the runner)",
+   "output/run_responses/fa38a75b-6dcc-4e75-a18b-feb0d0007c11.jsonl (full agent replies; written during the run)",
+   "data/audit.db events 10-11 (proposal 3 and draft 3; written during the run)",
+   "pending_actions id 3 and drafts id 3 rows (written during the run)"
+  ],
+  "reconstruction_method": "The same read-only backend GET routes the observer uses, called after the run, plus direct read-only checks."
+ },
+ "saved_utc": "2026-10-11T13:51:45+00:00",
+ "attempt": "attempt1",
+ "state_timing": "Read at reconstruction time (2026-10-11T13:51:45+00:00), NOT at run end (2026-10-11T13:37:57.847557+00:00). Recorded changes since run end: none.",
+ "ticket": {
+  "business_date": "2026-08-31",
+  "ticket": {
+   "id": 103,
+   "type": "price_override",
+   "requester": "Yale AI Club",
+   "subject": "Bulk hoodie discount",
+   "sku": "CC-HOOD-NAVY",
+   "size": "M",
+   "qty": 20,
+   "lease_id": null,
+   "invoice_id": null,
+   "status": "open",
+   "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+   "created_at": "2026-08-31T16:55:00-04:00",
+   "linked_invoice": null,
+   "linked_lease": null,
+   "is_open": true,
+   "is_resolved": false
+  },
+  "pending_actions": [
+   {
+    "id": 3,
+    "kind": "quote",
+    "status": "proposed",
+    "ticket_id": 103,
+    "invoice_id": null,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "unit_price": 50.0,
+    "amount": 1000.0,
+    "amount_basis": "quoted_unit_price",
+    "account": null,
+    "rationale": "Proposed bulk-discount unit price of $50, below the $58 list price and above the $22 unit cost. Inventory records show only 8 units in size M currently on hand versus the requested 20; this proposal is not a stock commitment or approval.",
+    "proposed_by": "customer_service",
+    "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T13:37:48.269723+00:00",
+    "fundable_at_proposal": null,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T13:37:48.269723+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "drafts": [
+   {
+    "id": 3,
+    "ticket_id": 103,
+    "recipient": "Yale AI Club",
+    "recipient_source": "tickets.requester",
+    "channel": "email",
+    "subject": "Bulk hoodie discount request — proposed quote",
+    "body": "Hello Yale AI Club,\n\nFor your request for 20 CC-HOOD-NAVY hoodies in size M, a proposed quote is $50 per hoodie ($1,000 total). This is a proposed price and is not approved or confirmed. Our current records show 8 size-M units on hand, 12 fewer than requested, so we cannot confirm availability for the full quantity. No delivery date or additional stock timing is confirmed.\n\nPlease note this message is an unsent draft pending human review.\n\nCampus Customs",
+    "related_action_id": null,
+    "warnings": [
+     "Body contains 'confirmed', which may assert a commitment. Human review required.",
+     "Body contains 'confirm', which may assert a commitment. Human review required.",
+     "Body contains 'approved', which may assert a commitment. Human review required.",
+     "Body asserts a price or amount ($50.00).",
+     "Body asserts a price or amount ($1000.00)."
+    ],
+    "status": "draft",
+    "created_by": "customer_service",
+    "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+    "call_id": "bd92ac20-30c2-468e-87c9-5b1269af07dc",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T13:37:50.145738+00:00",
+    "sent": false
+   }
+  ],
+  "runs": [
+   {
+    "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+    "mode": "live",
+    "phase": "completed",
+    "outcome": "awaiting_human_approval",
+    "started_at": "2026-10-11T13:37:27.364009+00:00",
+    "finished_at": "2026-10-11T13:37:57.847557+00:00"
+   }
+  ],
+  "inventory": {
+   "sku": "CC-HOOD-NAVY",
+   "name": "Basic Hoodie Big Yale",
+   "location": "Aisle A",
+   "unit_cost": 22.0,
+   "list_price": 58.0,
+   "sizes": [
+    {
+     "size": "S",
+     "qty": 4
+    },
+    {
+     "size": "M",
+     "qty": 8
+    },
+    {
+     "size": "L",
+     "qty": 14
+    },
+    {
+     "size": "XL",
+     "qty": 6
+    }
+   ],
+   "requested_size": "M",
+   "requested_qty": 20,
+   "on_hand_requested_size": 8,
+   "computed": {
+    "shortfall": 12,
+    "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+   },
+   "source": "inventory and pricing tables (stored values)"
+  }
+ },
+ "all_tickets": {
+  "business_date": "2026-08-31",
+  "open_count": 2,
+  "resolved_count": 1,
+  "tickets": [
+   {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "invoice_id": 501,
+    "lease_id": null,
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "proposals": {
+     "proposed": 1,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 1,
+    "drafts": 1,
+    "latest_run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "latest_run_phase": "completed"
+   },
+   {
+    "id": 102,
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "subject": "Rent due",
+    "status": "resolved",
+    "is_open": false,
+    "is_resolved": true,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "invoice_id": null,
+    "lease_id": 1,
+    "notes": "Email: shop rent due in 2 days.",
+    "created_at": "2026-08-31T11:05:00-04:00",
+    "proposals": {
+     "proposed": 0,
+     "approved": 0,
+     "executed": 1,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 0,
+    "drafts": 1,
+    "latest_run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "latest_run_phase": "completed"
+   },
+   {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "invoice_id": null,
+    "lease_id": null,
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "proposals": {
+     "proposed": 1,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 1,
+    "drafts": 1,
+    "latest_run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+    "latest_run_phase": "completed"
+   }
+  ]
+ },
+ "pending": {
+  "business_date": "2026-08-31",
+  "count": 2,
+  "actions": [
+   {
+    "id": 1,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 101,
+    "invoice_id": 501,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 840.0,
+    "amount_basis": "invoice_amount",
+    "account": "checking",
+    "rationale": "Full stored amount of open, overdue invoice #501. Checking balance is $3,400; the proposal is within stored cash. The invoice is linked to ticket 101. Whether the invoiced goods were delivered is not recorded; human review should resolve that before deciding whether to approve payment. If this invoice and next rent of $2,400 are both paid, hypothetical cash remaining is $160.",
+    "proposed_by": "accounting",
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T03:26:17.480860+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T03:26:17.480860+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   },
+   {
+    "id": 3,
+    "kind": "quote",
+    "status": "proposed",
+    "ticket_id": 103,
+    "invoice_id": null,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "unit_price": 50.0,
+    "amount": 1000.0,
+    "amount_basis": "quoted_unit_price",
+    "account": null,
+    "rationale": "Proposed bulk-discount unit price of $50, below the $58 list price and above the $22 unit cost. Inventory records show only 8 units in size M currently on hand versus the requested 20; this proposal is not a stock commitment or approval.",
+    "proposed_by": "customer_service",
+    "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T13:37:48.269723+00:00",
+    "fundable_at_proposal": null,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T13:37:48.269723+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+ },
+ "cash": {
+  "business_date": "2026-08-31",
+  "checking_balance": 1000.0,
+  "checking_as_of": "2026-08-31",
+  "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+  "accounts": [
+   {
+    "name": "checking",
+    "balance": 1000.0,
+    "as_of": "2026-08-31"
+   }
+  ],
+  "payments_executed": [
+   {
+    "id": 1,
+    "kind": "lease",
+    "ref_id": 1,
+    "amount": 2400.0,
+    "account": "checking",
+    "paid_at": "2026-08-31",
+    "approved_by": "Ryan Suspanic"
+   }
+  ],
+  "not_counted_as_cash": {
+   "proposed_payments_total": 840.0,
+   "approved_unexecuted_payments_total": 0,
+   "proposed_or_approved_purchase_estimates": 0,
+   "proposed_purchase_estimates": 0,
+   "approved_unexecuted_purchases_total": 0,
+   "proposed_or_approved_quotes_total": 1000.0,
+   "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+  },
+  "available": {
+   "for_obligations": 1000.0,
+   "for_purchases": 1000.0,
+   "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+  }
+ },
+ "audit": {
+  "consistent": true,
+  "run_active": false,
+  "json_trail": {
+   "events": 184,
+   "valid": true,
+   "problems": [],
+   "exists": true
+  },
+  "audit_db": {
+   "events": 11,
+   "valid": true,
+   "problems": []
+  },
+  "incomplete": [],
+  "cross_reference_problems": [],
+  "note": "The JSON trail and the SQLite databases cannot be committed atomically together. Gaps are detected here and reconciled from audit.db and the working copy's reset stamp, never assumed."
+ }
+}

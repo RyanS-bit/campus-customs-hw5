@@ -1,0 +1,77 @@
+{
+ "purpose": "Ticket 101 Attempt 3 readiness (Problem 9, follow-up 18)",
+ "checked_utc": "2026-10-11T03:18:15+00:00",
+ "1_model": {
+  "model_name": "gpt-6-luna",
+  "base_url": "https://api.portkey.ai/v1",
+  "api_key_configured": true,
+  "required_model": true,
+  "model_settings": {
+   "openai_reasoning_effort": "none"
+  },
+  "has_required_settings": true,
+  "live_guard": "passed",
+  "one_model_for_all_five_agents": true
+ },
+ "2_loaded": {
+  "rule_11_in_all_five_prompts": true,
+  "boss_routes_by_business_problem": true,
+  "execute_route_live": true,
+  "cash_shows_available_limits": true,
+  "worker_started_utc": "2026-10-11T03:17:39+00:00",
+  "newest_code_file": "desk_reads.py",
+  "newest_code_modified_utc": "2026-10-11T03:05:40+00:00",
+  "worker_started_after_all_code_changes": true
+ },
+ "3_4_6_state": {
+  "live_runs_enabled": true,
+  "run_mode": "live",
+  "checking_balance": 3400.0,
+  "payments_executed": 0,
+  "pending_proposals": 0,
+  "tickets": [
+   [
+    101,
+    "open"
+   ],
+   [
+    102,
+    "open"
+   ],
+   [
+    103,
+    "open"
+   ]
+  ],
+  "run_active": false
+ },
+ "5_audit": {
+  "consistent": true,
+  "trail_events": 54,
+  "audit_db_events": 2,
+  "gaps": [],
+  "problems": [],
+  "earlier_attempt_files_present": true
+ },
+ "7_limits": {
+  "budget": {
+   "max_depth": 4,
+   "max_delegations": 12,
+   "request_limit": 40,
+   "total_tokens_limit": 60000,
+   "tool_calls_limit": 60,
+   "max_output_tokens": 1200,
+   "wall_clock_seconds": 300.0,
+   "request_timeout_seconds": 60.0,
+   "max_http_retries": 1
+  },
+  "unchanged": true
+ },
+ "mcp_tools_match_approved_access": {
+  "boss": true,
+  "inventory": true,
+  "accounting": true,
+  "facilities": true,
+  "customer_service": true
+ }
+}

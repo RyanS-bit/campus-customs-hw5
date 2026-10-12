@@ -1,0 +1,130 @@
+{
+ "gate": "G2",
+ "checked_utc": "2026-10-10T20:40:05+00:00",
+ "authorization_statement_matches_log": true,
+ "backend": {
+  "live_runs_enabled": true,
+  "run_mode": "live"
+ },
+ "model": {
+  "model_name": "gpt-6-luna",
+  "base_url": "https://api.portkey.ai/v1",
+  "api_key_configured": true,
+  "is_required_model": true,
+  "client_timeout_s": 60.0,
+  "client_max_retries": 1,
+  "live_mode_guard": "passed"
+ },
+ "budget": {
+  "max_depth": 4,
+  "max_delegations": 12,
+  "request_limit": 40,
+  "total_tokens_limit": 60000,
+  "tool_calls_limit": 60,
+  "max_output_tokens": 1200,
+  "wall_clock_seconds": 300.0,
+  "request_timeout_seconds": 60.0,
+  "max_http_retries": 1
+ },
+ "mcp": {
+  "boss": {
+   "tools": [
+    "check_inventory",
+    "get_financial_position",
+    "get_open_tickets",
+    "get_ticket",
+    "list_pending_actions",
+    "list_vendors"
+   ],
+   "matches_approved_access": true
+  },
+  "inventory": {
+   "tools": [
+    "check_inventory",
+    "get_ticket",
+    "list_pending_actions",
+    "list_vendors",
+    "propose_purchase"
+   ],
+   "matches_approved_access": true
+  },
+  "accounting": {
+   "tools": [
+    "get_financial_position",
+    "get_ticket",
+    "list_pending_actions",
+    "list_vendors",
+    "propose_payment"
+   ],
+   "matches_approved_access": true
+  },
+  "facilities": {
+   "tools": [
+    "draft_message",
+    "get_financial_position",
+    "get_ticket",
+    "list_pending_actions"
+   ],
+   "matches_approved_access": true
+  },
+  "customer_service": {
+   "tools": [
+    "check_inventory",
+    "draft_message",
+    "get_ticket",
+    "list_pending_actions",
+    "propose_quote"
+   ],
+   "matches_approved_access": true
+  }
+ },
+ "agents_built": [
+  "accounting",
+  "boss",
+  "customer_service",
+  "facilities",
+  "inventory"
+ ],
+ "state": {
+  "checking_balance": 3400.0,
+  "payments_executed": 0,
+  "tickets": [
+   [
+    101,
+    "open"
+   ],
+   [
+    102,
+    "open"
+   ],
+   [
+    103,
+    "open"
+   ]
+  ],
+  "pending": 0,
+  "reset_stamp_is_g1_reset_id": true
+ },
+ "audit": {
+  "consistent": true,
+  "run_active": false,
+  "trail_events": 3,
+  "audit_db_events": 2
+ },
+ "fingerprints": {
+  "before_checks": {
+   "original": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+   "working": "d6b0e89a64671dc12e4276a6cf865558039abd65131eb96bf4d280fd2a39ba25",
+   "audit_trail_json": "c3a4812408132050760b3a559fb3d53a915b00a4c5ab8e9d4a569a9ad10f6484",
+   "audit_db": "67415c0942873cb22e500ae81d619833b6729f3e92673eb37d08936469f83bc9"
+  },
+  "after_checks": {
+   "original": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+   "working": "d6b0e89a64671dc12e4276a6cf865558039abd65131eb96bf4d280fd2a39ba25",
+   "audit_trail_json": "c3a4812408132050760b3a559fb3d53a915b00a4c5ab8e9d4a569a9ad10f6484",
+   "audit_db": "67415c0942873cb22e500ae81d619833b6729f3e92673eb37d08936469f83bc9"
+  },
+  "unchanged": true,
+  "working_still_post_g1": true
+ }
+}

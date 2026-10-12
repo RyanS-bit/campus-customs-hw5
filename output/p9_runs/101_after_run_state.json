@@ -1,0 +1,124 @@
+{
+ "saved_utc": "2026-10-10T20:57:44+00:00",
+ "ticket": {
+  "business_date": "2026-08-31",
+  "ticket": {
+   "id": 101,
+   "type": "customer_order",
+   "requester": "Tauhid Zaman",
+   "subject": "Bulldog tee",
+   "sku": "CC-TEE-WHITE",
+   "size": "S",
+   "qty": 1,
+   "lease_id": null,
+   "invoice_id": 501,
+   "status": "open",
+   "notes": "Needs a tee in size S.",
+   "created_at": "2026-08-31T09:15:00-04:00",
+   "linked_invoice": {
+    "id": 501,
+    "amount": 840.0,
+    "due_date": "2026-08-28",
+    "status": "open",
+    "description": "Rush reprint CC-TEE-WHITE S",
+    "vendor_id": 1,
+    "vendor_name": "Bulldog Print Co",
+    "specialty": "apparel reprint",
+    "lead_days": 5
+   },
+   "linked_lease": null,
+   "is_open": true,
+   "is_resolved": false
+  },
+  "pending_actions": [],
+  "drafts": [],
+  "runs": [
+   {
+    "run_id": "53e4f001-d845-4c50-a3a6-1f09ebee50d6",
+    "mode": "live",
+    "phase": "failed",
+    "outcome": "failed",
+    "started_at": "2026-10-10T20:57:26.480851+00:00",
+    "finished_at": "2026-10-10T20:57:39.127117+00:00"
+   }
+  ],
+  "inventory": {
+   "sku": "CC-TEE-WHITE",
+   "name": "Classic Bulldog Tee",
+   "location": "Aisle B",
+   "unit_cost": 8.0,
+   "list_price": 28.0,
+   "sizes": [
+    {
+     "size": "S",
+     "qty": 0
+    },
+    {
+     "size": "M",
+     "qty": 5
+    },
+    {
+     "size": "L",
+     "qty": 3
+    },
+    {
+     "size": "XL",
+     "qty": 2
+    }
+   ],
+   "requested_size": "S",
+   "requested_qty": 1,
+   "on_hand_requested_size": 0,
+   "computed": {
+    "shortfall": 1,
+    "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+   },
+   "source": "inventory and pricing tables (stored values)"
+  }
+ },
+ "pending": {
+  "business_date": "2026-08-31",
+  "count": 0,
+  "actions": [],
+  "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+ },
+ "cash": {
+  "business_date": "2026-08-31",
+  "checking_balance": 3400.0,
+  "checking_as_of": "2026-08-31",
+  "source": "cash_accounts table (stored balance after executed payments only)",
+  "accounts": [
+   {
+    "name": "checking",
+    "balance": 3400.0,
+    "as_of": "2026-08-31"
+   }
+  ],
+  "payments_executed": [],
+  "not_counted_as_cash": {
+   "proposed_payments_total": 0,
+   "approved_unexecuted_payments_total": 0,
+   "proposed_or_approved_purchase_estimates": 0,
+   "proposed_or_approved_quotes_total": 0,
+   "note": "Information only. Proposals move no money, purchase figures are estimates, and quotes add no revenue (R6). The balance changes only when a human approves a payment."
+  }
+ },
+ "audit": {
+  "consistent": true,
+  "run_active": false,
+  "json_trail": {
+   "events": 8,
+   "valid": true,
+   "problems": [],
+   "exists": true
+  },
+  "audit_db": {
+   "events": 2,
+   "valid": true,
+   "problems": []
+  },
+  "incomplete": [],
+  "cross_reference_problems": [],
+  "note": "The JSON trail and the SQLite databases cannot be committed atomically together. Gaps are detected here and reconciled from audit.db and the working copy's reset stamp, never assumed."
+ }
+}

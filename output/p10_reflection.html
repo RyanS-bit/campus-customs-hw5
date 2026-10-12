@@ -1,0 +1,280 @@
+<!-- Problem 10 reflection: SOURCE FRAGMENT (revised draft for Dr. Ryan's review, Problem 10 follow-up 7).
+     To be inserted into the Reflection tab of output/desk_tickets.html by scripts/build_p9_evidence.py once authorized.
+     Sources: the Ticket 101-103 tabs and Cash tab of this file, output/audit_trail.json, data/audit.db, the working database,
+     output/resolved_tickets.json and the tool code in mcp_server/. -->
+<div class="card reflection" data-section="reflection">
+<p class="small">I answer the five Problem 10 questions from our Campus Customs app: the Ticket 101, 102 and 103 tabs and the Cash tab.
+<b>Observed</b> marks what the records show, <b>Inference</b> my interpretation, and <b>Hypothetical</b> the new scenarios in questions 4
+and 5. Payments are recorded payments inside the simulation, not real bank transfers. Token counts are provider-reported; the dollar cost
+is unknown.</p>
+
+<h3>1. How would I evaluate the agents' performance on each ticket, and why?</h3>
+<p>I separate what the agents did from what our safeguards did regardless of them: the database refusing duplicate proposals, tools that
+can only propose and draft, and my approval before any money moved. I credit the agents only for the former.</p>
+
+<p><b>Ticket 101: a size S Classic Bulldog Tee for Tauhid Zaman, linked to Bulldog Print Co's unpaid $840 invoice #501.</b></p>
+<ul>
+  <li><b>Goal:</b> confirm that size S was out of stock and that the only restock record was the unpaid invoice, prepare a payment proposal
+      for me to decide, and possibly draft an honest reply.</li>
+  <li><b>Observed:</b> three attempts.
+    <ul>
+      <li>Attempt 1 failed before any tool call: the provider rejected tool use combined with the model's default reasoning setting.</li>
+      <li>Attempt 2 (Boss, Customer Service, Inventory) made 15 read calls and produced nothing, because no one consulted Accounting
+          although the blocker was an unpaid invoice.</li>
+      <li>After a code fix and stricter routing rules, Attempt 3 succeeded. Accounting proposed payment #1 ($840), Inventory read stock and
+          vendors and rightly proposed no second order, and Customer Service drafted a reply. The specialists re-read the same ticket
+          (<code>get_ticket</code> four times), and the draft exposed our internal product code and supplier invoice.</li>
+    </ul>
+  </li>
+  <li><b>Human role:</b> I approved the payment after the rent; it executed as payment #2 (the −$840 line in the Cash tab), lifting
+      Bulldog's R3 block. Stock did not change, and delivery of the reprint is not recorded.</li>
+  <li><b>Evaluation: partially effective.</b> <b>Inference:</b> once routing was fixed, the agents framed the right decision, but it took
+      three attempts, and the customer-facing draft needed editing.</li>
+</ul>
+
+<p><b>Ticket 102: Elm City Properties' $2,400 rent notice for lease #1.</b></p>
+<ul>
+  <li><b>Goal:</b> confirm the notice against the lease, prepare the rent proposal, and draft an acknowledgement without promising
+      payment.</li>
+  <li><b>Observed:</b> one run.
+    <ul>
+      <li>The Boss delegated to Facilities and Accounting in parallel, and Accounting proposed payment #2 ($2,400).</li>
+      <li>Facilities called a second Accounting instance, which tried to propose the same rent; the database refused the duplicate.</li>
+      <li>Facilities drafted to the landlord.</li>
+      <li>Because the two Accounting reports disagreed about whether the proposal was new, the Boss delegated a fourth time to reconcile
+          them.</li>
+    </ul>
+    <code>get_ticket</code> and <code>get_financial_position</code> each ran five times, making this our most expensive run (17 requests,
+    43,787 tokens).</li>
+  <li><b>Human role:</b> I approved the rent; it executed as payment #1 (the −$2,400 line in the Cash tab) and moved the lease's next due
+      date to 2026-10-02. The pre-payment landlord draft then became outdated and stayed unsent.</li>
+  <li><b>Evaluation: effective in outcome, inefficient in process.</b> <b>Inference:</b> the agents produced exactly the needed decision,
+      but the duplicate was stopped by the database, not by their judgment, and parallel work misled its own coordinator.</li>
+</ul>
+
+<p><b>Ticket 103: the Yale AI Club asks for 20 navy size M hoodies at a bulk discount.</b></p>
+<ul>
+  <li><b>Goal:</b> establish supply (8 of 20 on hand), consult Inventory about the shortage, quote between the $22 cost and the $58 list
+      price, and draft a reply with no promised date.</li>
+  <li><b>Observed:</b> the leanest run (8 requests, 20,678 tokens). The Boss read the ticket, stock, cash and vendors, then delegated only
+      to Customer Service, which proposed quote #3 at $50 per hoodie ($1,000): a 13.8% discount keeping a 56% gross margin. It quoted 20
+      units with 8 in stock, never consulted Inventory, named no supplier, and its draft triggered five wording warnings.</li>
+  <li><b>Human role:</b> I approved the quote internally. That is the $0 line in the Cash tab: no cash moved, no revenue, nothing sent,
+      and no acceptance recorded.</li>
+  <li><b>Evaluation: partially effective.</b> <b>Inference:</b> sound pricing, incomplete operations.</li>
+</ul>
+
+<h3>2. For each ticket, how did Actual compare with my Expected plan?</h3>
+<p>My Expected sections described where each ticket should stand <i>after the agents' run</i>: proposals awaiting my approval, unsent
+drafts, and the ticket still open. That was never meant as the final state. After my decisions all three tickets were resolved: 102 with its
+business outcome confirmed, and 101 and 103 as "simulated workflow complete; fulfilment not verified".</p>
+
+<p><b>Ticket 101.</b> <b>Observed:</b></p>
+<ul>
+  <li><b>First delegation:</b> planned to Inventory; in the successful attempt, to Accounting.</li>
+  <li><b>Delegations:</b> Boss → Inventory occurred. Inventory → Accounting was skipped; the Boss went to Accounting directly. The optional
+      Boss → Customer Service occurred.</li>
+  <li><b>Tools:</b> every planned tool was used (<code>get_ticket</code>, <code>check_inventory</code>, <code>list_vendors</code>,
+      <code>get_financial_position</code>, <code>list_pending_actions</code>, <code>propose_payment</code> and the optional
+      <code>draft_message</code>), with repeated reads.</li>
+  <li><b>Deviations:</b> a failed and an empty attempt before success.</li>
+  <li><b>Post-run state:</b> as planned: one $840 proposal awaiting approval, one unsent draft, size S still 0.</li>
+  <li><b>Final status:</b> resolved as simulated workflow complete after I executed the payment. The customer's need is unverified.</li>
+</ul>
+<p><b>Inference:</b> the agents reached my post-run state by a shorter route. But attempt 2 showed that, without explicit routing, the same
+team could miss the blocker entirely.</p>
+
+<p><b>Ticket 102.</b> <b>Observed:</b></p>
+<ul>
+  <li><b>First delegation:</b> Facilities, as planned, with a parallel delegation to Accounting.</li>
+  <li><b>Delegations:</b> the planned Facilities → Accounting hand-off occurred; two Boss → Accounting delegations were added.</li>
+  <li><b>Tools:</b> the planned tools were used, but Facilities never called <code>list_pending_actions</code>, the check my plan relied on
+      to avoid a duplicate. The landlord draft was not linked to the rent proposal as planned.</li>
+  <li><b>Post-run state:</b> as planned: one $2,400 proposal awaiting approval and one unsent landlord draft.</li>
+  <li><b>Final status:</b> resolved with the business outcome confirmed after I executed the payment. The record predates our
+      resolution-type field and is read as a business outcome from its stored confirmation.</li>
+</ul>
+<p><b>Inference:</b> the agent skipped the very check designed to prevent duplication, and the database caught what the plan expected the
+agent to catch.</p>
+
+<p><b>Ticket 103.</b> <b>Observed:</b></p>
+<ul>
+  <li><b>First delegation:</b> Customer Service, as planned.</li>
+  <li><b>Delegations:</b> the planned Customer Service → Inventory hand-off was skipped; the conditional Accounting step never arose.</li>
+  <li><b>Tools:</b> <code>get_ticket</code>, <code>check_inventory</code>, <code>propose_quote</code> and <code>draft_message</code> were
+      used. <code>list_vendors</code> was used only by the Boss, and no purchase was considered. The draft was not linked to the quote.</li>
+  <li><b>Post-run state:</b> as planned: one quote awaiting approval and one unsent draft. The optional blocked purchase did not appear.</li>
+  <li><b>Final status:</b> resolved as simulated workflow complete after I approved the quote. Acceptance and supply are unverified.</li>
+</ul>
+<p><b>Inference:</b> here the deviation mattered most. My plan made "who can supply the other 12?" an explicit step, and skipping it left
+the quote unsupported for 12 of 20 units.</p>
+<p><b>Across the three:</b> every human checkpoint in my plans held, and no proposal executed itself. The agents reliably stopped where the
+controls stopped them, and less reliably followed the investigative path I designed.</p>
+
+<h3>3. What would have been simpler with one agent and tools, and why?</h3>
+<p><b>Observed:</b> coordination produced visible overhead.</p>
+<ul>
+  <li>In 102, parallel delegation caused the duplicate attempt, the five repeated reads of the ticket and the finances, the conflicting
+      reports, and the extra reconciliation delegation.</li>
+  <li>In 101, several agents re-read the same ticket.</li>
+  <li>103 was effectively one agent's work.</li>
+</ul>
+<p>Across five runs the team used 51 model requests and 132,763 tokens.</p>
+<p><b>Inference:</b> one agent holding the read tools plus <code>propose_payment</code> and <code>draft_message</code> could likely have
+handled 102 in a single pass, avoiding the hand-offs, the second Accounting instance and the conflict to reconcile. For 103, one agent would
+have had vendor and stock information in the same context, which might have prompted the supply question. A single agent is not guaranteed
+to notice everything, though. In Ticket 103 our Boss read the hoodie stock itself, 8 on hand against 20 requested, and still let the quote
+cover all 20 without asking Inventory about the 12-hoodie shortage. One agent reduces
+coordination overhead; it does not remove the risk of overlooking a relevant fact.</p>
+<p>Code-enforced permissions are possible in either design. A single agent could also be given a tool set fixed in code. What our
+multi-agent design added was different:</p>
+<ul>
+  <li><b>Separable authority:</b> payments, quotes, and customer and landlord messages sit with different roles, so no one agent can both
+      propose a payment and message a counterparty.</li>
+  <li><b>Attribution:</b> every proposal and draft names its author role, such as "proposed by accounting".</li>
+  <li><b>A structure that matches cross-functional work:</b> Ticket 101 genuinely spanned stock, payables and customer communication.</li>
+</ul>
+<p>My conclusion: use one well-tooled agent for single-domain requests, and specialization where authority over money or external
+communication should be divided.</p>
+
+<h3>4. Three new problems the current team could solve with the tools we built (hypothetical)</h3>
+<p>Each problem would reach the desk as a new ticket, exactly as 101–103 did, because runs start from an open ticket. No other record has
+to be added, and each stops at a person's decision.</p>
+
+<p><b>A. A customer orders 12 Crest Mugs, which are out of stock.</b></p>
+<ul>
+  <li><b>Why it could arise:</b> the database shows 0 Crest Mugs on hand.</li>
+  <li><b>Agents and tools:</b> the Boss routes to Inventory (<code>check_inventory</code>, <code>list_vendors</code>,
+      <code>propose_purchase</code>), to Accounting if cash matters (<code>get_financial_position</code>), and to Customer Service
+      (<code>draft_message</code>).</li>
+  <li><b>Workflow:</b> Elm City Gifts ("mugs and small goods") has no open invoice and a three-day lead time.
+    <ul>
+      <li>Inventory <b>proposes</b> 12 mugs at the stored $3.50 cost: an estimate of $42.</li>
+      <li>I <b>approve</b>, which authorizes the purchase and moves no money.</li>
+      <li>I <b>execute</b> it separately, confirming the $42 estimate basis and stating that the supplier agreed. That reduces checking by
+          $42, within the $160 available for purchases.</li>
+      <li>Customer Service drafts a reply with no promised date.</li>
+    </ul>
+  </li>
+  <li><b>Why the current system suffices:</b> each step uses an existing tool or approval route.</li>
+  <li><b>Limits:</b> the cost is an estimate, the supplier's agreement is my statement, and receipt of the mugs cannot be
+      <b>verified</b>, because stock never changes.</li>
+</ul>
+
+<p><b>B. A residence hall asks for 30 Yale Caps at a bulk price.</b></p>
+<ul>
+  <li><b>Why it could arise:</b> group orders like Ticket 103 recur, and caps are well stocked: 40 on hand, $6 cost, $22 list.</li>
+  <li><b>Agents and tools:</b> Customer Service (<code>get_ticket</code>, <code>check_inventory</code>, <code>propose_quote</code>,
+      <code>draft_message</code>).</li>
+  <li><b>Workflow:</b> Customer Service <b>proposes</b> a price between $6 and $22 for exactly 30 caps; the tool refuses any other quantity or
+      price. I <b>approve</b> it as an internal price decision. A quote has no execution step: nothing is sent, and no cash moves.</li>
+  <li><b>Why the current system suffices:</b> unlike 103, there is no shortfall and no supplier question.</li>
+  <li><b>Limits:</b> acceptance, the sale and the stock reduction cannot be recorded.</li>
+</ul>
+
+<p><b>C. The landlord asks for confirmation that September's rent was paid, and when October's will be.</b></p>
+<ul>
+  <li><b>Why it could arise:</b> landlords routinely ask, and the Cash tab now shows only $160 against October's $2,400. Like Ticket 102,
+      the new ticket would link lease #1, which is what lets Facilities draft to the landlord.</li>
+  <li><b>Agents and tools:</b>
+    <ul>
+      <li>Facilities: <code>get_ticket</code> (lease #1, next due 2026-10-02), <code>list_pending_actions</code> (proposal #2, executed as
+          payment #1) and <code>draft_message</code> to the landlord.</li>
+      <li>Accounting if needed: <code>get_financial_position</code> (2 payments recorded, $160 in checking).</li>
+    </ul>
+  </li>
+  <li><b>Workflow:</b> Facilities drafts a reply stating that our records show the September rent recorded as paid on 2026-08-31, without
+      promising an October date. I review the draft and send it myself if appropriate (R7).</li>
+  <li><b>Why the current system suffices:</b> every fact is already in our records and readable by Facilities, and no proposal is
+      needed.</li>
+  <li><b>Limits:</b> the payment is recorded in our simulation, not verified as received by the landlord. The draft's amount and date would be
+      flagged for my review.</li>
+</ul>
+
+<h3>5. Three new problems the current team cannot solve, and what it would take (hypothetical)</h3>
+
+<p><b>A. A customer returns a defective Yale Cap and asks for a $22 refund.</b></p>
+<ul>
+  <li><b>Why the current team cannot:</b> <code>propose_payment</code> pays only an open invoice or the lease, so there is no refund payment.
+      No tool can return an item to stock or mark it defective. And because sales are not recorded, nothing proves the original purchase.
+      This is a technical gap: refunds are outgoing cash, which the rules allow.</li>
+  <li><b>Tools needed:</b>
+    <ul>
+      <li><code>propose_refund</code> (Accounting): creates a refund proposal. Like a payment, a person approves it, which executes it
+          against the cash rule (R1).</li>
+      <li><code>record_return</code> (Inventory): proposes marking the returned unit as defective stock. A person confirms it after
+          inspecting the item.</li>
+    </ul>
+  </li>
+  <li><b>New agent?</b> No. Accounting, Inventory and Customer Service already own these duties.</li>
+  <li><b>Controls:</b> human approval for the refund; physical inspection before the stock change; and proof of purchase verified by a
+      person, since the system cannot.</li>
+</ul>
+
+<p><b>B. The shop cannot pay October's rent.</b></p>
+<ul>
+  <li><b>Why the current team cannot:</b> the Cash tab ends at $160, and lease #1 needs $2,400 by 2026-10-02. Accounting can propose the
+      rent, but my approval would be refused by the cash rule (R1). The only remedy is incoming money: payment on a quote a customer has
+      accepted (Ticket 103's $1,000 quote has no recorded acceptance), recorded sales, or financing.</li>
+  <li><b>This is a rule, not a missing feature.</b> Assignment rule R6 says the simulation models outgoing cash only, so R6 would have to
+      change before any tool could help.</li>
+  <li><b>Tools needed</b> (if R6 changed):
+    <ul>
+      <li><code>record_customer_acceptance</code> (Customer Service);</li>
+      <li><code>record_customer_receipt</code> (Accounting), which proposes a receipt that only a person can confirm against bank evidence,
+          writing to a receipts ledger kept separate from payments.</li>
+    </ul>
+  </li>
+  <li><b>New agent?</b> No. Receivables belong to Accounting.</li>
+  <li><b>Controls:</b> no cash counted from a proposal or an unaccepted quote; human confirmation of every receipt; and a Cash tab that
+      reconciles inflows as well as outflows.</li>
+</ul>
+
+<p><b>C. The Yale AI Club asks for 50 custom-logo hoodies, a product we have never sold.</b></p>
+<ul>
+  <li><b>Why the current team cannot:</b> <code>propose_quote</code> and <code>propose_purchase</code> work only for products already in
+      the inventory and pricing tables, and no tool adds one. No tool requests or records a supplier's quote. And under rule R7 nothing is
+      ever sent, so no agent can contact a decorator or confirm artwork with the club.</li>
+  <li><b>Tools needed:</b>
+    <ul>
+      <li><code>add_product</code>: a new product and price, approved by a person.</li>
+      <li><code>record_supplier_quote</code>: stores a supplier's written price and lead time as evidence.</li>
+      <li><code>send_message</code>: sends a draft only after a person approves it. This requires changing rule R7, not just adding a
+          feature.</li>
+    </ul>
+  </li>
+  <li><b>New agent?</b> Yes, a Procurement agent. Sourcing new products and negotiating with suppliers creates external commitments, which
+      is distinct from Inventory's restocking of existing products, and it should carry its own permissions and attribution. Customer
+      Service would delegate to Procurement for a recorded supplier quote, then propose the customer quote from it.</li>
+  <li><b>Controls:</b> human approval for every product, price and outgoing message; purchases still require separate approval and
+      execution; and delivery still cannot be verified without a receiving capability.</li>
+</ul>
+
+<h3>What I take from this as a manager</h3>
+<p><b>Inference:</b></p>
+<ul>
+  <li><b>Completing a workflow is not achieving an outcome.</b> When I tried to resolve Ticket 101, the app asked me to certify that the
+      customer's problem was solved. I could not, so we added a resolution type that records exactly what I confirmed and what remains
+      unverified. No shirt delivery, hoodie supply, customer acceptance or message sending is recorded for 101 or 103.</li>
+  <li><b>Managing the AI that built the system was management work too.</b> The development assistant made mistakes that our checks caught:
+    <ul>
+      <li>a test that accidentally started a real server;</li>
+      <li>an evidence generator that first attached files to the wrong run;</li>
+      <li>a screenshot record that reported zero events through a wrong selector;</li>
+      <li>a checker that assumed the invoice would stay unpaid.</li>
+    </ul>
+    We ran Ticket 103 without the evidence observer, so its run files were rebuilt and labelled. Ticket 101's full agent replies were never
+    captured.</li>
+  <li><b>Evidence and the definition of success belong in the design from day one.</b> Retrofitting them cost effort and left permanent
+      gaps.</li>
+</ul>
+<p>I would change four things:</p>
+<ul>
+  <li>delegate payment work sequentially;</li>
+  <li>link each draft to its decision, with an edit step;</li>
+  <li>record full evidence on every run;</li>
+  <li>test real tool use, and track cost in dollars, before going live.</li>
+</ul>
+<p>The agents prepared useful work quickly once roles were clear; the reliability came from the controls, the records and the human
+decisions around them.</p>
+</div>

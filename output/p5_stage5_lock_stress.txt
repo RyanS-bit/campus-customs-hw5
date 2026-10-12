@@ -1,0 +1,23 @@
+# Lock/concurrency stress after the lock-file fix: 20 consecutive runs of j4, j6, j15, j16, j17
+# Each run uses fresh temporary lock and trail files; 6-process writer and lock races. 2026-10-09T23:00:28Z
+run 1: 5 passed, 26 deselected in 11.02s
+run 2: 5 passed, 26 deselected in 8.97s
+run 3: 5 passed, 26 deselected in 9.16s
+run 4: 5 passed, 26 deselected in 8.97s
+run 5: 5 passed, 26 deselected in 8.91s
+run 6: 5 passed, 26 deselected in 9.04s
+run 7: 5 passed, 26 deselected in 9.00s
+run 8: 5 passed, 26 deselected in 9.12s
+run 9: 5 passed, 26 deselected in 9.14s
+run 10: 5 passed, 26 deselected in 9.15s
+run 11: 5 passed, 26 deselected in 9.13s
+run 12: 5 passed, 26 deselected in 8.88s
+run 13: 5 passed, 26 deselected in 9.37s
+run 14: 5 passed, 26 deselected in 9.11s
+run 15: 5 passed, 26 deselected in 9.15s
+run 16: 5 passed, 26 deselected in 9.10s
+run 17: 5 passed, 26 deselected in 8.97s
+run 18: 5 passed, 26 deselected in 9.09s
+run 19: 5 passed, 26 deselected in 9.26s
+run 20: 5 passed, 26 deselected in 9.20s
+--- failures across 20 runs: 0

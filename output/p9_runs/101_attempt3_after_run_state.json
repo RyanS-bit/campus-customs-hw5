@@ -1,0 +1,333 @@
+{
+ "saved_utc": "2026-10-11T03:26:48+00:00",
+ "attempt": "attempt3",
+ "ticket": {
+  "business_date": "2026-08-31",
+  "ticket": {
+   "id": 101,
+   "type": "customer_order",
+   "requester": "Tauhid Zaman",
+   "subject": "Bulldog tee",
+   "sku": "CC-TEE-WHITE",
+   "size": "S",
+   "qty": 1,
+   "lease_id": null,
+   "invoice_id": 501,
+   "status": "open",
+   "notes": "Needs a tee in size S.",
+   "created_at": "2026-08-31T09:15:00-04:00",
+   "linked_invoice": {
+    "id": 501,
+    "amount": 840.0,
+    "due_date": "2026-08-28",
+    "status": "open",
+    "description": "Rush reprint CC-TEE-WHITE S",
+    "vendor_id": 1,
+    "vendor_name": "Bulldog Print Co",
+    "specialty": "apparel reprint",
+    "lead_days": 5
+   },
+   "linked_lease": null,
+   "is_open": true,
+   "is_resolved": false
+  },
+  "pending_actions": [
+   {
+    "id": 1,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 101,
+    "invoice_id": 501,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 840.0,
+    "amount_basis": "invoice_amount",
+    "account": "checking",
+    "rationale": "Full stored amount of open, overdue invoice #501. Checking balance is $3,400; the proposal is within stored cash. The invoice is linked to ticket 101. Whether the invoiced goods were delivered is not recorded; human review should resolve that before deciding whether to approve payment. If this invoice and next rent of $2,400 are both paid, hypothetical cash remaining is $160.",
+    "proposed_by": "accounting",
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T03:26:17.480860+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T03:26:17.480860+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "drafts": [
+   {
+    "id": 1,
+    "ticket_id": 101,
+    "recipient": "Tauhid Zaman",
+    "recipient_source": "tickets.requester",
+    "channel": "email",
+    "subject": "Update on your Bulldog tee order",
+    "body": "Hi Tauhid,\n\nWe\u2019re checking your request for one CC-TEE-WHITE tee in size S. Our current stock record shows 0 available in size S, so we can\u2019t fulfill the order from stock now. The linked record shows an open invoice with Bulldog Print Co for a rush reprint of this item. The records do not confirm whether the invoiced goods have arrived, so we can\u2019t confirm availability or shipment at this time.\n\nWe\u2019ll update you when the status is clarified.\n\nBest,\nCampus Customs",
+    "related_action_id": null,
+    "warnings": [
+     "Body contains 'confirm', which may assert a commitment. Human review required."
+    ],
+    "status": "draft",
+    "created_by": "customer_service",
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "call_id": "4dd5a848-9786-46a4-b830-78aa332f6c06",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T03:26:36.929941+00:00",
+    "sent": false
+   }
+  ],
+  "runs": [
+   {
+    "run_id": "53e4f001-d845-4c50-a3a6-1f09ebee50d6",
+    "mode": "live",
+    "phase": "failed",
+    "outcome": "failed",
+    "started_at": "2026-10-10T20:57:26.480851+00:00",
+    "finished_at": "2026-10-10T20:57:39.127117+00:00"
+   },
+   {
+    "run_id": "ae8d9bf4-f61f-4117-b7f4-f08b8626e139",
+    "mode": "live",
+    "phase": "completed",
+    "outcome": "completed_nothing_proposed",
+    "started_at": "2026-10-10T21:44:10.314241+00:00",
+    "finished_at": "2026-10-10T21:44:46.898051+00:00"
+   },
+   {
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "mode": "live",
+    "phase": "completed",
+    "outcome": "awaiting_human_approval",
+    "started_at": "2026-10-11T03:25:55.566355+00:00",
+    "finished_at": "2026-10-11T03:26:44.583233+00:00"
+   }
+  ],
+  "inventory": {
+   "sku": "CC-TEE-WHITE",
+   "name": "Classic Bulldog Tee",
+   "location": "Aisle B",
+   "unit_cost": 8.0,
+   "list_price": 28.0,
+   "sizes": [
+    {
+     "size": "S",
+     "qty": 0
+    },
+    {
+     "size": "M",
+     "qty": 5
+    },
+    {
+     "size": "L",
+     "qty": 3
+    },
+    {
+     "size": "XL",
+     "qty": 2
+    }
+   ],
+   "requested_size": "S",
+   "requested_qty": 1,
+   "on_hand_requested_size": 0,
+   "computed": {
+    "shortfall": 1,
+    "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+   },
+   "source": "inventory and pricing tables (stored values)"
+  }
+ },
+ "all_tickets": {
+  "business_date": "2026-08-31",
+  "open_count": 3,
+  "resolved_count": 0,
+  "tickets": [
+   {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "invoice_id": 501,
+    "lease_id": null,
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "proposals": {
+     "proposed": 1,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 1,
+    "drafts": 1,
+    "latest_run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "latest_run_phase": "completed"
+   },
+   {
+    "id": 102,
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "subject": "Rent due",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "invoice_id": null,
+    "lease_id": 1,
+    "notes": "Email: shop rent due in 2 days.",
+    "created_at": "2026-08-31T11:05:00-04:00",
+    "proposals": {
+     "proposed": 0,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 0,
+    "drafts": 0,
+    "latest_run_id": null,
+    "latest_run_phase": null
+   },
+   {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "status": "open",
+    "is_open": true,
+    "is_resolved": false,
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "invoice_id": null,
+    "lease_id": null,
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "proposals": {
+     "proposed": 0,
+     "approved": 0,
+     "executed": 0,
+     "rejected": 0,
+     "failed": 0
+    },
+    "awaiting_human_decision": 0,
+    "drafts": 0,
+    "latest_run_id": null,
+    "latest_run_phase": null
+   }
+  ]
+ },
+ "pending": {
+  "business_date": "2026-08-31",
+  "count": 1,
+  "actions": [
+   {
+    "id": 1,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 101,
+    "invoice_id": 501,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 840.0,
+    "amount_basis": "invoice_amount",
+    "account": "checking",
+    "rationale": "Full stored amount of open, overdue invoice #501. Checking balance is $3,400; the proposal is within stored cash. The invoice is linked to ticket 101. Whether the invoiced goods were delivered is not recorded; human review should resolve that before deciding whether to approve payment. If this invoice and next rent of $2,400 are both paid, hypothetical cash remaining is $160.",
+    "proposed_by": "accounting",
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T03:26:17.480860+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T03:26:17.480860+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+ },
+ "cash": {
+  "business_date": "2026-08-31",
+  "checking_balance": 3400.0,
+  "checking_as_of": "2026-08-31",
+  "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+  "accounts": [
+   {
+    "name": "checking",
+    "balance": 3400.0,
+    "as_of": "2026-08-31"
+   }
+  ],
+  "payments_executed": [],
+  "not_counted_as_cash": {
+   "proposed_payments_total": 840.0,
+   "approved_unexecuted_payments_total": 0,
+   "proposed_or_approved_purchase_estimates": 0,
+   "proposed_purchase_estimates": 0,
+   "approved_unexecuted_purchases_total": 0,
+   "proposed_or_approved_quotes_total": 0,
+   "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+  },
+  "available": {
+   "for_obligations": 3400.0,
+   "for_purchases": 3400.0,
+   "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+  }
+ },
+ "audit": {
+  "consistent": true,
+  "run_active": false,
+  "json_trail": {
+   "events": 100,
+   "valid": true,
+   "problems": [],
+   "exists": true
+  },
+  "audit_db": {
+   "events": 4,
+   "valid": true,
+   "problems": []
+  },
+  "incomplete": [],
+  "cross_reference_problems": [],
+  "note": "The JSON trail and the SQLite databases cannot be committed atomically together. Gaps are detected here and reconciled from audit.db and the working copy's reset stamp, never assumed."
+ }
+}

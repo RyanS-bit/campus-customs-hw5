@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs: Desk Tickets Plan (Homework 5, Problem 6)</title>
+<style>
+  :root {
+    --ink: #1d2433; --muted: #5b6475; --line: #d9dee8; --bg: #f5f7fb; --card: #ffffff;
+    --brand: #0f3d6e; --brand-soft: #e7eef8; --expected: #1f6f43; --expected-soft: #e8f5ee;
+    --actual: #8a5a00; --actual-soft: #fff7e6; --warn: #9b2c2c; --warn-soft: #fdecec;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.55 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+         color: var(--ink); background: var(--bg); }
+  header { background: var(--brand); color: #fff; padding: 22px 32px 18px; }
+  header h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: .2px; }
+  header p { margin: 0; color: #d5e2f2; font-size: 13.5px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; font-size: 12.5px; color: #d5e2f2; }
+  .meta b { color: #fff; font-weight: 600; }
+  nav[role="tablist"] { display: flex; gap: 4px; padding: 0 24px; background: #0b2f55; overflow-x: auto; }
+  nav button { appearance: none; border: 0; background: transparent; color: #c9d7ea; font: inherit; font-weight: 600;
+               padding: 12px 18px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+  nav button:hover { color: #fff; }
+  nav button[aria-selected="true"] { color: #fff; border-bottom-color: #7fb3ff; background: rgba(255,255,255,.06); }
+  nav button:focus-visible { outline: 2px solid #7fb3ff; outline-offset: -2px; }
+  main { max-width: 1060px; margin: 0 auto; padding: 24px 24px 48px; }
+  section[role="tabpanel"] > h2 { margin: 0 0 4px; font-size: 21px; color: var(--brand); }
+  .lede { margin: 0 0 18px; color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }
+  .card h3 { margin: 0 0 10px; font-size: 16px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: .4px; }
+  code { font-family: Consolas, "Cascadia Mono", Menlo, monospace; font-size: 13px; background: #f0f2f7;
+         padding: 1px 5px; border-radius: 4px; }
+  .badge { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+           padding: 3px 9px; border-radius: 999px; vertical-align: middle; }
+  .badge.expected { background: var(--expected-soft); color: var(--expected); border: 1px solid #b7dcc6; }
+  .badge.actual { background: var(--actual-soft); color: var(--actual); border: 1px solid #f0d49b; }
+  .badge.optional { background: #eef0f6; color: var(--muted); border: 1px solid var(--line); }
+  .expected-block { border-left: 5px solid var(--expected); }
+  .expected-block > h3 { color: var(--expected); }
+  .first { background: var(--brand-soft); border-radius: 8px; padding: 12px 14px; margin: 0 0 14px; }
+  .first strong { color: var(--brand); }
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; }
+  ol.steps > li { counter-increment: s; position: relative; padding: 12px 12px 12px 54px; border: 1px solid var(--line);
+                  border-radius: 8px; margin: 0 0 10px; background: #fff; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 14px; top: 12px; width: 26px; height: 26px;
+                          border-radius: 50%; background: var(--brand); color: #fff; font-weight: 700; text-align: center;
+                          line-height: 26px; font-size: 13px; }
+  ol.steps > li.optional { border-style: dashed; background: #fbfcfe; }
+  ol.steps > li.optional::before { background: #8a94a8; }
+  .step-head { font-weight: 700; }
+  .route { color: var(--muted); font-weight: 600; }
+  .tools { margin: 6px 0 0; font-size: 13.5px; }
+  .why { margin: 4px 0 0; }
+  .expect { margin: 4px 0 0; color: #2c3a52; }
+  ul.tight { margin: 6px 0 0; padding-left: 20px; }
+  ul.tight li { margin: 3px 0; }
+  .not-involved { background: #fafbfd; }
+  .boundary { background: var(--warn-soft); border: 1px solid #f3c2c2; }
+  .boundary h3 { color: var(--warn); }
+  .actual-block { border: 2px dashed #e0b45e; background: var(--actual-soft); }
+  .actual-block h3 { color: var(--actual); }
+  .actual-empty { min-height: 90px; border-radius: 8px; background: rgba(255,255,255,.6); border: 1px solid #f0d49b;
+                  display: flex; align-items: center; justify-content: center; color: var(--actual); font-style: italic;
+                  text-align: center; padding: 16px; }
+  .later { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           text-align: center; color: var(--muted); }
+  .later .big { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 6px; }
+  footer { max-width: 1060px; margin: 0 auto; padding: 0 24px 32px; color: var(--muted); font-size: 12.5px; }
+  [hidden] { display: none !important; }
+  @media print {
+    nav { display: none; } section[role="tabpanel"] { display: block !important; page-break-after: always; }
+    body { background: #fff; } .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Campus Customs: Desk Tickets Plan</h1>
+  <p>Homework 5, Problem 6: Plan the three tickets. This is the plan of what we <b>expect</b> the agent team to do, written before any live run.</p>
+  <div class="meta">
+    <span><b>Shop business date:</b> 2026-08-31 (<code>desk.date_today</code>)</span>
+    <span><b>Plan written:</b> 2026-10-10</span>
+    <span><b>Model for the live runs:</b> gpt-6-luna via Portkey</span>
+    <span><span class="badge expected">Expected</span> = planned &nbsp; <span class="badge actual">Actual</span> = filled in after the live runs</span>
+  </div>
+</header>
+
+<nav role="tablist" aria-label="Desk tickets">
+  <button role="tab" id="tab-101" aria-controls="panel-101" aria-selected="true" tabindex="0" data-hash="ticket-101">Ticket 101</button>
+  <button role="tab" id="tab-102" aria-controls="panel-102" aria-selected="false" tabindex="-1" data-hash="ticket-102">Ticket 102</button>
+  <button role="tab" id="tab-103" aria-controls="panel-103" aria-selected="false" tabindex="-1" data-hash="ticket-103">Ticket 103</button>
+  <button role="tab" id="tab-cash" aria-controls="panel-cash" aria-selected="false" tabindex="-1" data-hash="cash">Cash</button>
+  <button role="tab" id="tab-reflection" aria-controls="panel-reflection" aria-selected="false" tabindex="-1" data-hash="reflection">Reflection</button>
+</nav>
+
+<main>
+
+<!-- ============================== TICKET 101 ============================== -->
+<section role="tabpanel" id="panel-101" aria-labelledby="tab-101" data-ticket="101">
+  <h2>Ticket 101: Tauhid Zaman wants a Classic Bulldog Tee in size S</h2>
+  <p class="lede">Customer order. The ticket is linked to vendor invoice #501.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The request</h3>
+      <table>
+        <tr><th>Requester</th><td>Tauhid Zaman (customer)</td></tr>
+        <tr><th>Item</th><td><code>CC-TEE-WHITE</code>, size S, quantity 1</td></tr>
+        <tr><th>Note</th><td>"Needs a tee in size S."</td></tr>
+        <tr><th>Status</th><td>Open</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Verified facts the agents will find</h3>
+      <table>
+        <tr><th>Fact</th><th>Tool</th></tr>
+        <tr><td>Size S on hand: <b>0</b> (M 5, L 3, XL 2). Cost $8, list $28.</td><td><code>check_inventory</code></td></tr>
+        <tr><td>Invoice #501, Bulldog Print Co, <b>$840</b>, "Rush reprint CC-TEE-WHITE S", due 2026-08-28, <b>open, 3 days overdue</b></td><td><code>get_ticket</code>, <code>get_financial_position</code></td></tr>
+        <tr><td>Bulldog Print Co is <b>blocked</b> (open unpaid invoice, rule R3); no arrival date can be estimated</td><td><code>list_vendors</code></td></tr>
+        <tr><td>Whether the goods on #501 were delivered is <b>not recorded</b></td><td><code>get_ticket</code> (unknowns)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card expected-block">
+    <h3><span class="badge expected">Expected</span>&nbsp; How I expect the team to handle it</h3>
+    <div class="first">
+      <strong>First contact: Inventory.</strong> The customer is asking for a product, so the first question is whether we have it and, if not, why it isn't coming. Inventory owns stock and vendors. It will find size S at zero, and that the only restock record for this item is invoice #501, which its description identifies as a rush reprint of the size-S tee. Bulldog Print Co is blocked because that invoice is unpaid. The records do not show whether those tees were delivered. Until this is known, a reply or a payment would be premature.
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-head">Boss reads the ticket <span class="route">· Boss</span></div>
+        <div class="tools">Tools: <code>get_ticket(101)</code></div>
+        <p class="expect">Sees a customer order linked to invoice #501, and delegates to Inventory.</p>
+      </li>
+      <li>
+        <div class="step-head">Check stock and the restock path <span class="route">· Boss → Inventory</span></div>
+        <div class="tools">Tools: <code>check_inventory("CC-TEE-WHITE")</code>, <code>list_vendors</code></div>
+        <p class="expect">Reports size S = 0, and that Bulldog Print Co is blocked by #501. Inventory should <b>not</b> propose a second order yet. The invoice description associates #501 with a reprint of this exact item, but the records do not show whether those goods were delivered or what their fulfillment status is. A second order should wait until a human clarifies that status.</p>
+      </li>
+      <li>
+        <div class="step-head">Address the unpaid invoice <span class="route">· Inventory → Accounting</span></div>
+        <div class="tools">Tools: <code>get_financial_position</code>, <code>list_pending_actions</code>, <code>propose_payment(kind="invoice", ref_id=501, amount=840, ticket_id=101)</code></div>
+        <p class="why"><b>Why Accounting:</b> the blocker is a payables problem, and only Accounting can prepare a payment.</p>
+        <p class="expect">Confirms cash of $3,400 covers the $840 invoice, checks that no duplicate proposal exists, and creates a <b>payment proposal</b> that waits for human approval. Nothing is paid.</p>
+      </li>
+      <li class="optional">
+        <div class="step-head">Optional: an honest status reply <span class="route">· Boss → Customer Service</span> <span class="badge optional">only if needed</span></div>
+        <div class="tools">Tools: <code>draft_message(ticket_id=101, …)</code></div>
+        <p class="expect">Only if the Boss decides the customer should hear from us now. An unsent draft: "size S is out of stock and a restock is in progress", with no promised date. A human reviews it before anything is sent.</p>
+      </li>
+    </ol>
+    <div class="grid">
+      <div class="card not-involved">
+        <h3>Not involved, and why</h3>
+        <ul class="tight">
+          <li><b>Facilities:</b> nothing about the lease or the premises.</li>
+          <li><b>Customer Service:</b> only for the optional reply, not for the diagnosis.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Expected end state</h3>
+        <ul class="tight">
+          <li>One payment proposal (invoice #501, $840) <b>awaiting human approval</b></li>
+          <li>Possibly one unsent customer draft</li>
+          <li>Size S still 0; ticket still <b>open</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card boundary">
+      <h3>Where the agents must stop (a human decides)</h3>
+      <ul class="tight">
+        <li>Approving or rejecting the $840 payment (R2)</li>
+        <li>Finding out whether the #501 tees were already delivered (not in the records)</li>
+        <li>Approving any customer message (R7: nothing is sent automatically)</li>
+        <li>Any new shipment from Bulldog is an outside event; it can happen only after #501 is paid (R3)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card actual-block" data-section="actual" data-ticket="101">
+    <h3><span class="badge actual">Actual</span>&nbsp; What the agents actually did</h3>
+    <div class="actual-empty" id="actual-101">Not yet run. To be completed from the live run and <code>output/audit_trail.json</code> (Problem 9).</div>
+  </div>
+</section>
+
+<!-- ============================== TICKET 102 ============================== -->
+<section role="tabpanel" id="panel-102" aria-labelledby="tab-102" data-ticket="102" hidden>
+  <h2>Ticket 102: Elm City Properties rent notice</h2>
+  <p class="lede">The landlord's email: "shop rent due in 2 days". The ticket is linked to lease 1.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The request</h3>
+      <table>
+        <tr><th>Requester</th><td>Elm City Properties (landlord)</td></tr>
+        <tr><th>Subject</th><td>Rent due</td></tr>
+        <tr><th>Linked record</th><td>Lease 1, Chapel Street shop</td></tr>
+        <tr><th>Status</th><td>Open</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Verified facts the agents will find</h3>
+      <table>
+        <tr><th>Fact</th><th>Tool</th></tr>
+        <tr><td>Monthly rent <b>$2,400</b>, next due <b>2026-09-02</b> (2 days after the business date)</td><td><code>get_ticket</code>, <code>get_financial_position</code></td></tr>
+        <tr><td>Landlord on the lease: Elm City Properties, matching the requester</td><td><code>get_ticket</code></td></tr>
+        <tr><td>Cash: <b>$3,400</b> in checking</td><td><code>get_financial_position</code></td></tr>
+        <tr><td>Also owed: invoice #501, $840 (overdue)</td><td><code>get_financial_position</code></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card expected-block">
+    <h3><span class="badge expected">Expected</span>&nbsp; How I expect the team to handle it</h3>
+    <div class="first">
+      <strong>First contact: Facilities.</strong> A rent notice is about the lease, and Facilities owns the lease and the landlord relationship. Facilities should first confirm the notice against the stored lease (amount, due date, landlord) before any money is considered. Only then does it bring in Accounting, the one agent allowed to prepare a payment.
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-head">Boss reads the ticket <span class="route">· Boss</span></div>
+        <div class="tools">Tools: <code>get_ticket(102)</code></div>
+        <p class="expect">Sees a rent notice linked to lease 1, and delegates to Facilities.</p>
+      </li>
+      <li>
+        <div class="step-head">Verify the notice against the lease <span class="route">· Boss → Facilities</span></div>
+        <div class="tools">Tools: <code>get_ticket(102)</code>, <code>get_financial_position</code>, <code>list_pending_actions</code></div>
+        <p class="expect">Confirms $2,400 due 2026-09-02 to Elm City Properties, and that no rent proposal already exists.</p>
+      </li>
+      <li>
+        <div class="step-head">Assess and prepare the rent payment <span class="route">· Facilities → Accounting</span></div>
+        <div class="tools">Tools: <code>get_financial_position</code>, <code>list_pending_actions</code>, <code>propose_payment(kind="lease", ref_id=1, amount=2400, ticket_id=102)</code></div>
+        <p class="why"><b>Why Accounting:</b> only Accounting can prepare payments, and it can see what else is competing for the same cash.</p>
+        <p class="expect">The rent is fundable from $3,400 on its own. If invoice #501 is also proposed, Accounting will show that only <b>$160</b> would remain if both were paid. That is a hypothetical figure, not the current balance. The result is a <b>payment proposal</b> awaiting human approval; nothing is paid.</p>
+      </li>
+      <li>
+        <div class="step-head">Acknowledge the landlord <span class="route">· Facilities</span></div>
+        <div class="tools">Tools: <code>draft_message(ticket_id=102, related_action_id=&lt;the rent proposal&gt;, …)</code></div>
+        <p class="expect">An <b>unsent</b> draft to the landlord recorded on the lease, acknowledging the notice. It must not promise a payment date before approval; the tool will flag any amount or date as a warning.</p>
+      </li>
+    </ol>
+    <div class="grid">
+      <div class="card not-involved">
+        <h3>Not involved, and why</h3>
+        <ul class="tight">
+          <li><b>Inventory:</b> no stock or vendor question.</li>
+          <li><b>Customer Service:</b> the landlord is not a customer. Landlord messages belong to Facilities, and the system enforces this.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Expected end state</h3>
+        <ul class="tight">
+          <li>One rent payment proposal ($2,400) <b>awaiting human approval</b></li>
+          <li>One unsent landlord draft</li>
+          <li>Ticket still <b>open</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card boundary">
+      <h3>Where the agents must stop (a human decides)</h3>
+      <ul class="tight">
+        <li>Approving the rent payment (R2), and checking that cash never goes negative (R1)</li>
+        <li>Deciding priority if both #501 and the rent are proposed</li>
+        <li>Approving and sending the landlord message (R7)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card actual-block" data-section="actual" data-ticket="102">
+    <h3><span class="badge actual">Actual</span>&nbsp; What the agents actually did</h3>
+    <div class="actual-empty" id="actual-102">Not yet run. To be completed from the live run and <code>output/audit_trail.json</code> (Problem 9).</div>
+  </div>
+</section>
+
+<!-- ============================== TICKET 103 ============================== -->
+<section role="tabpanel" id="panel-103" aria-labelledby="tab-103" data-ticket="103" hidden>
+  <h2>Ticket 103: Yale AI Club wants 20 hoodies (size M) at a bulk discount</h2>
+  <p class="lede">A price override request from a student organization. No invoice or lease is linked.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>The request</h3>
+      <table>
+        <tr><th>Requester</th><td>Yale AI Club (customer)</td></tr>
+        <tr><th>Item</th><td><code>CC-HOOD-NAVY</code>, size M, quantity 20</td></tr>
+        <tr><th>Note</th><td>"Student org wants 20 hoodies, size M, asking for a bulk discount."</td></tr>
+        <tr><th>Status</th><td>Open</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Verified facts the agents will find</h3>
+      <table>
+        <tr><th>Fact</th><th>Tool</th></tr>
+        <tr><td>Size M on hand: <b>8</b>, so <b>12 short</b> (S 4, L 14, XL 6)</td><td><code>check_inventory</code></td></tr>
+        <tr><td>Unit cost <b>$22</b>, list price <b>$58</b></td><td><code>check_inventory</code></td></tr>
+        <tr><td>No vendor is recorded as able to supply navy hoodies. Bulldog Print Co ("apparel reprint") is blocked by #501, and its only record is a <i>tee</i> reprint.</td><td><code>list_vendors</code></td></tr>
+        <tr><td>Restock <i>estimate</i>: 12 × $22 = <b>$264</b> (stored unit cost; not a vendor quote)</td><td><code>propose_purchase</code> (if used)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card expected-block">
+    <h3><span class="badge expected">Expected</span>&nbsp; How I expect the team to handle it</h3>
+    <div class="first">
+      <strong>First contact: Customer Service.</strong> This is a customer asking for a price. Customer Service owns the customer relationship and is the only agent allowed to propose a quote. It must first see what we can actually supply, so it checks stock, then brings in Inventory for the 12-hoodie shortage. It brings in Accounting only if a restock purchase or a margin-versus-cash question comes up.
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-head">Boss reads the ticket <span class="route">· Boss</span></div>
+        <div class="tools">Tools: <code>get_ticket(103)</code></div>
+        <p class="expect">Sees a bulk discount request from a customer, and delegates to Customer Service.</p>
+      </li>
+      <li>
+        <div class="step-head">Check what we can supply <span class="route">· Boss → Customer Service</span></div>
+        <div class="tools">Tools: <code>get_ticket(103)</code>, <code>check_inventory("CC-HOOD-NAVY")</code></div>
+        <p class="expect">Finds 8 of the 20 in stock (12 short), and the $22 cost and $58 list price that bound any quote.</p>
+      </li>
+      <li>
+        <div class="step-head">Ask about the shortage <span class="route">· Customer Service → Inventory</span></div>
+        <div class="tools">Tools: <code>list_vendors</code>, <code>check_inventory</code>; <code>propose_purchase</code> only if a supplier is a reasonable hypothesis</div>
+        <p class="why"><b>Why Inventory:</b> only Inventory can judge restocking and vendor blocks.</p>
+        <p class="expect">Reports that no vendor is recorded as a hoodie supplier and that Bulldog Print Co is blocked. Any purchase proposal must be flagged <i>blocked</i>, labeled an <i>estimate</i> ($264), and left for a human to confirm the supplier.</p>
+      </li>
+      <li class="optional">
+        <div class="step-head">Only if a purchase or margin question arises <span class="route">· Customer Service (or Inventory) → Accounting</span> <span class="badge optional">conditional</span></div>
+        <div class="tools">Tools: <code>get_financial_position</code>, <code>list_pending_actions</code></div>
+        <p class="expect">Compares the $264 estimate with the cash left after other proposals. If #501 and the rent are both proposed, only $160 would remain (hypothetical), so the restock cannot be funded as well, and a human must set priorities. Revenue from the sale is not counted (R6).</p>
+      </li>
+      <li>
+        <div class="step-head">Prepare the quote and the reply <span class="route">· Customer Service</span></div>
+        <div class="tools">Tools: <code>propose_quote(ticket_id=103, sku="CC-HOOD-NAVY", size="M", qty=20, unit_price=&lt;between $22 and $58&gt;)</code>, <code>draft_message(ticket_id=103, related_action_id=&lt;the quote&gt;, …)</code></div>
+        <p class="expect">A <b>quote proposal</b> for exactly 20 × M (the tool refuses anything else), priced between cost and list. The discount level is a business decision for a human. Then an <b>unsent</b> draft that promises no delivery date and does not treat the quote as accepted.</p>
+      </li>
+    </ol>
+    <div class="grid">
+      <div class="card not-involved">
+        <h3>Not involved, and why</h3>
+        <ul class="tight">
+          <li><b>Facilities:</b> nothing about the lease or the premises.</li>
+          <li><b>Accounting:</b> only if a purchase or a cash and margin question actually arises (step 4).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Expected end state</h3>
+        <ul class="tight">
+          <li>One quote proposal <b>awaiting human approval</b></li>
+          <li>Possibly one purchase proposal, flagged blocked and estimated</li>
+          <li>One unsent customer draft; ticket still <b>open</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card boundary">
+      <h3>Where the agents must stop (a human decides, or an outside event is needed)</h3>
+      <ul class="tight">
+        <li>The discount level, and approving the quote</li>
+        <li>Identifying a real supplier for navy hoodies and getting a vendor quote (neither exists in the records)</li>
+        <li>Approving any purchase (R2), after any vendor block is cleared (R3) and only if cash allows (R1)</li>
+        <li>Customer acceptance, which the system never records on its own; and any shipment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card actual-block" data-section="actual" data-ticket="103">
+    <h3><span class="badge actual">Actual</span>&nbsp; What the agents actually did</h3>
+    <div class="actual-empty" id="actual-103">Not yet run. To be completed from the live run and <code>output/audit_trail.json</code> (Problem 9).</div>
+  </div>
+</section>
+
+<!-- ============================== CASH ============================== -->
+<section role="tabpanel" id="panel-cash" aria-labelledby="tab-cash" hidden>
+  <h2>Cash</h2>
+  <div class="card later" data-section="coming-later"><div class="big">Coming later</div><div>This tab will be completed in a later problem.</div></div>
+</section>
+
+<!-- ============================== REFLECTION ============================== -->
+<section role="tabpanel" id="panel-reflection" aria-labelledby="tab-reflection" hidden>
+  <h2>Reflection</h2>
+  <div class="card later" data-section="coming-later"><div class="big">Coming later</div><div>This tab will be completed in a later problem.</div></div>
+</section>
+
+</main>
+
+<footer>
+  The Expected sections are a plan written before any live agent run; they record what we expect, not what happened. The Actual sections are intentionally empty until the live runs. Facts come from the Campus Customs working database through the MCP tools. No vendor quote, customer acceptance, payment, or ticket resolution is assumed.
+</footer>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(tab, setFocus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (setFocus) tab.focus();
+    if (history.replaceState) history.replaceState(null, '', '#' + tab.dataset.hash);
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { select(tab, false); });
+    tab.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === 'Home') n = tabs[0];
+      if (e.key === 'End') n = tabs[tabs.length - 1];
+      if (n) { e.preventDefault(); select(n, true); }
+    });
+  });
+  var start = tabs.filter(function (t) { return '#' + t.dataset.hash === location.hash; })[0];
+  if (start) select(start, false);
+})();
+</script>
+</body>
+</html>

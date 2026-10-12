@@ -1,0 +1,602 @@
+{
+ "generated_utc": "2026-10-11T21:26:57+00:00",
+ "generated_by": "scripts/build_p9_evidence.py (read-only on all sources)",
+ "business_date": "2026-08-31",
+ "resolution_bases": {
+  "business_outcome": "the person confirmed the underlying business issue is resolved",
+  "simulated_workflow_complete": "the person confirmed only that the desk's simulated workflow is complete; the listed outcomes are NOT verified"
+ },
+ "tickets": [
+  {
+   "ticket_id": 101,
+   "final_status": "resolved",
+   "outcome": "Simulated workflow complete (payment #2 of $840.00 (invoice 501); draft #1 unsent). Not verified: physical production, shipment, delivery or receipt of goods; acceptance by the customer or counterparty; that any message was actually sent (drafts are never sent, R7).",
+   "agent_contributions": {
+    "Boss": {
+     "delegated_to": [
+      "Accounting",
+      "Inventory",
+      "Customer Service"
+     ],
+     "delegated_by": [],
+     "tool_calls": {
+      "get_ticket": 1,
+      "list_pending_actions": 1,
+      "check_inventory": 1,
+      "get_financial_position": 1,
+      "list_vendors": 1
+     },
+     "records_created": [],
+     "refused_calls": []
+    },
+    "Inventory": {
+     "delegated_to": [],
+     "delegated_by": [
+      "Boss"
+     ],
+     "tool_calls": {
+      "check_inventory": 1,
+      "get_ticket": 1,
+      "list_vendors": 1
+     },
+     "records_created": [],
+     "refused_calls": []
+    },
+    "Accounting": {
+     "delegated_to": [],
+     "delegated_by": [
+      "Boss"
+     ],
+     "tool_calls": {
+      "get_ticket": 1,
+      "get_financial_position": 1,
+      "list_pending_actions": 1,
+      "propose_payment": 1
+     },
+     "records_created": [
+      {
+       "tool": "propose_payment",
+       "action_id": 1
+      }
+     ],
+     "refused_calls": []
+    },
+    "Customer Service": {
+     "delegated_to": [],
+     "delegated_by": [
+      "Boss"
+     ],
+     "tool_calls": {
+      "get_ticket": 1,
+      "check_inventory": 1,
+      "draft_message": 1
+     },
+     "records_created": [
+      {
+       "tool": "draft_message",
+       "draft_id": 1
+      }
+     ],
+     "refused_calls": []
+    }
+   },
+   "agent_contributions_run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+   "human_approvals": [
+    {
+     "by": "Ryan Suspanic",
+     "at_utc": "2026-10-11T14:04:53.326244+00:00",
+     "operation": "approve",
+     "action_id": 1,
+     "result": "payment_executed",
+     "payment_id": 2,
+     "trail_seq": 188,
+     "resolution_basis_recorded": null
+    },
+    {
+     "by": "Ryan Suspanic",
+     "at_utc": "2026-10-11T19:17:18.613938+00:00",
+     "operation": "resolve_ticket",
+     "action_id": null,
+     "result": "ticket_resolved",
+     "payment_id": null,
+     "trail_seq": 190,
+     "resolution_basis_recorded": "simulated_workflow_complete"
+    }
+   ],
+   "resolution": {
+    "basis": "simulated_workflow_complete",
+    "basis_source": "recorded resolution_basis field",
+    "business_outcome_confirmed": false,
+    "workflow_complete_confirmed": true,
+    "unverified_outcomes": [
+     "delivery",
+     "customer_acceptance",
+     "message_sent"
+    ],
+    "resolved_by": "Ryan Suspanic",
+    "resolved_at_utc": "2026-10-11T19:17:18.601804+00:00",
+    "summary": "Ticket 101's simulated workflow is complete. The agents reviewed the customer's request for one white Classic Bulldog Tee in size S, identified the inventory shortage, examined the linked overdue invoice #501, and prepared a payment proposal and customer message draft. I approved and executed payment #2 of $840 to Bulldog Print Co, reducing checking from $1,000 to $160. Invoice #501 is now paid, removing the vendor's unpaid-invoice shipping restriction. However, size-S inventory remains at zero. Production, shipment, delivery, customer acceptance, and customer communication are not verified. The customer message remains an unsent draft. This resolution records completion of the simulated administrative workflow, not fulfillment of the customer's order.",
+    "audit_db_event_id": 15
+   },
+   "runs": [
+    {
+     "run_id": "53e4f001-d845-4c50-a3a6-1f09ebee50d6",
+     "attempt": 1,
+     "status": "error",
+     "started_utc": "2026-10-10T20:57:26.480851+00:00",
+     "finished_utc": "2026-10-10T20:57:39.127117+00:00",
+     "trail_events": 5,
+     "usage": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "source": "provider-reported, via PydanticAI"
+     },
+     "evidence_files": [
+      "output/p9_runs/101_run.json",
+      "output/p9_runs/101_events.json",
+      "output/p9_runs/101_after_run_state.json",
+      "output/p9_runs/101_attempt1_incident.md"
+     ],
+     "evidence_kind": "saved by the read-only observer while and right after the run",
+     "full_agent_replies": null
+    },
+    {
+     "run_id": "ae8d9bf4-f61f-4117-b7f4-f08b8626e139",
+     "attempt": 2,
+     "status": "completed",
+     "started_utc": "2026-10-10T21:44:10.314241+00:00",
+     "finished_utc": "2026-10-10T21:44:46.898051+00:00",
+     "trail_events": 46,
+     "usage": {
+      "requests": 12,
+      "input_tokens": 27179,
+      "output_tokens": 2473,
+      "tool_calls": 18,
+      "source": "provider-reported, via PydanticAI"
+     },
+     "evidence_files": [
+      "output/p9_runs/101_attempt2_run.json",
+      "output/p9_runs/101_attempt2_events.json",
+      "output/p9_runs/101_attempt2_after_run_state.json"
+     ],
+     "evidence_kind": "saved by the read-only observer while and right after the run",
+     "full_agent_replies": null
+    },
+    {
+     "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+     "attempt": 3,
+     "status": "completed",
+     "started_utc": "2026-10-11T03:25:55.566355+00:00",
+     "finished_utc": "2026-10-11T03:26:44.583233+00:00",
+     "trail_events": 46,
+     "usage": {
+      "requests": 14,
+      "input_tokens": 36214,
+      "output_tokens": 2432,
+      "tool_calls": 18,
+      "source": "provider-reported, via PydanticAI"
+     },
+     "evidence_files": [
+      "output/p9_runs/101_attempt3_run.json",
+      "output/p9_runs/101_attempt3_events.json",
+      "output/p9_runs/101_attempt3_after_run_state.json"
+     ],
+     "evidence_kind": "saved by the read-only observer while and right after the run",
+     "full_agent_replies": null
+    }
+   ],
+   "final_run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+   "payments": [
+    {
+     "payment_id": 2,
+     "kind": "invoice",
+     "ref_id": 501,
+     "amount": 840.0,
+     "approved_by": "Ryan Suspanic"
+    }
+   ],
+   "proposals": [
+    {
+     "id": 1,
+     "kind": "payment",
+     "status": "executed",
+     "amount": 840.0,
+     "payment_id": 2
+    }
+   ],
+   "drafts": [
+    {
+     "id": 1,
+     "recipient": "Tauhid Zaman",
+     "status": "draft",
+     "sent": false
+    }
+   ],
+   "differences_from_expected": [
+    "3 runs were needed; the plan assumed one (see the attempts listed above).",
+    "Attempt 1 failed before any tool call (a model-provider configuration error, corrected offline; harness §12.1).",
+    "Attempt 2 completed without creating any proposal or draft.",
+    "The comparison below is for the final attempt (3).",
+    "First contact differed: the plan named Inventory; the Boss delegated first to Accounting.",
+    "Planned hand-off Boss → Inventory happened.",
+    "Planned hand-off Inventory → Accounting did not happen (delegations to Accounting: Boss → Accounting).",
+    "Optional hand-off Boss → Customer Service was used.",
+    "Delegations not in the plan: Boss → Accounting.",
+    "Facilities was not involved, as planned.",
+    "Planned propose_payment by Accounting: done.",
+    "Optional draft_message by Customer Service: done."
+   ],
+   "screenshot": {
+    "file": "output/p9_screenshots/101_final.png",
+    "sha256": "da05ce2822f03769184100ef8122a998b275e35373a4a750402ef6d11a2f71b7",
+    "captured_utc": "2026-10-11T20:10:24+00:00"
+   }
+  },
+  {
+   "ticket_id": 102,
+   "final_status": "resolved",
+   "outcome": "Business outcome confirmed by Ryan Suspanic: payment #1 of $2,400.00 (lease 1) executed through the human approval path; draft #2 unsent.",
+   "agent_contributions": {
+    "Boss": {
+     "delegated_to": [
+      "Facilities",
+      "Accounting",
+      "Accounting"
+     ],
+     "delegated_by": [],
+     "tool_calls": {
+      "get_ticket": 1,
+      "list_pending_actions": 1,
+      "get_financial_position": 1
+     },
+     "records_created": [],
+     "refused_calls": []
+    },
+    "Accounting": {
+     "delegated_to": [],
+     "delegated_by": [
+      "Boss",
+      "Facilities"
+     ],
+     "tool_calls": {
+      "get_ticket": 3,
+      "get_financial_position": 3,
+      "list_pending_actions": 2,
+      "propose_payment": 2
+     },
+     "records_created": [
+      {
+       "tool": "propose_payment",
+       "action_id": 2
+      }
+     ],
+     "refused_calls": [
+      {
+       "tool": "propose_payment",
+       "code": "DUPLICATE"
+      }
+     ]
+    },
+    "Facilities": {
+     "delegated_to": [
+      "Accounting"
+     ],
+     "delegated_by": [
+      "Boss"
+     ],
+     "tool_calls": {
+      "get_ticket": 1,
+      "get_financial_position": 1,
+      "draft_message": 1
+     },
+     "records_created": [
+      {
+       "tool": "draft_message",
+       "draft_id": 2
+      }
+     ],
+     "refused_calls": []
+    }
+   },
+   "agent_contributions_run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+   "human_approvals": [
+    {
+     "by": "Ryan Suspanic",
+     "at_utc": "2026-10-11T13:23:08.251538+00:00",
+     "operation": "approve",
+     "action_id": 2,
+     "result": "payment_executed",
+     "payment_id": 1,
+     "trail_seq": 154,
+     "resolution_basis_recorded": null
+    },
+    {
+     "by": "Ryan Suspanic",
+     "at_utc": "2026-10-11T13:32:18.622334+00:00",
+     "operation": "resolve_ticket",
+     "action_id": null,
+     "result": "ticket_resolved",
+     "payment_id": null,
+     "trail_seq": 156,
+     "resolution_basis_recorded": null
+    }
+   ],
+   "resolution": {
+    "basis": "business_outcome",
+    "basis_source": "legacy rule: the audit record has no resolution_basis field and business_outcome_confirmed is true (harness §13.10)",
+    "business_outcome_confirmed": true,
+    "workflow_complete_confirmed": null,
+    "unverified_outcomes": [],
+    "resolved_by": "Ryan Suspanic",
+    "resolved_at_utc": "2026-10-11T13:32:18.611027+00:00",
+    "summary": "September rent for lease #1 (Elm City Properties, Chapel Street shop) was paid in the Campus Customs simulation. I approved and executed proposal #2, recording payment #1 of $2,400 on the shop date of August 31, 2026, before the September 2 due date. Checking decreased from $3,400 to $1,000. The lease's next due date advanced to October 2 under our documented simulation convention (D6). No real bank transfer occurred. Landlord draft #2 was prepared before payment and remains unsent; it is superseded by the executed transaction. No landlord acknowledgment was recorded.",
+    "audit_db_event_id": 9
+   },
+   "runs": [
+    {
+     "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+     "attempt": 1,
+     "status": "completed",
+     "started_utc": "2026-10-11T05:44:55.745919+00:00",
+     "finished_utc": "2026-10-11T05:45:52.836953+00:00",
+     "trail_events": 52,
+     "usage": {
+      "requests": 17,
+      "input_tokens": 40554,
+      "output_tokens": 3233,
+      "tool_calls": 20,
+      "source": "provider-reported, via PydanticAI"
+     },
+     "evidence_files": [
+      "output/p9_runs/102_attempt1_run.json",
+      "output/p9_runs/102_attempt1_events.json",
+      "output/p9_runs/102_attempt1_responses.json",
+      "output/p9_runs/102_attempt1_after_run_state.json"
+     ],
+     "evidence_kind": "saved by the read-only observer while and right after the run",
+     "full_agent_replies": "output/run_responses/f2412172-0e32-4e74-96d4-31b9228e9c19.jsonl"
+    }
+   ],
+   "final_run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+   "payments": [
+    {
+     "payment_id": 1,
+     "kind": "lease",
+     "ref_id": 1,
+     "amount": 2400.0,
+     "approved_by": "Ryan Suspanic"
+    }
+   ],
+   "proposals": [
+    {
+     "id": 2,
+     "kind": "payment",
+     "status": "executed",
+     "amount": 2400.0,
+     "payment_id": 1
+    }
+   ],
+   "drafts": [
+    {
+     "id": 2,
+     "recipient": "Elm City Properties",
+     "status": "draft",
+     "sent": false
+    }
+   ],
+   "differences_from_expected": [
+    "First contact matched the plan: the Boss delegated first to Facilities.",
+    "Planned hand-off Boss → Facilities happened.",
+    "Planned hand-off Facilities → Accounting happened.",
+    "Delegations not in the plan: Boss → Accounting (2 in total).",
+    "Inventory was not involved, as planned.",
+    "Customer Service was not involved, as planned.",
+    "Planned propose_payment by Accounting: done.",
+    "Planned draft_message by Facilities: done.",
+    "Accounting's propose_payment call was refused (DUPLICATE); nothing was created by it."
+   ],
+   "screenshot": {
+    "file": "output/p9_screenshots/102_final.png",
+    "sha256": "a99cee9da342b6d8dc0bfa6c51c77d57c805b86e28ba6ab75957ba755633eff0",
+    "captured_utc": "2026-10-11T20:10:45+00:00"
+   }
+  },
+  {
+   "ticket_id": 103,
+   "final_status": "resolved",
+   "outcome": "Simulated workflow complete (no payment; quote #3 ($1,000.00) approved internally, no revenue; draft #3 unsent). Not verified: physical production, shipment, delivery or receipt of goods; acceptance by the customer or counterparty; that any message was actually sent (drafts are never sent, R7).",
+   "agent_contributions": {
+    "Boss": {
+     "delegated_to": [
+      "Customer Service"
+     ],
+     "delegated_by": [],
+     "tool_calls": {
+      "get_ticket": 1,
+      "list_pending_actions": 1,
+      "check_inventory": 1,
+      "get_financial_position": 1,
+      "list_vendors": 1
+     },
+     "records_created": [],
+     "refused_calls": []
+    },
+    "Customer Service": {
+     "delegated_to": [],
+     "delegated_by": [
+      "Boss"
+     ],
+     "tool_calls": {
+      "check_inventory": 1,
+      "get_ticket": 1,
+      "list_pending_actions": 1,
+      "propose_quote": 1,
+      "draft_message": 1
+     },
+     "records_created": [
+      {
+       "tool": "propose_quote",
+       "action_id": 3
+      },
+      {
+       "tool": "draft_message",
+       "draft_id": 3
+      }
+     ],
+     "refused_calls": []
+    }
+   },
+   "agent_contributions_run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+   "human_approvals": [
+    {
+     "by": "Ryan Suspanic",
+     "at_utc": "2026-10-11T13:56:39.953690+00:00",
+     "operation": "approve",
+     "action_id": 3,
+     "result": "quote_approved",
+     "payment_id": null,
+     "trail_seq": 186,
+     "resolution_basis_recorded": null
+    },
+    {
+     "by": "Ryan Suspanic",
+     "at_utc": "2026-10-11T19:37:00.455982+00:00",
+     "operation": "resolve_ticket",
+     "action_id": null,
+     "result": "ticket_resolved",
+     "payment_id": null,
+     "trail_seq": 192,
+     "resolution_basis_recorded": "simulated_workflow_complete"
+    }
+   ],
+   "resolution": {
+    "basis": "simulated_workflow_complete",
+    "basis_source": "recorded resolution_basis field",
+    "business_outcome_confirmed": false,
+    "workflow_complete_confirmed": true,
+    "unverified_outcomes": [
+     "delivery",
+     "customer_acceptance",
+     "message_sent"
+    ],
+    "resolved_by": "Ryan Suspanic",
+    "resolved_at_utc": "2026-10-11T19:37:00.432335+00:00",
+    "summary": "Ticket 103's simulated workflow is complete. The agents reviewed Yale AI Club's request for a bulk discount on 20 navy size-M hoodies. Customer Service proposed quote #3 at $50 per hoodie ($1,000 total), compared with the $58 list price and $22 unit cost. I approved the proposed pricing internally. The approval did not generate revenue, reserve inventory, or communicate with the customer. Only 8 hoodies are in stock, leaving a shortage of 12, and no verified supplier or replenishment is recorded. Customer acceptance, inventory replenishment, shipment, and delivery remain unverified. Customer draft #3 remains unsent. This resolution records completion of the simulated pricing and administrative workflow, not customer acceptance or fulfillment of the order.",
+    "audit_db_event_id": 16
+   },
+   "runs": [
+    {
+     "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+     "attempt": 1,
+     "status": "completed",
+     "started_utc": "2026-10-11T13:37:27.364009+00:00",
+     "finished_utc": "2026-10-11T13:37:57.847557+00:00",
+     "trail_events": 28,
+     "usage": {
+      "requests": 8,
+      "input_tokens": 19450,
+      "output_tokens": 1228,
+      "tool_calls": 11,
+      "source": "provider-reported, via PydanticAI"
+     },
+     "evidence_files": [
+      "output/p9_runs/103_attempt1_run.json",
+      "output/p9_runs/103_attempt1_events.json",
+      "output/p9_runs/103_attempt1_responses.json",
+      "output/p9_runs/103_attempt1_after_run_state.json",
+      "output/p9_runs/103_attempt1_recovery_record.json"
+     ],
+     "evidence_kind": "reconstructed after the run from the trail, the response file and the database (no observer was running; see the recovery record)",
+     "full_agent_replies": "output/run_responses/fa38a75b-6dcc-4e75-a18b-feb0d0007c11.jsonl"
+    }
+   ],
+   "final_run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+   "payments": [],
+   "proposals": [
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "approved",
+     "amount": 1000.0,
+     "payment_id": null
+    }
+   ],
+   "drafts": [
+    {
+     "id": 3,
+     "recipient": "Yale AI Club",
+     "status": "draft",
+     "sent": false
+    }
+   ],
+   "differences_from_expected": [
+    "First contact matched the plan: the Boss delegated first to Customer Service.",
+    "Planned hand-off Boss → Customer Service happened.",
+    "Planned hand-off Customer Service → Inventory did not happen (delegations to Inventory: none).",
+    "Facilities was not involved, as planned.",
+    "Planned propose_quote by Customer Service: done.",
+    "Planned draft_message by Customer Service: done.",
+    "Optional propose_purchase by Inventory: not done."
+   ],
+   "screenshot": {
+    "file": "output/p9_screenshots/103_final.png",
+    "sha256": "0a6baa2500fdc6826652e0987b43d0c9953a5aa93fd65eddadea52a56010d3ce",
+    "captured_utc": "2026-10-11T20:11:06+00:00"
+   }
+  }
+ ],
+ "cash": {
+  "opening_checking": 3400.0,
+  "opening_source": "output/p9_runs/g1_reset_record.json (opening_balance_cash_accounts, read right after the controlled reset)",
+  "payments": [
+   {
+    "payment_id": 1,
+    "ticket_id": 102,
+    "kind": "lease",
+    "ref_id": 1,
+    "amount": -2400.0,
+    "proposal_id": 2,
+    "approved_by": "Ryan Suspanic",
+    "executed_at": "2026-10-11T13:23:08.237751+00:00",
+    "audit_db_event_ids": [
+     8
+    ]
+   },
+   {
+    "payment_id": 2,
+    "ticket_id": 101,
+    "kind": "invoice",
+    "ref_id": 501,
+    "amount": -840.0,
+    "proposal_id": 1,
+    "approved_by": "Ryan Suspanic",
+    "executed_at": "2026-10-11T14:04:53.315636+00:00",
+    "audit_db_event_ids": [
+     14
+    ]
+   }
+  ],
+  "quote_3_cash_effect": 0.0,
+  "ending_checking": 160.0,
+  "cash_accounts_checking": 160.0,
+  "reconciles": true,
+  "note": "Recorded payments in the simulated Campus Customs system; no real bank transfer occurred."
+ },
+ "limitations": [
+  "Full agent replies exist only for the runs of tickets 102 and 103; ticket 101's runs predate the full-response recorder, so only 300-character summaries of agent replies are in the trail. Tool results are 300-character summaries for every run.",
+  "Ticket 103's observer files were reconstructed after the run from the contemporaneous trail, response file and database rows; no observer was running (output/p9_runs/103_attempt1_recovery_record.json).",
+  "No record establishes delivery, shipment or receipt of goods, customer acceptance, or that any message was sent.",
+  "Each screenshot's Activity panel shows only the first 8-9 events; the complete events are in the trail."
+ ],
+ "sources": {
+  "audit_trail_events": 192,
+  "audit_db_events": 16,
+  "expected_block_sha256": {
+   "101": "a457da78134da640016b71ab39e3bcbb2833dc12d1c3248bf88545f135523a1d",
+   "102": "4211a7d3ab9a553f8e10be38361fc61070d67f59409224feb08afc37c6619814",
+   "103": "6b88c2e9a0fa235ef789fbddd9e9f8cc4a75174e16dae43c11726fac58a4d9f2"
+  }
+ }
+}

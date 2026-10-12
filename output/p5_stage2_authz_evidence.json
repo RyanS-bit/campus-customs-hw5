@@ -1,0 +1,258 @@
+{
+  "label": "OFFLINE evidence on a temporary copy of the database. Not live agent activity.",
+  "generated_utc": "2026-10-09T05:51:16+00:00",
+  "legitimate_proposal": {
+    "links": {
+      "action_id": 1,
+      "audit_db_event_id": 1
+    },
+    "state_after": {
+      "protected_tables_digest": "8fc9ded8cb08ff321468fe658205f5066a118c641444b44c54dba236e7ca863e",
+      "cash_balance": 3400.0,
+      "pending_actions": 1,
+      "drafts": 0,
+      "audit_events": 1
+    }
+  },
+  "denied_direct_attempts": [
+    {
+      "sql": "UPDATE cash_accounts SET balance = 0",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "UPDATE",
+          "target": "cash_accounts",
+          "detail": "balance",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "UPDATE invoices SET status = 'paid' WHERE id = 501",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "UPDATE",
+          "target": "invoices",
+          "detail": "status",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "INSERT INTO payments (kind, ref_id, amount, account, paid_at, approved_by) VALUES ('invoice', 501, 840, 'checking', 'x', 'agent')",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "INSERT",
+          "target": "payments",
+          "detail": null,
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "UPDATE tickets SET status = 'closed'",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "UPDATE",
+          "target": "tickets",
+          "detail": "status",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "UPDATE inventory SET qty = qty + 100",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "UPDATE",
+          "target": "inventory",
+          "detail": "qty",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "UPDATE leases SET next_due = '2026-10-02'",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "UPDATE",
+          "target": "leases",
+          "detail": "next_due",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "UPDATE pending_actions SET status = 'approved'",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "UPDATE",
+          "target": "pending_actions",
+          "detail": "status",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "DELETE FROM audit.events",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "DELETE",
+          "target": "events",
+          "detail": null,
+          "database": "audit",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    }
+  ],
+  "denied_indirect_attempts": [
+    {
+      "sql": "CREATE TEMP TRIGGER t AFTER INSERT ON pending_actions BEGIN UPDATE cash_accounts SET balance = 0; END",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "CREATE_TEMP_TRIGGER",
+          "target": "t",
+          "detail": "pending_actions",
+          "database": "temp",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "DROP TRIGGER pending_actions_insert_as_proposed",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "DROP_TRIGGER",
+          "target": "pending_actions_insert_as_proposed",
+          "detail": "pending_actions",
+          "database": "main",
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "ATTACH DATABASE 'C:\\Users\\DrRya\\AppData\\Local\\Temp\\tmpt0s7fiww\\hw5\\data\\campus_customs.db' AS orig",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "ATTACH",
+          "target": "C:\\Users\\DrRya\\AppData\\Local\\Temp\\tmpt0s7fiww\\hw5\\data\\campus_customs.db",
+          "detail": null,
+          "database": null,
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "PRAGMA foreign_keys = OFF",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "PRAGMA",
+          "target": "foreign_keys",
+          "detail": "OFF",
+          "database": null,
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "PRAGMA recursive_triggers = OFF",
+      "outcome": "refused: not authorized",
+      "authorizer_denials": [
+        {
+          "action": "PRAGMA",
+          "target": "recursive_triggers",
+          "detail": "OFF",
+          "database": null,
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "VACUUM INTO 'C:\\Users\\DrRya\\AppData\\Local\\Temp\\tmpt0s7fiww\\copy.db'",
+      "outcome": "refused: authorization denied",
+      "authorizer_denials": [
+        {
+          "action": "ATTACH",
+          "target": "C:\\Users\\DrRya\\AppData\\Local\\Temp\\tmpt0s7fiww\\copy.db",
+          "detail": null,
+          "database": null,
+          "via_trigger": null
+        }
+      ],
+      "state_unchanged": true
+    },
+    {
+      "sql": "INSERT OR REPLACE INTO pending_actions (id, kind, invoice_id, amount, amount_basis, account, fundable_at_proposal, rationale, proposed_by, run_id, business_date, created_at) VALUES (1, 'payment', 501, 840, 'invoice_amount', 'checking', 1, 'forged replacement', 'accounting', 'r', 'd', 't')",
+      "outcome": "refused: pending_actions: rows are never deleted",
+      "authorizer_denials": [],
+      "state_unchanged": true
+    },
+    {
+      "scenario": "hostile trigger fired by a real propose_payment",
+      "outcome": "DB_DENIED: Database authorizer refused the operation; nothing was saved (not authorized).",
+      "state_unchanged": true
+    }
+  ],
+  "rollback": [
+    {
+      "scenario": "failure injected after_row",
+      "outcome": "failed as injected: injected at after_row",
+      "state_unchanged": true
+    },
+    {
+      "scenario": "failure injected after_audit",
+      "outcome": "failed as injected: injected at after_audit",
+      "state_unchanged": true
+    },
+    {
+      "scenario": "audit.db write fails",
+      "outcome": "AUDIT_FAILED: Audit event could not be recorded; nothing was saved (simulated audit failure).",
+      "state_unchanged": true
+    }
+  ],
+  "final_state": {
+    "protected_tables_digest": "8fc9ded8cb08ff321468fe658205f5066a118c641444b44c54dba236e7ca863e",
+    "cash_balance": 3400.0,
+    "pending_actions": 1,
+    "drafts": 0,
+    "audit_events": 1
+  },
+  "audit_chain": {
+    "events": 1,
+    "valid": true,
+    "problems": []
+  },
+  "real_databases_unchanged": true
+}

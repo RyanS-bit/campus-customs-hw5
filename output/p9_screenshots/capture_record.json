@@ -1,0 +1,188 @@
+{
+ "purpose": "Final-state dashboard screenshots, Problem 9 (follow-up 44)",
+ "source": "http://localhost:5173/",
+ "browser": "Microsoft Edge (headless, throwaway profile, muted) via Chrome DevTools Protocol on 127.0.0.1",
+ "method": "Page.captureScreenshot, full page (captureBeyondViewport); bytes saved unmodified as PNG",
+ "read_only": "Only the ticket list buttons were clicked (they issue GET requests). No dialog was opened.",
+ "record_version": 2,
+ "correction": {
+  "corrected_utc": "2026-10-11T20:16:50+00:00",
+  "authorized_by": "Dr. Ryan (Problem 9, follow-up 46)",
+  "original_record": {
+   "file": "output/p9_screenshots/capture_record_original_with_error.json",
+   "sha256": "5faf8362f62b43fe36267f99f2436ebb5153f971d835ecb53f932c605bc279a9",
+   "note": "byte-for-byte copy of the first capture_record.json, kept unedited"
+  },
+  "error": "The capture script selected the Activity list with '[role=list][aria-label=\"Agent activity\"]'. The dashboard renders <ol aria-label=\"Agent activity\">, whose list role is implicit (no role attribute), so the selector matched nothing. That gave 'events': 0, and because 'detail_loaded' required at least one event, 'detail_loaded': false for all three shots. Both values were wrong.",
+  "fix": "Selector corrected to ol[aria-label=\"Agent activity\"] (scratchpad revalidate_shots.py).",
+  "revalidation": {
+   "started_utc": "2026-10-11T20:16:09+00:00",
+   "finished_utc": "2026-10-11T20:16:15+00:00",
+   "method": "Headless Edge, throwaway profile, muted, same viewport and scale as the capture; read-only (only ticket list buttons clicked); NO new screenshots; counts from the page structure and the audit trail only.",
+   "recorded_changes_between_capture_and_revalidation": []
+  },
+  "superseded_fields": [
+   "shots[].detail_loaded",
+   "shots[].page_text.events"
+  ],
+  "also_corrected": "Claude's follow-up 45 note said each image shows the first '10-11' events; that was estimated from the images. The measured values are in activity_events.visible_in_scrollable_panel."
+ },
+ "shots": [
+  {
+   "ticket_id": 101,
+   "file": "output/p9_screenshots/101_final.png",
+   "captured_utc": "2026-10-11T20:10:24+00:00",
+   "sha256": "da05ce2822f03769184100ef8122a998b275e35373a4a750402ef6d11a2f71b7",
+   "bytes": 341327,
+   "pixels": [
+    1425,
+    2486
+   ],
+   "sha256_rechecked_utc": "2026-10-11T20:16:15+00:00",
+   "sha256_unchanged": true,
+   "ticket_detail_loaded": {
+    "value": true,
+    "basis": "At capture time the page text read back included this ticket's heading, the 'resolution' section and the 'activity-caption' (see page_text_at_capture). Re-confirmed at revalidation with the corrected selector: heading, resolution, caption and Activity list items all present."
+   },
+   "activity_events": {
+    "visible_in_scrollable_panel": {
+     "any_part": 9,
+     "fully": 8,
+     "basis": "Measured from the page structure (element positions inside the Activity list's 520-px scroll box at scroll position 0) in a re-render at revalidation time with the capture's settings; not measured from the PNG pixels and not measured at capture time. No recorded change occurred between capture and revalidation, and the re-rendered page size equals the PNG size."
+    },
+    "rendered_in_dashboard_list": {
+     "value": 46,
+     "basis": "count of list items in ol[aria-label='Agent activity'] at revalidation"
+    },
+    "recorded_events_label_on_page": {
+     "value": 46,
+     "basis": "the run panel's 'Recorded events' figure at revalidation"
+    },
+    "complete_count_in_audit_trail": {
+     "value": 46,
+     "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+     "basis": "events with this run_id in output/audit_trail.json"
+    },
+    "at_capture_time": {
+     "value": "unverified",
+     "reason": "the original capture's selector matched nothing, so no count was taken then"
+    }
+   },
+   "page_text_at_capture": {
+    "heading": "Ticket 101: Bulldog tee",
+    "list_item": "#101 Bulldog tee\nTauhid Zaman · customer order\nTicket\nResolved\nfulfilment not verified\nAgent run\nCompleted",
+    "resolution": "Resolved: workflow complete; fulfilment not verified (by Ryan Suspanic).\n\nThe person confirmed only that the desk's simulated workflow is complete. They did not confirm the business outcome. Not verified:\n\nPhysical production, shipment, delivery or receipt of goods\nAcceptance by the customer or counterparty\nThat any message was actually sent (drafts are never sent)\n\n“Ticket 101's simulated workflow is complete. The agents reviewed the customer's request for one white Classic Bulldog Tee in size S, identified the inventory shortage, examined the linked overdue invoice #501, and prepared a payment proposal and customer message draft. I approved and executed payment #2 of $840 to Bulldog Print Co, reducing checking from $1,000 to $160. Invoice #501 is now paid, removing the vendor's unpaid-invoice shipping restriction. However, size-S inventory remains at zero. Production, shipment, delivery, customer acceptance, and customer communication are not verified. The customer message remains an unsent draft. This resolution records completion of the simulated administrative workflow, not fulfillment of the customer's order.”",
+    "caption": "Recorded during this run (started 23:25:55, finished 23:26:44). The team's summary and the Activity list below describe the shop as it was at that time and may no longer describe its current condition; the current ticket status, proposals and cash are shown elsewhere on this page.",
+    "cash": "$160.00",
+    "dialog_open": false,
+    "errors": null
+   },
+   "database_status": "resolved",
+   "status_matches_page": true
+  },
+  {
+   "ticket_id": 102,
+   "file": "output/p9_screenshots/102_final.png",
+   "captured_utc": "2026-10-11T20:10:45+00:00",
+   "sha256": "a99cee9da342b6d8dc0bfa6c51c77d57c805b86e28ba6ab75957ba755633eff0",
+   "bytes": 326768,
+   "pixels": [
+    1425,
+    2296
+   ],
+   "sha256_rechecked_utc": "2026-10-11T20:16:15+00:00",
+   "sha256_unchanged": true,
+   "ticket_detail_loaded": {
+    "value": true,
+    "basis": "At capture time the page text read back included this ticket's heading, the 'resolution' section and the 'activity-caption' (see page_text_at_capture). Re-confirmed at revalidation with the corrected selector: heading, resolution, caption and Activity list items all present."
+   },
+   "activity_events": {
+    "visible_in_scrollable_panel": {
+     "any_part": 8,
+     "fully": 7,
+     "basis": "Measured from the page structure (element positions inside the Activity list's 520-px scroll box at scroll position 0) in a re-render at revalidation time with the capture's settings; not measured from the PNG pixels and not measured at capture time. No recorded change occurred between capture and revalidation, and the re-rendered page size equals the PNG size."
+    },
+    "rendered_in_dashboard_list": {
+     "value": 52,
+     "basis": "count of list items in ol[aria-label='Agent activity'] at revalidation"
+    },
+    "recorded_events_label_on_page": {
+     "value": 52,
+     "basis": "the run panel's 'Recorded events' figure at revalidation"
+    },
+    "complete_count_in_audit_trail": {
+     "value": 52,
+     "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+     "basis": "events with this run_id in output/audit_trail.json"
+    },
+    "at_capture_time": {
+     "value": "unverified",
+     "reason": "the original capture's selector matched nothing, so no count was taken then"
+    }
+   },
+   "page_text_at_capture": {
+    "heading": "Ticket 102: Rent due",
+    "list_item": "#102 Rent due\nElm City Properties · rent notice\nTicket\nResolved\nAgent run\nCompleted",
+    "resolution": "Resolved: business outcome confirmed (by Ryan Suspanic).\n\nA person confirmed the underlying business issue is resolved (their statement; the system does not verify deliveries, acceptance or messages).\n\n“September rent for lease #1 (Elm City Properties, Chapel Street shop) was paid in the Campus Customs simulation. I approved and executed proposal #2, recording payment #1 of $2,400 on the shop date of August 31, 2026, before the September 2 due date. Checking decreased from $3,400 to $1,000. The lease's next due date advanced to October 2 under our documented simulation convention (D6). No real bank transfer occurred. Landlord draft #2 was prepared before payment and remains unsent; it is superseded by the executed transaction. No landlord acknowledgment was recorded.”",
+    "caption": "Recorded during this run (started 01:44:55, finished 01:45:52). The team's summary and the Activity list below describe the shop as it was at that time and may no longer describe its current condition; the current ticket status, proposals and cash are shown elsewhere on this page.",
+    "cash": "$160.00",
+    "dialog_open": false,
+    "errors": null
+   },
+   "database_status": "resolved",
+   "status_matches_page": true
+  },
+  {
+   "ticket_id": 103,
+   "file": "output/p9_screenshots/103_final.png",
+   "captured_utc": "2026-10-11T20:11:06+00:00",
+   "sha256": "0a6baa2500fdc6826652e0987b43d0c9953a5aa93fd65eddadea52a56010d3ce",
+   "bytes": 345791,
+   "pixels": [
+    1425,
+    2482
+   ],
+   "sha256_rechecked_utc": "2026-10-11T20:16:15+00:00",
+   "sha256_unchanged": true,
+   "ticket_detail_loaded": {
+    "value": true,
+    "basis": "At capture time the page text read back included this ticket's heading, the 'resolution' section and the 'activity-caption' (see page_text_at_capture). Re-confirmed at revalidation with the corrected selector: heading, resolution, caption and Activity list items all present."
+   },
+   "activity_events": {
+    "visible_in_scrollable_panel": {
+     "any_part": 9,
+     "fully": 8,
+     "basis": "Measured from the page structure (element positions inside the Activity list's 520-px scroll box at scroll position 0) in a re-render at revalidation time with the capture's settings; not measured from the PNG pixels and not measured at capture time. No recorded change occurred between capture and revalidation, and the re-rendered page size equals the PNG size."
+    },
+    "rendered_in_dashboard_list": {
+     "value": 28,
+     "basis": "count of list items in ol[aria-label='Agent activity'] at revalidation"
+    },
+    "recorded_events_label_on_page": {
+     "value": 28,
+     "basis": "the run panel's 'Recorded events' figure at revalidation"
+    },
+    "complete_count_in_audit_trail": {
+     "value": 28,
+     "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+     "basis": "events with this run_id in output/audit_trail.json"
+    },
+    "at_capture_time": {
+     "value": "unverified",
+     "reason": "the original capture's selector matched nothing, so no count was taken then"
+    }
+   },
+   "page_text_at_capture": {
+    "heading": "Ticket 103: Bulk hoodie discount",
+    "list_item": "#103 Bulk hoodie discount\nYale AI Club · price override\nTicket\nResolved\nfulfilment not verified\nAgent run\nCompleted",
+    "resolution": "Resolved: workflow complete; fulfilment not verified (by Ryan Suspanic).\n\nThe person confirmed only that the desk's simulated workflow is complete. They did not confirm the business outcome. Not verified:\n\nPhysical production, shipment, delivery or receipt of goods\nAcceptance by the customer or counterparty\nThat any message was actually sent (drafts are never sent)\n\n“Ticket 103's simulated workflow is complete. The agents reviewed Yale AI Club's request for a bulk discount on 20 navy size-M hoodies. Customer Service proposed quote #3 at $50 per hoodie ($1,000 total), compared with the $58 list price and $22 unit cost. I approved the proposed pricing internally. The approval did not generate revenue, reserve inventory, or communicate with the customer. Only 8 hoodies are in stock, leaving a shortage of 12, and no verified supplier or replenishment is recorded. Customer acceptance, inventory replenishment, shipment, and delivery remain unverified. Customer draft #3 remains unsent. This resolution records completion of the simulated pricing and administrative workflow, not customer acceptance or fulfillment of the order.”",
+    "caption": "Recorded during this run (started 09:37:27, finished 09:37:57). The team's summary and the Activity list below describe the shop as it was at that time and may no longer describe its current condition; the current ticket status, proposals and cash are shown elsewhere on this page.",
+    "cash": "$160.00",
+    "dialog_open": false,
+    "errors": null
+   },
+   "database_status": "resolved",
+   "status_matches_page": true
+  }
+ ]
+}

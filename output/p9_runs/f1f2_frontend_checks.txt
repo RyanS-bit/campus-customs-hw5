@@ -1,0 +1,4 @@
+# Problem 9 F1/F2 frontend checks (2026-10-10T22:21:38Z)
+npm run typecheck: exit 0
+npm test: Tests 17 passed (17)
+npm run build: built successfully

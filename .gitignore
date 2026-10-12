@@ -1,0 +1,38 @@
+# Secrets: never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# SQLite side files. data/campus_customs.db, data/campus_customs_new.db and data/audit.db ARE committed:
+# audit.db is part of the final evidence (decision and resolution records; Problem 10, follow-up 11).
+data/backups/
+*.db-journal
+*.db-wal
+*.db-shm
+*.resetting
+*.snapshotting
+
+# Audit trail side files (output/audit_trail.json itself IS committed)
+output/audit_trail.json.lock
+output/audit_trail.json.tmp-*
+.run.lock
+
+# Frontend (Problem 8): installed packages and build output are reproducible from package-lock.json
+frontend/node_modules/
+frontend/dist/
+frontend/_mutation_tmp_*/
+frontend/tsconfig.tsbuildinfo
+
+# Local Claude Code preview configuration: machine-specific paths and a preset live-run authorization; never publish
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db

@@ -1,0 +1,74 @@
+{
+  "description": "Problem 5, Stage 3: LIVE tool calls made by the vibe coder (Claude Code, Claude Opus 5.5) through the reloaded campus-customs MCP server in DEVELOPMENT MODE (launched by .mcp.json with no run identity). Each 'output'/'error_text' is the result exactly as returned by the MCP connection. This file is separate from output/mcp_smoke.json (Problem 4), which was not modified. Not offline tests and not agent runs.",
+  "session": {
+    "date": "2026-10-09",
+    "conversation": "Homework 5 Problem 4: MCP tools verification (primary workspace, opened on hw5/)",
+    "server": "campus-customs (stdio, .venv/Scripts/python.exe mcp_server/server.py), 10 tools reported by the session; server processes 8096/35592 started 2026-10-09 5:55 PM EDT, after server.py was last modified (5:32 PM)",
+    "database": "data/campus_customs_new.db after the authorized Stage 3 reset (see output/p5_stage3_reset_record.md)",
+    "mode": "development (no CC_RUN_ID / CC_AGENT / CC_RUN_MODE): read tools only; write tools must refuse"
+  },
+  "pre_call_state": {
+    "original_sha256": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+    "working_sha256": "dbaf24cb083ec7b3f41420b18f59026eaafbaa511f233c2ed181557076228ede",
+    "mcp_smoke_json_sha256": "64a0c1b364cd49f4f09020088ab26ff9638a426201be6868ec4e55a1a7521f08",
+    "pending_actions": 0, "drafts": 0, "payments": 0, "cash_balance": 3400, "invoice_501_status": "open", "inventory_total_qty": 82,
+    "audit_db_exists": false
+  },
+  "original_tools": [
+    {"n": 1, "tool": "check_inventory", "input": {}, "mirrors_problem4_call": 1,
+     "output": {"business_date":"2026-08-31","products":[{"sku":"CC-HAT-BLUE","name":"Yale Cap","location":"Aisle C","unit_cost":6,"list_price":22,"sizes":[{"size":"OS","qty":40}],"total_qty":40},{"sku":"CC-HOOD-NAVY","name":"Basic Hoodie Big Yale","location":"Aisle A","unit_cost":22,"list_price":58,"sizes":[{"size":"S","qty":4},{"size":"M","qty":8},{"size":"L","qty":14},{"size":"XL","qty":6}],"total_qty":32},{"sku":"CC-MUG-CREST","name":"Crest Mug","location":"Aisle D","unit_cost":3.5,"list_price":14,"sizes":[{"size":"OS","qty":0}],"total_qty":0},{"sku":"CC-TEE-WHITE","name":"Classic Bulldog Tee","location":"Aisle B","unit_cost":8,"list_price":28,"sizes":[{"size":"S","qty":0},{"size":"M","qty":5},{"size":"L","qty":3},{"size":"XL","qty":2}],"total_qty":10}]}},
+    {"n": 2, "tool": "get_financial_position", "input": {}, "mirrors_problem4_call": 2,
+     "output": {"business_date":"2026-08-31","cash_accounts":[{"name":"checking","balance":3400,"as_of":"2026-08-31"}],"open_invoices":[{"id":501,"vendor_id":1,"vendor_name":"Bulldog Print Co","lead_days":5,"amount":840,"due_date":"2026-08-28","status":"open","description":"Rush reprint CC-TEE-WHITE S","days_overdue":3,"overdue":true}],"leases":[{"id":1,"space_name":"Chapel Street shop","landlord":"Elm City Properties","monthly_rent":2400,"next_due":"2026-09-02","notes":null,"days_until_due":2}],"vendors_with_open_invoices":["Bulldog Print Co"],"payments_recorded":{"count":0,"total":0},"computed":{"total_cash":3400,"total_open_obligations":3240,"cash_after_all_obligations":160,"note":"Hypothetical arithmetic, not stored facts. Obligations = all open invoices + next rent on each lease. cash_after_all_obligations is what the balance WOULD be if all of them were paid; it is not the current balance (see cash_accounts) and not a cash-flow forecast."}}},
+    {"n": 3, "tool": "get_open_tickets", "input": {}, "mirrors_problem4_call": 3,
+     "output": {"business_date":"2026-08-31","count":3,"tickets":[{"id":101,"type":"customer_order","requester":"Tauhid Zaman","subject":"Bulldog tee","sku":"CC-TEE-WHITE","size":"S","qty":1,"lease_id":null,"invoice_id":501,"status":"open","notes":"Needs a tee in size S.","created_at":"2026-08-31T09:15:00-04:00","linked_invoice":{"id":501,"amount":840,"due_date":"2026-08-28","status":"open","description":"Rush reprint CC-TEE-WHITE S","vendor_id":1,"vendor_name":"Bulldog Print Co","specialty":"apparel reprint","lead_days":5},"linked_lease":null},{"id":102,"type":"rent_notice","requester":"Elm City Properties","subject":"Rent due","sku":null,"size":null,"qty":null,"lease_id":1,"invoice_id":null,"status":"open","notes":"Email: shop rent due in 2 days.","created_at":"2026-08-31T11:05:00-04:00","linked_invoice":null,"linked_lease":{"id":1,"space_name":"Chapel Street shop","landlord":"Elm City Properties","monthly_rent":2400,"next_due":"2026-09-02","notes":null}},{"id":103,"type":"price_override","requester":"Yale AI Club","subject":"Bulk hoodie discount","sku":"CC-HOOD-NAVY","size":"M","qty":20,"lease_id":null,"invoice_id":null,"status":"open","notes":"Student org wants 20 hoodies, size M, asking for a bulk discount.","created_at":"2026-08-31T16:55:00-04:00","linked_invoice":null,"linked_lease":null}]}},
+    {"n": 4, "tool": "check_inventory", "input": {"sku": "CC-TEE-WHITE"}, "mirrors_problem4_call": 4,
+     "output": {"business_date":"2026-08-31","products":[{"sku":"CC-TEE-WHITE","name":"Classic Bulldog Tee","location":"Aisle B","unit_cost":8,"list_price":28,"sizes":[{"size":"S","qty":0},{"size":"M","qty":5},{"size":"L","qty":3},{"size":"XL","qty":2}],"total_qty":10}]}},
+    {"n": 5, "tool": "check_inventory", "input": {"sku": "INVALID-SKU-TEST"}, "mirrors_problem4_call": 5,
+     "result_type": "tool error",
+     "error_text": "Unknown SKU 'INVALID-SKU-TEST'. Known SKUs: CC-HAT-BLUE, CC-HOOD-NAVY, CC-MUG-CREST, CC-TEE-WHITE"},
+    {"n": 6, "tool": "check_inventory", "input": {"sku": "CC-HAT-BLUE"}, "mirrors_problem4_call": 6,
+     "output": {"business_date":"2026-08-31","products":[{"sku":"CC-HAT-BLUE","name":"Yale Cap","location":"Aisle C","unit_cost":6,"list_price":22,"sizes":[{"size":"OS","qty":40}],"total_qty":40}]}}
+  ],
+  "new_read_tools": [
+    {"n": 7, "tool": "get_ticket", "input": {"ticket_id": 101},
+     "output": {"business_date":"2026-08-31","ticket":{"id":101,"type":"customer_order","requester":"Tauhid Zaman","subject":"Bulldog tee","sku":"CC-TEE-WHITE","size":"S","qty":1,"lease_id":null,"invoice_id":501,"status":"open","notes":"Needs a tee in size S.","created_at":"2026-08-31T09:15:00-04:00","linked_invoice":{"id":501,"amount":840,"due_date":"2026-08-28","status":"open","description":"Rush reprint CC-TEE-WHITE S","vendor_id":1,"vendor_name":"Bulldog Print Co","specialty":"apparel reprint","lead_days":5},"linked_lease":null},"pending_actions":[],"drafts":[],"human_judgment":[],"unknowns":["Whether the goods billed on invoice #501 were delivered is not recorded."]}},
+    {"n": 8, "tool": "get_ticket", "input": {"ticket_id": 102},
+     "output": {"business_date":"2026-08-31","ticket":{"id":102,"type":"rent_notice","requester":"Elm City Properties","subject":"Rent due","sku":null,"size":null,"qty":null,"lease_id":1,"invoice_id":null,"status":"open","notes":"Email: shop rent due in 2 days.","created_at":"2026-08-31T11:05:00-04:00","linked_invoice":null,"linked_lease":{"id":1,"space_name":"Chapel Street shop","landlord":"Elm City Properties","monthly_rent":2400,"next_due":"2026-09-02","notes":null}},"pending_actions":[],"drafts":[],"human_judgment":[],"unknowns":[]}},
+    {"n": 9, "tool": "get_ticket", "input": {"ticket_id": 103},
+     "output": {"business_date":"2026-08-31","ticket":{"id":103,"type":"price_override","requester":"Yale AI Club","subject":"Bulk hoodie discount","sku":"CC-HOOD-NAVY","size":"M","qty":20,"lease_id":null,"invoice_id":null,"status":"open","notes":"Student org wants 20 hoodies, size M, asking for a bulk discount.","created_at":"2026-08-31T16:55:00-04:00","linked_invoice":null,"linked_lease":null},"pending_actions":[],"drafts":[],"human_judgment":[],"unknowns":[]}},
+    {"n": 10, "tool": "get_ticket", "input": {"ticket_id": 999},
+     "result_type": "tool error",
+     "error_text": "NOT_FOUND: Unknown ticket 999. Known tickets: 101, 102, 103"},
+    {"n": 11, "tool": "list_vendors", "input": {},
+     "output": {"business_date":"2026-08-31","vendors":[{"id":1,"name":"Bulldog Print Co","specialty":"apparel reprint","lead_days":5,"open_invoices":[{"id":501,"amount":840,"due_date":"2026-08-28","days_overdue":3}],"blocked":true,"blocked_reason":"R3: open unpaid invoice(s) 501; no new shipments until paid","computed":{"earliest_arrival_if_ordered_today":null,"note":"Not estimable while blocked. If unblocked, arrival >= order date + lead_days. No order exists."}},{"id":2,"name":"Elm City Gifts","specialty":"mugs and small goods","lead_days":3,"open_invoices":[],"blocked":false,"blocked_reason":null,"computed":{"earliest_arrival_if_ordered_today":"2026-09-03","note":"Hypothetical: business date + lead_days. No order exists."}},{"id":3,"name":"QuickShip CT","specialty":"local courier","lead_days":1,"open_invoices":[],"blocked":false,"blocked_reason":null,"computed":{"earliest_arrival_if_ordered_today":"2026-09-01","note":"Hypothetical: business date + lead_days. No order exists."}}],"human_judgment":["Specialty is stored text; whether a vendor can supply a product is a human judgment."],"unknowns":[]}},
+    {"n": 12, "tool": "list_pending_actions", "input": {},
+     "output": {"business_date":"2026-08-31","actions":[],"cash":{"stored_balance":3400,"accounts":[{"name":"checking","balance":3400}]},"computed":{"proposed_payments_total":0,"approved_commitments_total":0,"cash_if_all_proposed_payments_executed":3400,"estimated_purchases_total":0,"note":"Hypothetical. Proposals reserve no cash and move no money. Purchase totals are estimates, not quotes, and are not payments (payment would follow a real invoice)."}}}
+  ],
+  "write_tools_in_development_mode": [
+    {"n": 13, "tool": "propose_payment", "input": {"kind": "invoice", "ref_id": 501, "amount": 840, "ticket_id": 101, "rationale": "Live regression: development mode must refuse this"},
+     "result_type": "tool error",
+     "error_text": "NO_RUN_CONTEXT: This server was launched without a trusted run identity (development mode). Write tools are unavailable."},
+    {"n": 14, "tool": "propose_purchase", "input": {"vendor_id": 1, "sku": "CC-HOOD-NAVY", "size": "M", "qty": 12, "ticket_id": 103, "rationale": "Live regression: development mode must refuse this"},
+     "result_type": "tool error",
+     "error_text": "NO_RUN_CONTEXT: This server was launched without a trusted run identity (development mode). Write tools are unavailable."},
+    {"n": 15, "tool": "propose_quote", "input": {"ticket_id": 103, "sku": "CC-HOOD-NAVY", "size": "M", "qty": 20, "unit_price": 45, "rationale": "Live regression: development mode must refuse this"},
+     "result_type": "tool error",
+     "error_text": "NO_RUN_CONTEXT: This server was launched without a trusted run identity (development mode). Write tools are unavailable."},
+    {"n": 16, "tool": "draft_message", "input": {"ticket_id": 102, "subject": "Live regression", "body": "Live regression: development mode must refuse this draft."},
+     "result_type": "tool error",
+     "error_text": "NO_RUN_CONTEXT: This server was launched without a trusted run identity (development mode). Write tools are unavailable."}
+  ],
+  "post_call_state": {
+    "original_sha256": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+    "working_sha256": "dbaf24cb083ec7b3f41420b18f59026eaafbaa511f233c2ed181557076228ede",
+    "mcp_smoke_json_sha256": "64a0c1b364cd49f4f09020088ab26ff9638a426201be6868ec4e55a1a7521f08",
+    "pending_actions": 0, "drafts": 0, "payments": 0, "cash_balance": 3400, "invoice_501_status": "open", "inventory_total_qty": 82,
+    "tickets": "open,open,open", "audit_db_exists": false
+  },
+  "limitations": [
+    "Claude copied each result into this file; the harness did not save it automatically. The independent record is this Claude Code session's transcript.",
+    "Development mode only: authorized agent-mode writes were deliberately NOT made against the real working database (Dr. Ryan's instruction); they are evidenced offline in output/mcp_regression_p5.json and the C1-C5 tests.",
+    "Claude Code cannot attach request _meta or extra arguments to these calls, so forged-context checks are offline-only (tests/test_stage3_identity.py).",
+    "No per-call timestamps were recorded; only the session date."
+  ]
+}

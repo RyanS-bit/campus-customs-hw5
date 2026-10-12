@@ -1,0 +1,159 @@
+{
+ "gate": "G1",
+ "authorized_by": "Dr. Ryan (Problem 9, follow-up 5)",
+ "started_utc": "2026-10-10T20:36:36+00:00",
+ "pre_checks": {
+  "live_runs_enabled": false,
+  "run_mode": null,
+  "run_active": false,
+  "audit_consistent": true,
+  "trail_events": 1,
+  "audit_db_events": 0
+ },
+ "before": {
+  "original": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+  "working": "dbaf24cb083ec7b3f41420b18f59026eaafbaa511f233c2ed181557076228ede",
+  "audit_trail_json": "ec8e507a06a123b99a976992693820669c6b7971f05ad1a1e26e82566ca1c75e",
+  "audit_db_exists": false
+ },
+ "backup": {
+  "path": "data\\backups\\campus_customs_new.pre_p9_reset.20261010T203640Z.db",
+  "sha256": "dbaf24cb083ec7b3f41420b18f59026eaafbaa511f233c2ed181557076228ede",
+  "matches_working": true
+ },
+ "reset_response": {
+  "http_status": 200,
+  "reset": true,
+  "reset_id": "67e224e6-3e8f-4f82-b2d5-34cc47d3f74b",
+  "requested_by": "Dr. Ryan",
+  "result": {
+   "event": "db_reset",
+   "mode": "default",
+   "working_db": "C:\\Users\\DrRya\\OneDrive\\Documents\\MBA\\AI  Foundations\\hw5\\data\\campus_customs_new.db",
+   "original_sha256": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+   "working_sha256_before_extension": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+   "working_sha256_after_extension": "d6b0e89a64671dc12e4276a6cf865558039abd65131eb96bf4d280fd2a39ba25",
+   "original_tables_digest": "1308b65a435757533f100387b49cbb28e1ae51d06373357bb7e937655910bf0b",
+   "original_tables_unchanged": true,
+   "extension_tables": [
+    "drafts",
+    "pending_actions",
+    "schema_ext_meta"
+   ],
+   "stale_journals_removed": [],
+   "reset_id": "67e224e6-3e8f-4f82-b2d5-34cc47d3f74b"
+  },
+  "audit_trail_recorded": true,
+  "reconciliation_pending": false,
+  "audit_db_event_ids": {
+   "started": 1,
+   "finished": 2
+  },
+  "earlier_gaps_reconciled": 0,
+  "warnings": []
+ },
+ "after": {
+  "original": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+  "working": "d6b0e89a64671dc12e4276a6cf865558039abd65131eb96bf4d280fd2a39ba25",
+  "audit_trail_json": "c3a4812408132050760b3a559fb3d53a915b00a4c5ab8e9d4a569a9ad10f6484"
+ },
+ "verification": {
+  "original_unchanged": true,
+  "earlier_trail_events_preserved": true,
+  "new_trail_events": [
+   [
+    2,
+    "db_reset_requested",
+    "67e224e6-3e8f-4f82-b2d5-34cc47d3f74b"
+   ],
+   [
+    3,
+    "db_reset",
+    "67e224e6-3e8f-4f82-b2d5-34cc47d3f74b"
+   ]
+  ],
+  "json_trail_chain_valid": true,
+  "audit_db_events": [
+   [
+    1,
+    "db_reset_started",
+    "67e224e6-3e8f-4f82-b2d5-34cc47d3f74b"
+   ],
+   [
+    2,
+    "db_reset_finished",
+    "67e224e6-3e8f-4f82-b2d5-34cc47d3f74b"
+   ]
+  ],
+  "audit_db_chain_valid": true,
+  "reset_stamp_matches": true,
+  "working_changed": true,
+  "original_tables_content_identical": true
+ },
+ "opening_balance_cash_accounts": [
+  {
+   "name": "checking",
+   "balance": 3400.0,
+   "date": "2026-08-31"
+  }
+ ],
+ "starting_facts": {
+  "business_date": "2026-08-31",
+  "tickets": [
+   [
+    101,
+    "open"
+   ],
+   [
+    102,
+    "open"
+   ],
+   [
+    103,
+    "open"
+   ]
+  ],
+  "tee_white": {
+   "L": 3,
+   "M": 5,
+   "S": 0,
+   "XL": 2
+  },
+  "tee_name": "Classic Bulldog Tee",
+  "hoodie_navy": {
+   "L": 14,
+   "M": 8,
+   "S": 4,
+   "XL": 6
+  },
+  "invoice_501": {
+   "id": 501,
+   "vendor_id": 1,
+   "amount": 840.0,
+   "due_date": "2026-08-28",
+   "status": "open",
+   "description": "Rush reprint CC-TEE-WHITE S"
+  },
+  "lease_1": {
+   "id": 1,
+   "landlord": "Elm City Properties",
+   "monthly_rent": 2400.0,
+   "next_due": "2026-09-02"
+  },
+  "counts": {
+   "pending_actions": 0,
+   "payments": 0,
+   "drafts": 0
+  }
+ },
+ "api_cash_after_reset": 3400.0,
+ "audit_after": {
+  "consistent": true,
+  "run_active": false,
+  "trail_events": 3,
+  "audit_db_events": 2,
+  "incomplete": [],
+  "problems": []
+ },
+ "finished_utc": "2026-10-10T20:36:46+00:00"
+}

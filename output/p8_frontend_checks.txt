@@ -1,0 +1,52 @@
+# Problem 8 dashboard checks (2026-10-10T18:38:19Z), node v24.19.0, npm 11.17.0
+
+## npm run typecheck
+
+> campus-customs-dashboard@1.0.0 typecheck
+> tsc --noEmit -p tsconfig.json
+
+exit 0
+
+## npm test
+
+ RUN  v5.0.3 C:/Users/DrRya/OneDrive/Documents/MBA/AI  Foundations/hw5/frontend
+
+ ✓ src/test/App.test.tsx > tickets and facts > lists the three tickets with the business status and balance reported by the backend 316ms
+ ✓ src/test/App.test.tsx > tickets and facts > shows each ticket's underlying issue and its stored financial or inventory facts 379ms
+ ✓ src/test/App.test.tsx > tickets and facts > reports an unreachable backend instead of showing invented data 21ms
+ ✓ src/test/App.test.tsx > agent runs > explains a run refused because live runs are not authorized, and starts nothing 157ms
+ ✓ src/test/App.test.tsx > agent runs > streams a run's recorded events in order without duplicates, then waits for a person without resolving the ticket 639ms
+ ✓ src/test/App.test.tsx > agent runs > shows interrupted and failed runs honestly 196ms
+ ✓ src/test/App.test.tsx > human decisions > shows the pending proposals with the right consequences for each kind 535ms
+ ✓ src/test/App.test.tsx > human decisions > approves a payment only after a name and an explicit confirmation, once, and shows the balance the backend reports 713ms
+ ✓ src/test/App.test.tsx > human decisions > shows a backend refusal in the dialog and claims nothing 586ms
+ ✓ src/test/App.test.tsx > human decisions > shows a backend error for a second decision on the same proposal 549ms
+ ✓ src/test/App.test.tsx > human decisions > resolves a ticket only with an explicit business confirmation and a written explanation 1135ms
+ ✓ src/test/App.test.tsx > human decisions > warns that undecided proposals block resolution and shows the backend refusal 1126ms
+ ✓ src/test/App.test.tsx > cash and audit > keeps actual cash separate from proposals, estimates and quotes 31ms
+ ✓ src/test/App.test.tsx > cash and audit > shows audit gaps reported by the backend 32ms
+ ✓ src/test/App.test.tsx > cash and audit > never sends a POST from loading, polling or browsing 509ms
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  14:38:34
+   Duration  9.49s (tests 81%, environment 11%, transform 3%, setup 3%, import 1%)
+
+exit 0
+
+## npm run build
+
+> campus-customs-dashboard@1.0.0 build
+> tsc --noEmit -p tsconfig.json && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 23 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.42 kB │ gzip:  0.29 kB
+dist/assets/index-B9S5yvXR.css    7.21 kB │ gzip:  2.24 kB
+dist/assets/index-BB_L9ddd.js   254.03 kB │ gzip: 78.65 kB
+
+✓ built in 153ms
+exit 0

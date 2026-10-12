@@ -1,0 +1,31 @@
+{
+ "saved_utc": "2026-10-10T20:57:44+00:00",
+ "source": "GET /api/runs/53e4f001-d845-4c50-a3a6-1f09ebee50d6",
+ "run": {
+  "run_id": "53e4f001-d845-4c50-a3a6-1f09ebee50d6",
+  "ticket_id": 101,
+  "mode": "live",
+  "phase": "failed",
+  "outcome": "failed",
+  "started_at": "2026-10-10T20:57:26.480851+00:00",
+  "finished_at": "2026-10-10T20:57:39.127117+00:00",
+  "error": "ModelHTTPError: status_code: 400, model_name: gpt-6-luna, body: {'message': \"azure-openai error: Function tools with reasoning_effort are not supported for gpt-6-luna-global in /v1/chat/completions. To use function tools, use /v1/responses or set reasoning_effort to 'none'.\", 'type': 'invalid_req...",
+  "awaiting_human_action": false,
+  "proposals_awaiting_decision": [],
+  "proposals_decided": [],
+  "drafts_unsent": [],
+  "ticket_status": "open",
+  "ticket_resolved": false,
+  "usage": {
+   "requests": 0,
+   "input_tokens": 0,
+   "output_tokens": 0,
+   "tool_calls": 0,
+   "source": "provider-reported, via PydanticAI"
+  },
+  "agent_report": null,
+  "agent_report_source": null,
+  "events": 5,
+  "events_url": "/api/events?run_id=53e4f001-d845-4c50-a3a6-1f09ebee50d6"
+ }
+}

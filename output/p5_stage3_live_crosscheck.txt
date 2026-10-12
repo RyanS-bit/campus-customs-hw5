@@ -1,0 +1,41 @@
+# Stage 3 live regression cross-check (offline, read-only; separate from the live calls)
+PASS  live call 1 (check_inventory {}) identical to Problem 4 call 1
+PASS  live call 2 (get_financial_position {}) identical to Problem 4 call 2
+PASS  live call 3 (get_open_tickets {}) identical to Problem 4 call 3
+PASS  live call 4 (check_inventory {'sku': 'CC-TEE-WHITE'}) identical to Problem 4 call 4
+PASS  live call 5 (check_inventory {'sku': 'INVALID-SKU-TEST'}) identical to Problem 4 call 5
+PASS  live call 6 (check_inventory {'sku': 'CC-HAT-BLUE'}) identical to Problem 4 call 6
+PASS  get_ticket(101) fields match tickets row
+PASS  get_ticket(101) work state empty, as in DB
+PASS  get_ticket(102) fields match tickets row
+PASS  get_ticket(102) work state empty, as in DB
+PASS  get_ticket(103) fields match tickets row
+PASS  get_ticket(103) work state empty, as in DB
+PASS  ticket 101 'delivery not recorded' unknown is grounded (tee S qty 0, invoice 501 open)
+PASS  ticket 102 lease landlord matches leases
+PASS  get_ticket(999) NOT_FOUND; known IDs match DB
+PASS  list_vendors vendor 1 (Bulldog Print Co): blocked=True, arrival=None match DB
+PASS  list_vendors vendor 2 (Elm City Gifts): blocked=False, arrival=2026-09-03 match DB
+PASS  list_vendors vendor 3 (QuickShip CT): blocked=False, arrival=2026-09-01 match DB
+PASS  list_pending_actions empty, as in DB
+PASS  stored balance 3400 matches cash_accounts
+PASS  all four write tools refused with NO_RUN_CONTEXT
+PASS  transcription of live call 1 matches a fresh call
+PASS  transcription of live call 2 matches a fresh call
+PASS  transcription of live call 3 matches a fresh call
+PASS  transcription of live call 4 matches a fresh call
+PASS  transcription of live call 5 matches a fresh call
+PASS  transcription of live call 6 matches a fresh call
+PASS  transcription of live call 7 matches a fresh call
+PASS  transcription of live call 8 matches a fresh call
+PASS  transcription of live call 9 matches a fresh call
+PASS  transcription of live call 10 matches a fresh call
+PASS  transcription of live call 11 matches a fresh call
+PASS  transcription of live call 12 matches a fresh call
+PASS  transcription of live call 13 (refusal) matches a fresh call
+PASS  transcription of live call 14 (refusal) matches a fresh call
+PASS  transcription of live call 15 (refusal) matches a fresh call
+PASS  transcription of live call 16 (refusal) matches a fresh call
+PASS  no proposals, drafts or payments exist
+
+38/38 checks passed

@@ -1,0 +1,138 @@
+{
+ "purpose": "Ticket 102 Attempt 1 readiness (Problem 9, follow-up 23)",
+ "checked_utc": "2026-10-11T04:59:29+00:00",
+ "1_business_state": {
+  "checking_balance_db": 3400.0,
+  "checking_balance_api": 3400.0,
+  "tickets_db": [
+   [
+    101,
+    "open"
+   ],
+   [
+    102,
+    "open"
+   ],
+   [
+    103,
+    "open"
+   ]
+  ],
+  "lease_1": [
+   1,
+   "Elm City Properties",
+   2400.0,
+   "2026-09-02"
+  ],
+  "payments_rows": 0,
+  "lease_payments": 0,
+  "pending_actions_db": [
+   [
+    1,
+    "payment",
+    "proposed",
+    101,
+    501,
+    840.0,
+    "accounting"
+   ]
+  ],
+  "pending_api_count": 1,
+  "ticket_102_runs": [
+   null
+  ],
+  "drafts_db": [
+   [
+    1,
+    101,
+    "draft"
+   ]
+  ]
+ },
+ "2_evidence_and_audit": {
+  "fingerprints_checked": 16,
+  "changed": [],
+  "audit_consistent": true,
+  "trail_events": 100,
+  "audit_db_events": 4,
+  "incomplete": [],
+  "cross_reference_problems": [],
+  "ticket_101_files": [
+   "101_after_run_state.json",
+   "101_attempt1_incident.md",
+   "101_attempt2_after_run_state.json",
+   "101_attempt2_events.json",
+   "101_attempt2_run.json",
+   "101_attempt3_after_run_state.json",
+   "101_attempt3_events.json",
+   "101_attempt3_run.json",
+   "101_events.json",
+   "101_run.json"
+  ]
+ },
+ "3_model_rules_limits": {
+  "model_name": "gpt-6-luna",
+  "base_url": "https://api.portkey.ai/v1",
+  "api_key_configured": true,
+  "required_model": true,
+  "model_settings": {
+   "openai_reasoning_effort": "none"
+  },
+  "has_required_settings": true,
+  "live_guard": "passed",
+  "one_model_for_all_five_agents": true,
+  "rule_11_in_all_five_prompts": true,
+  "boss_routes_by_business_problem": true,
+  "budget": {
+   "max_depth": 4,
+   "max_delegations": 12,
+   "request_limit": 40,
+   "total_tokens_limit": 60000,
+   "tool_calls_limit": 60,
+   "max_output_tokens": 1200,
+   "wall_clock_seconds": 300.0,
+   "request_timeout_seconds": 60.0,
+   "max_http_retries": 1
+  },
+  "limits_unchanged": true,
+  "mcp_tools_match_approved_access": {
+   "boss": true,
+   "inventory": true,
+   "accounting": true,
+   "facilities": true,
+   "customer_service": true
+  },
+  "worker_started_utc": "2026-10-11T04:58:21+00:00",
+  "newest_code_file": "delegation.py",
+  "newest_code_modified_utc": "2026-10-11T03:37:04+00:00",
+  "worker_started_after_all_code_changes": true
+ },
+ "4_full_response_recorder": {
+  "route_live": true,
+  "runner_opens_response_log": true,
+  "target_dir": "output\\run_responses",
+  "target_dir_exists_yet": false,
+  "output_dir_writable": true,
+  "attempt3_reported_as": {
+   "recorded": false,
+   "consistent": true
+  },
+  "offline_selftest_in_temp_dir": {
+   "stored_length": 5000,
+   "sha_matches_trail_format": true,
+   "overwrite_refused": true
+  }
+ },
+ "5_observer_targets_free": {
+  "102_attempt1_run.json": true,
+  "102_attempt1_events.json": true,
+  "102_attempt1_responses.json": true,
+  "102_attempt1_after_run_state.json": true
+ },
+ "6_services": {
+  "live_runs_enabled": true,
+  "run_mode": "live",
+  "run_active": false,
+  "dashboard_http": 200
+ }
+}

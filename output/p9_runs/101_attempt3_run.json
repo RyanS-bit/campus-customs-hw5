@@ -1,0 +1,116 @@
+{
+ "saved_utc": "2026-10-11T03:26:48+00:00",
+ "attempt": "attempt3",
+ "source": "GET /api/runs/84270c9b-53f9-455e-b956-93b3fd77f698",
+ "run": {
+  "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+  "ticket_id": 101,
+  "mode": "live",
+  "phase": "completed",
+  "outcome": "awaiting_human_approval",
+  "started_at": "2026-10-11T03:25:55.566355+00:00",
+  "finished_at": "2026-10-11T03:26:44.583233+00:00",
+  "error": null,
+  "awaiting_human_action": true,
+  "proposals_awaiting_decision": [
+   {
+    "id": 1,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 101,
+    "invoice_id": 501,
+    "lease_id": null,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 840.0,
+    "amount_basis": "invoice_amount",
+    "account": "checking",
+    "rationale": "Full stored amount of open, overdue invoice #501. Checking balance is $3,400; the proposal is within stored cash. The invoice is linked to ticket 101. Whether the invoiced goods were delivered is not recorded; human review should resolve that before deciding whether to approve payment. If this invoice and next rent of $2,400 are both paid, hypothetical cash remaining is $160.",
+    "proposed_by": "accounting",
+    "run_id": "84270c9b-53f9-455e-b956-93b3fd77f698",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T03:26:17.480860+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T03:26:17.480860+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "proposals_decided": [],
+  "drafts_unsent": [
+   {
+    "id": 1,
+    "ticket_id": 101,
+    "recipient": "Tauhid Zaman",
+    "subject": "Update on your Bulldog tee order",
+    "created_by": "customer_service",
+    "created_at": "2026-10-11T03:26:36.929941+00:00",
+    "sent": false
+   }
+  ],
+  "ticket_status": "open",
+  "ticket_resolved": false,
+  "usage": {
+   "requests": 14,
+   "input_tokens": 36214,
+   "output_tokens": 2432,
+   "tool_calls": 18,
+   "source": "provider-reported, via PydanticAI"
+  },
+  "agent_report": {
+   "summary": "Ticket 101 only: the requested size S is out of stock. No new Bulldog Print Co shipment can be expected while invoice #501 remains open and unpaid. Accounting prepared a human-review payment proposal for that invoice; inventory did not create a purchase proposal because the invoice may already cover the request and delivery is unverified. Customer Service prepared an unsent update. Nothing has been paid, ordered, shipped, or sent.",
+   "facts": [
+    "Ticket 101 is an open customer order from Tauhid Zaman for one CC-TEE-WHITE size S and links invoice #501. (get_ticket)",
+    "Invoice #501 is open for $840, due 2026-08-28, for a rush reprint of CC-TEE-WHITE S; business date is 2026-08-31. (get_ticket)",
+    "Size S stock is 0; stored unit cost is $8 and list price is $28. (check_inventory)",
+    "Checking balance is $3,400. Invoice #501 is overdue by 3 days; next rent of $2,400 is due 2026-09-02. (get_financial_position)",
+    "Bulldog Print Co is blocked under R3 by open invoice #501 and cannot ship new products until it is paid. (list_vendors)",
+    "Accounting created payment proposal action ID 1 for $840; it is within current stored cash and remains subject to human approval. (accounting delegation)",
+    "Customer Service created unsent draft ID 1. (customer_service delegation)"
+   ],
+   "proposals_created": [
+    1
+   ],
+   "drafts_created": [
+    1
+   ],
+   "estimates": [
+    "If the proposed $840 payment and the upcoming $2,400 rent were both paid, hypothetical remaining cash would be $160; this is arithmetic, not a forecast. (accounting delegation)"
+   ],
+   "needs_human": [
+    "Decide whether to approve payment proposal 1 for invoice #501. Consider the upcoming rent when deciding; the proposal does not execute payment.",
+    "Clarify whether the goods billed on invoice #501 were delivered and whether they satisfy this request; the records do not establish this.",
+    "Review draft 1 and decide whether to send it; it remains unsent.",
+    "Once the invoice/goods situation is clarified, decide whether further sourcing or another purchase is needed. No second purchase proposal is currently supported."
+   ],
+   "unknowns": [
+    "Whether the goods billed on invoice #501 were delivered or are available.",
+    "Whether Bulldog Print Co can supply this exact item beyond the invoice description, and any current quote or delivery timing.",
+    "No customer contact address is recorded, according to Customer Service."
+   ],
+   "delegations": [
+    "Accounting: assess linked invoice and cash implications; prepared proposal 1 for payment of invoice #501.",
+    "Inventory: assess stock, potential restocking, and vendor block; no purchase proposal created because invoice fulfilment is unknown and vendor is blocked.",
+    "Customer Service: prepare a customer update; unsent draft 1 created."
+   ]
+  },
+  "agent_report_source": "entry agent's final report (its own claim; verify against events)",
+  "events": 46,
+  "events_url": "/api/events?run_id=84270c9b-53f9-455e-b956-93b3fd77f698"
+ }
+}

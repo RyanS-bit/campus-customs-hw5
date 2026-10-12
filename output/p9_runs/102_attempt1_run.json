@@ -1,0 +1,115 @@
+{
+ "saved_utc": "2026-10-11T05:45:55+00:00",
+ "attempt": "attempt1",
+ "source": "GET /api/runs/f2412172-0e32-4e74-96d4-31b9228e9c19",
+ "run": {
+  "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+  "ticket_id": 102,
+  "mode": "live",
+  "phase": "completed",
+  "outcome": "awaiting_human_approval",
+  "started_at": "2026-10-11T05:44:55.745919+00:00",
+  "finished_at": "2026-10-11T05:45:52.836953+00:00",
+  "error": null,
+  "awaiting_human_action": true,
+  "proposals_awaiting_decision": [
+   {
+    "id": 2,
+    "kind": "payment",
+    "status": "proposed",
+    "ticket_id": 102,
+    "invoice_id": null,
+    "lease_id": 1,
+    "vendor_id": null,
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "unit_price": null,
+    "amount": 2400.0,
+    "amount_basis": "lease_rent",
+    "account": "checking",
+    "rationale": "Ticket 102 and the lease record show $2,400 rent due 2026-09-02. Stored checking cash is $3,400 as of the shop date 2026-08-31; this full-amount proposal is within that stored balance. An open $840 invoice is also recorded, so if both rent and invoice are paid, hypothetical remaining cash is $160. This proposal does not execute payment; human approval is required.",
+    "proposed_by": "accounting",
+    "run_id": "f2412172-0e32-4e74-96d4-31b9228e9c19",
+    "business_date": "2026-08-31",
+    "created_at": "2026-10-11T05:45:27.981175+00:00",
+    "fundable_at_proposal": true,
+    "vendor_blocked": false,
+    "blocking_invoice_ids": [],
+    "alternative_to": [],
+    "warnings": [],
+    "decided_by": null,
+    "decided_at": null,
+    "decision_note": null,
+    "executed_at": null,
+    "payment_id": null,
+    "warnings_recorded_at": {
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T05:45:27.981175+00:00"
+    },
+    "withdrawal": null,
+    "current_vendor_status": null
+   }
+  ],
+  "proposals_decided": [],
+  "drafts_unsent": [
+   {
+    "id": 2,
+    "ticket_id": 102,
+    "recipient": "Elm City Properties",
+    "subject": "Rent due September 2",
+    "created_by": "facilities",
+    "created_at": "2026-10-11T05:45:35.804690+00:00",
+    "sent": false
+   }
+  ],
+  "ticket_status": "open",
+  "ticket_resolved": false,
+  "usage": {
+   "requests": 17,
+   "input_tokens": 40554,
+   "output_tokens": 3233,
+   "tool_calls": 20,
+   "source": "provider-reported, via PydanticAI"
+  },
+  "agent_report": {
+   "summary": "Ticket 102 concerns rent due for the Chapel Street shop. Accounting verified a $2,400 rent payment proposal (ID 2) is awaiting a human decision; no payment occurred. Facilities prepared an unsent landlord email draft (ID 2). The stored cash balance covers the rent proposal alone, but the proposed outflows together with the other pending payment would leave only a hypothetical $160. Nothing was sent or paid.",
+   "facts": [
+    "Ticket 102 is an open rent_notice for Elm City Properties, linked to lease 1; its note says rent is due in 2 days. (get_ticket)",
+    "The shop date is 2026-08-31; lease 1 records monthly rent of $2,400, next due 2026-09-02. (get_ticket; get_financial_position)",
+    "Checking balance is $3,400. (get_financial_position)",
+    "Open invoice 501 is $840, overdue, and unpaid; Bulldog Print Co is listed as a vendor with an open invoice. (get_financial_position)",
+    "Current pending actions include payment proposal ID 2 for $2,400, status proposed, with fundable_at_proposal: true. No payment is recorded. (Accounting delegation report; list_pending_actions)",
+    "The proposed payment outflows total $3,240, with hypothetical cash after those proposed payments of $160. Proposals do not reserve cash or move money. (Accounting delegation report; list_pending_actions)",
+    "Facilities created unsent email draft ID 2 to Elm City Properties; no recipient contact is stored. (Facilities delegation report)"
+   ],
+   "proposals_created": [
+    2
+   ],
+   "drafts_created": [
+    2
+   ],
+   "estimates": [
+    "If all proposed payments totaling $3,240 were executed from the recorded $3,400 balance, hypothetical remaining cash would be $160; this is not a forecast."
+   ],
+   "needs_human": [
+    "Decide whether to approve or reject existing rent payment proposal 2. No payment has been made.",
+    "Review the unsent draft and provide or confirm Elm City Properties' email address before deciding whether to send it.",
+    "Consider the other proposed $840 payment when assessing available cash; proposals are not completed payments."
+   ],
+   "unknowns": [
+    "The available current records do not establish whether proposal 2 existed before Facilities' review; Accounting found it present during verification and made no new proposal then.",
+    "Whether rent was paid outside the recorded payment records is not established.",
+    "No landlord email address is recorded.",
+    "Delivery status for goods associated with invoice 501 is not recorded."
+   ],
+   "delegations": [
+    "Facilities: asked to review rent notice and prepare a landlord draft if supported; returned unsent draft ID 2.",
+    "Accounting: asked to assess payment; reported proposal ID 2. A follow-up asked Accounting to verify its status and avoid duplicate work; it confirmed the current proposed action and created no additional proposal."
+   ]
+  },
+  "agent_report_source": "entry agent's final report (its own claim; verify against events)",
+  "events": 52,
+  "events_url": "/api/events?run_id=f2412172-0e32-4e74-96d4-31b9228e9c19"
+ }
+}

@@ -1,0 +1,8 @@
+# Complete offline suite, 5 consecutive runs after the lock-file fix. 2026-10-09T23:04:28Z
+# Every run is reported, including any failure.
+run 1: 383 passed in 117.66s (0:01:57)
+run 2: 383 passed in 110.92s (0:01:50)
+run 3: 383 passed in 110.76s (0:01:50)
+run 4: 383 passed in 116.95s (0:01:56)
+run 5: 383 passed in 115.90s (0:01:55)
+real files unchanged across the 5 runs: yes

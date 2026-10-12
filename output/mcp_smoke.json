@@ -1,0 +1,70 @@
+{
+  "description": "Problem 4 evidence: live tool calls made by the vibe coder (Claude Code, Claude Opus 5.5) through the registered campus-customs MCP server (.mcp.json). Each 'output' is the tool result exactly as returned by the MCP connection, unedited. This is NOT the offline test (mcp_server/verify_tools.py).",
+  "session": {
+    "date": "2026-10-09",
+    "client": "Claude Code desktop app (Code tab), session opened on hw5/",
+    "server": "campus-customs (stdio, .venv/Scripts/python.exe mcp_server/server.py)",
+    "database": "data/campus_customs_new.db (working copy)",
+    "tools_registered": [
+      "mcp__campus-customs__check_inventory",
+      "mcp__campus-customs__get_financial_position",
+      "mcp__campus-customs__get_open_tickets"
+    ]
+  },
+  "calls": [
+    {
+      "n": 1,
+      "tool": "check_inventory",
+      "input": {},
+      "output": {"business_date":"2026-08-31","products":[{"sku":"CC-HAT-BLUE","name":"Yale Cap","location":"Aisle C","unit_cost":6,"list_price":22,"sizes":[{"size":"OS","qty":40}],"total_qty":40},{"sku":"CC-HOOD-NAVY","name":"Basic Hoodie Big Yale","location":"Aisle A","unit_cost":22,"list_price":58,"sizes":[{"size":"S","qty":4},{"size":"M","qty":8},{"size":"L","qty":14},{"size":"XL","qty":6}],"total_qty":32},{"sku":"CC-MUG-CREST","name":"Crest Mug","location":"Aisle D","unit_cost":3.5,"list_price":14,"sizes":[{"size":"OS","qty":0}],"total_qty":0},{"sku":"CC-TEE-WHITE","name":"Classic Bulldog Tee","location":"Aisle B","unit_cost":8,"list_price":28,"sizes":[{"size":"S","qty":0},{"size":"M","qty":5},{"size":"L","qty":3},{"size":"XL","qty":2}],"total_qty":10}]}
+    },
+    {
+      "n": 2,
+      "tool": "get_financial_position",
+      "input": {},
+      "output": {"business_date":"2026-08-31","cash_accounts":[{"name":"checking","balance":3400,"as_of":"2026-08-31"}],"open_invoices":[{"id":501,"vendor_id":1,"vendor_name":"Bulldog Print Co","lead_days":5,"amount":840,"due_date":"2026-08-28","status":"open","description":"Rush reprint CC-TEE-WHITE S","days_overdue":3,"overdue":true}],"leases":[{"id":1,"space_name":"Chapel Street shop","landlord":"Elm City Properties","monthly_rent":2400,"next_due":"2026-09-02","notes":null,"days_until_due":2}],"vendors_with_open_invoices":["Bulldog Print Co"],"payments_recorded":{"count":0,"total":0},"computed":{"total_cash":3400,"total_open_obligations":3240,"cash_after_all_obligations":160,"note":"Hypothetical arithmetic, not stored facts. Obligations = all open invoices + next rent on each lease. cash_after_all_obligations is what the balance WOULD be if all of them were paid; it is not the current balance (see cash_accounts) and not a cash-flow forecast."}}
+    },
+    {
+      "n": 3,
+      "tool": "get_open_tickets",
+      "input": {},
+      "output": {"business_date":"2026-08-31","count":3,"tickets":[{"id":101,"type":"customer_order","requester":"Tauhid Zaman","subject":"Bulldog tee","sku":"CC-TEE-WHITE","size":"S","qty":1,"lease_id":null,"invoice_id":501,"status":"open","notes":"Needs a tee in size S.","created_at":"2026-08-31T09:15:00-04:00","linked_invoice":{"id":501,"amount":840,"due_date":"2026-08-28","status":"open","description":"Rush reprint CC-TEE-WHITE S","vendor_id":1,"vendor_name":"Bulldog Print Co","specialty":"apparel reprint","lead_days":5},"linked_lease":null},{"id":102,"type":"rent_notice","requester":"Elm City Properties","subject":"Rent due","sku":null,"size":null,"qty":null,"lease_id":1,"invoice_id":null,"status":"open","notes":"Email: shop rent due in 2 days.","created_at":"2026-08-31T11:05:00-04:00","linked_invoice":null,"linked_lease":{"id":1,"space_name":"Chapel Street shop","landlord":"Elm City Properties","monthly_rent":2400,"next_due":"2026-09-02","notes":null}},{"id":103,"type":"price_override","requester":"Yale AI Club","subject":"Bulk hoodie discount","sku":"CC-HOOD-NAVY","size":"M","qty":20,"lease_id":null,"invoice_id":null,"status":"open","notes":"Student org wants 20 hoodies, size M, asking for a bulk discount.","created_at":"2026-08-31T16:55:00-04:00","linked_invoice":null,"linked_lease":null}]}
+    },
+    {
+      "n": 4,
+      "tool": "check_inventory",
+      "input": {"sku": "CC-TEE-WHITE"},
+      "output": {"business_date":"2026-08-31","products":[{"sku":"CC-TEE-WHITE","name":"Classic Bulldog Tee","location":"Aisle B","unit_cost":8,"list_price":28,"sizes":[{"size":"S","qty":0},{"size":"M","qty":5},{"size":"L","qty":3},{"size":"XL","qty":2}],"total_qty":10}]}
+    }
+  ],
+  "additional_verification_calls": {
+    "purpose": "Error-handling test requested by Dr. Ryan (Problem 4, follow-up 2), made later in the same session through the same MCP connection. Call 5 uses an invalid SKU; call 6 confirms the connection still works afterward.",
+    "calls": [
+      {
+        "n": 5,
+        "tool": "check_inventory",
+        "input": {"sku": "INVALID-SKU-TEST"},
+        "result_type": "tool error (MCP isError result, returned to the client; the server did not crash)",
+        "error_text": "Unknown SKU 'INVALID-SKU-TEST'. Known SKUs: CC-HAT-BLUE, CC-HOOD-NAVY, CC-MUG-CREST, CC-TEE-WHITE"
+      },
+      {
+        "n": 6,
+        "tool": "check_inventory",
+        "input": {"sku": "CC-HAT-BLUE"},
+        "output": {"business_date":"2026-08-31","products":[{"sku":"CC-HAT-BLUE","name":"Yale Cap","location":"Aisle C","unit_cost":6,"list_price":22,"sizes":[{"size":"OS","qty":40}],"total_qty":40}]}
+      }
+    ]
+  },
+  "limitations": [
+    "Claude copied each tool result into this file with the Write/Edit tools; the harness did not save it automatically. The file cannot prove its own authenticity. The independent record is this Claude Code session's transcript.",
+    "Successful outputs are embedded as JSON values (the same compact text the tools returned), not as quoted strings. The error in call 5 is stored as its text, because the tool returned an error message, not JSON.",
+    "No per-call timestamps were recorded; only the session date is given.",
+    "The cross_check below is a separate direct-SQL step, not an MCP call."
+  ],
+  "cross_check": {
+    "method": "Separate step, not an MCP call: direct SQL against data/campus_customs_new.db opened read-only (mode=ro), independent of server.py. Tables read: desk, inventory, pricing, cash_accounts, invoices, vendors, leases, payments, tickets.",
+    "result": "All stored values returned by the four calls match the database: business date 2026-08-31; all 10 inventory rows (qty, location), 4 pricing rows; checking balance 3400 as of 2026-08-31; invoice 501 (vendor 1 Bulldog Print Co, apparel reprint, lead 5 days, 840, due 2026-08-28, open); lease 1 (Chapel Street shop, Elm City Properties, 2400, next due 2026-09-02); 0 payments; tickets 101/102/103 (all open, with matching sku/size/qty/links).",
+    "computed_fields_checked": "days_overdue 3 (08-28 to 08-31), days_until_due 2 (08-31 to 09-02), total_open_obligations 3240 (840 + 2400), cash_after_all_obligations 160 (3400 - 3240, hypothetical only). Arithmetic is correct.",
+    "database_unchanged": "SHA-256 of data/campus_customs.db and data/campus_customs_new.db were identical after the calls (23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a); the read-only tools made no changes."
+  }
+}

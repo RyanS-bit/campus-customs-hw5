@@ -1,0 +1,96 @@
+{
+ "provenance": {
+  "capture": "RECONSTRUCTED AFTER THE RUN — not an observer capture",
+  "reconstructed_utc": "2026-10-11T13:51:45+00:00",
+  "reconstructed_by": "Claude (vibe coder), Problem 9 follow-up 32, at Dr. Ryan's request",
+  "why": "The live run was started from the dashboard without the read-only observer running, so no contemporaneous observer files exist.",
+  "contemporaneous_sources": [
+   "output/audit_trail.json (append-only, hash-chained; written during the run by the runner)",
+   "output/run_responses/fa38a75b-6dcc-4e75-a18b-feb0d0007c11.jsonl (full agent replies; written during the run)",
+   "data/audit.db events 10-11 (proposal 3 and draft 3; written during the run)",
+   "pending_actions id 3 and drafts id 3 rows (written during the run)"
+  ],
+  "reconstruction_method": "The same read-only backend GET routes the observer uses, called after the run, plus direct read-only checks."
+ },
+ "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+ "ticket_id": 103,
+ "run_started_utc": "2026-10-11T13:37:27.364009+00:00",
+ "run_finished_utc": "2026-10-11T13:37:57.847557+00:00",
+ "files_created": [
+  "103_attempt1_run.json",
+  "103_attempt1_events.json",
+  "103_attempt1_responses.json",
+  "103_attempt1_after_run_state.json",
+  "103_attempt1_recovery_record.json"
+ ],
+ "verification": {
+  "events_match_trail": true,
+  "event_count": [
+   28,
+   28
+  ],
+  "trail_chain_valid": true,
+  "run_view_times_match_trail": [
+   true,
+   true
+  ],
+  "run_view_usage_matches_run_finished": true,
+  "run_view_phase": "completed",
+  "run_finished_status": {
+   "status": "ok",
+   "run_status": "completed"
+  },
+  "responses_copy_equals_jsonl": true,
+  "responses_reconciliation": {
+   "run_id": "fa38a75b-6dcc-4e75-a18b-feb0d0007c11",
+   "recorded": true,
+   "consistent": true,
+   "records": 3,
+   "responses": 2,
+   "unavailable": 0,
+   "withheld": 0,
+   "problems": []
+  },
+  "db_rows_from_this_run": {
+   "pending_actions": [
+    [
+     3,
+     "quote",
+     "proposed"
+    ]
+   ],
+   "drafts": [
+    [
+     3,
+     "draft"
+    ]
+   ],
+   "audit_db": [
+    [
+     10,
+     "proposal_created"
+    ],
+    [
+     11,
+     "draft_created"
+    ]
+   ]
+  },
+  "run_view_ids_match_db": true,
+  "recorded_changes_since_run_end": {
+   "trail_last_seq": 184,
+   "run_finished_seq": 184,
+   "trail_events_after_run": [],
+   "audit_db_events_after_run_end": [],
+   "audit_db_last_id": 11
+  },
+  "audit_consistent": true
+ },
+ "cannot_be_recovered": [
+  "The observer's live polling log (phase and event-count progression as seen during the run) - it never ran.",
+  "An after-run state snapshot taken at the moment the run finished (13:37:57 UTC). The state file below was read at reconstruction time instead ; no change was recorded in either audit record between the run's end and this read, but changes made outside the system's recorded paths cannot be excluded.",
+  "The backend's in-memory run state during the run (queued/active timing beyond the recorded run_started/run_finished events).",
+  "Full tool results: the trail keeps each tool result as a 300-character summary plus SHA-256 (as for every run); created proposal/draft rows are complete in the database.",
+  "Dashboard screenshots during or immediately after the run."
+ ]
+}

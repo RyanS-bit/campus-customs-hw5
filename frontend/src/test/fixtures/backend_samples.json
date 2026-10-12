@@ -1,0 +1,5704 @@
+{
+ "_about": {
+  "generated_utc": "2026-10-11T14:20:13+00:00",
+  "generated_by": "scripts/make_frontend_fixtures.py",
+  "note": "Real responses from backend/main.py run in-process on a TEMPORARY database with SCRIPTED OFFLINE agents. Test fixtures only; not evidence of real ticket work."
+ },
+ "index_runs_disabled": {
+  "status": 200,
+  "body": {
+   "service": "Campus Customs backend (Problem 7)",
+   "docs": "/docs",
+   "dashboard_origins": [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+   ],
+   "live_runs_enabled": false,
+   "run_mode": null,
+   "routes": [
+    "GET /api/actions/pending",
+    "GET /api/audit",
+    "GET /api/cash",
+    "GET /api/events",
+    "GET /api/runs/{run_id}",
+    "GET /api/runs/{run_id}/responses",
+    "GET /api/tickets",
+    "GET /api/tickets/{ticket_id}",
+    "POST /api/actions/{action_id}/approve",
+    "POST /api/actions/{action_id}/execute",
+    "POST /api/actions/{action_id}/reject",
+    "POST /api/reset",
+    "POST /api/tickets/{ticket_id}/resolve",
+    "POST /api/tickets/{ticket_id}/run"
+   ]
+  }
+ },
+ "run_refused_not_authorized": {
+  "status": 403,
+  "body": {
+   "error": {
+    "code": "RUNS_NOT_AUTHORIZED",
+    "message": "Agent runs are not enabled in this server process. Live runs call gpt-6-luna through Portkey and cost money, so they start only if the person launching the server sets CC_LIVE_AUTHORIZATION to a short authorization note (Problem 9)."
+   }
+  }
+ },
+ "index": {
+  "status": 200,
+  "body": {
+   "service": "Campus Customs backend (Problem 7)",
+   "docs": "/docs",
+   "dashboard_origins": [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+   ],
+   "live_runs_enabled": false,
+   "run_mode": "simulated",
+   "routes": [
+    "GET /api/actions/pending",
+    "GET /api/audit",
+    "GET /api/cash",
+    "GET /api/events",
+    "GET /api/runs/{run_id}",
+    "GET /api/runs/{run_id}/responses",
+    "GET /api/tickets",
+    "GET /api/tickets/{ticket_id}",
+    "POST /api/actions/{action_id}/approve",
+    "POST /api/actions/{action_id}/execute",
+    "POST /api/actions/{action_id}/reject",
+    "POST /api/reset",
+    "POST /api/tickets/{ticket_id}/resolve",
+    "POST /api/tickets/{ticket_id}/run"
+   ]
+  }
+ },
+ "tickets_initial": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "open_count": 3,
+   "resolved_count": 0,
+   "tickets": [
+    {
+     "id": 101,
+     "type": "customer_order",
+     "requester": "Tauhid Zaman",
+     "subject": "Bulldog tee",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-TEE-WHITE",
+     "size": "S",
+     "qty": 1,
+     "invoice_id": 501,
+     "lease_id": null,
+     "notes": "Needs a tee in size S.",
+     "created_at": "2026-08-31T09:15:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 0,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": null,
+     "latest_run_phase": null,
+     "resolution": null
+    },
+    {
+     "id": 102,
+     "type": "rent_notice",
+     "requester": "Elm City Properties",
+     "subject": "Rent due",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "invoice_id": null,
+     "lease_id": 1,
+     "notes": "Email: shop rent due in 2 days.",
+     "created_at": "2026-08-31T11:05:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 0,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": null,
+     "latest_run_phase": null,
+     "resolution": null
+    },
+    {
+     "id": 103,
+     "type": "price_override",
+     "requester": "Yale AI Club",
+     "subject": "Bulk hoodie discount",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "invoice_id": null,
+     "lease_id": null,
+     "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+     "created_at": "2026-08-31T16:55:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 0,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": null,
+     "latest_run_phase": null,
+     "resolution": null
+    }
+   ]
+  }
+ },
+ "ticket_101_initial": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "lease_id": null,
+    "invoice_id": 501,
+    "status": "open",
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "linked_invoice": {
+     "id": 501,
+     "amount": 840.0,
+     "due_date": "2026-08-28",
+     "status": "open",
+     "description": "Rush reprint CC-TEE-WHITE S",
+     "vendor_id": 1,
+     "vendor_name": "Bulldog Print Co",
+     "specialty": "apparel reprint",
+     "lead_days": 5
+    },
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [],
+   "drafts": [],
+   "runs": [],
+   "inventory": {
+    "sku": "CC-TEE-WHITE",
+    "name": "Classic Bulldog Tee",
+    "location": "Aisle B",
+    "unit_cost": 8.0,
+    "list_price": 28.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 0
+     },
+     {
+      "size": "M",
+      "qty": 5
+     },
+     {
+      "size": "L",
+      "qty": 3
+     },
+     {
+      "size": "XL",
+      "qty": 2
+     }
+    ],
+    "requested_size": "S",
+    "requested_qty": 1,
+    "on_hand_requested_size": 0,
+    "computed": {
+     "shortfall": 1,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "ticket_102_initial": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 102,
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "subject": "Rent due",
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "lease_id": 1,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Email: shop rent due in 2 days.",
+    "created_at": "2026-08-31T11:05:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": {
+     "id": 1,
+     "space_name": "Chapel Street shop",
+     "landlord": "Elm City Properties",
+     "monthly_rent": 2400.0,
+     "next_due": "2026-09-02",
+     "notes": null
+    },
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [],
+   "drafts": [],
+   "runs": [],
+   "inventory": null
+  }
+ },
+ "ticket_103_initial": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "lease_id": null,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [],
+   "drafts": [],
+   "runs": [],
+   "inventory": {
+    "sku": "CC-HOOD-NAVY",
+    "name": "Basic Hoodie Big Yale",
+    "location": "Aisle A",
+    "unit_cost": 22.0,
+    "list_price": 58.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 4
+     },
+     {
+      "size": "M",
+      "qty": 8
+     },
+     {
+      "size": "L",
+      "qty": 14
+     },
+     {
+      "size": "XL",
+      "qty": 6
+     }
+    ],
+    "requested_size": "M",
+    "requested_qty": 20,
+    "on_hand_requested_size": 8,
+    "computed": {
+     "shortfall": 12,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "cash_initial": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "checking_balance": 3400.0,
+   "checking_as_of": "2026-08-31",
+   "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+   "accounts": [
+    {
+     "name": "checking",
+     "balance": 3400.0,
+     "as_of": "2026-08-31"
+    }
+   ],
+   "payments_executed": [],
+   "not_counted_as_cash": {
+    "proposed_payments_total": 0,
+    "approved_unexecuted_payments_total": 0,
+    "proposed_or_approved_purchase_estimates": 0,
+    "proposed_purchase_estimates": 0,
+    "approved_unexecuted_purchases_total": 0,
+    "proposed_or_approved_quotes_total": 0,
+    "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+   },
+   "available": {
+    "for_obligations": 3400.0,
+    "for_purchases": 3400.0,
+    "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+   }
+  }
+ },
+ "pending_initial": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "count": 0,
+   "actions": [],
+   "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+  }
+ },
+ "audit_initial": {
+  "status": 200,
+  "body": {
+   "consistent": true,
+   "run_active": false,
+   "json_trail": {
+    "events": 0,
+    "valid": true,
+    "problems": [],
+    "exists": false
+   },
+   "audit_db": {
+    "events": 0,
+    "valid": true,
+    "problems": []
+   },
+   "incomplete": [],
+   "cross_reference_problems": [],
+   "note": "The JSON trail and the SQLite databases cannot be committed atomically together. Gaps are detected here and reconciled from audit.db and the working copy's reset stamp, never assumed."
+  }
+ },
+ "run_missing_header": {
+  "status": 403,
+  "body": {
+   "error": {
+    "code": "HUMAN_CONFIRMATION_REQUIRED",
+    "message": "This action needs the header 'X-Human-Decision: confirm' sent by the dashboard when a person clicks. It guards against accidental or cross-site requests; it is not authentication."
+   }
+  }
+ },
+ "run_unknown_ticket": {
+  "status": 404,
+  "body": {
+   "error": {
+    "code": "NOT_FOUND",
+    "message": "Unknown ticket 9999. Known tickets: [101, 102, 103]"
+   }
+  }
+ },
+ "run_101_accepted": {
+  "status": 202,
+  "body": {
+   "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+   "ticket_id": 101,
+   "phase": "queued",
+   "mode": "simulated",
+   "status_url": "/api/runs/daa5d9a6-aed3-45c6-9df1-d36450b54382",
+   "events_url": "/api/events?run_id=daa5d9a6-aed3-45c6-9df1-d36450b54382",
+   "note": "Poll the status and events URLs. A finished run never resolves the ticket or approves anything."
+  }
+ },
+ "run_101_completed": {
+  "status": 200,
+  "body": {
+   "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+   "ticket_id": 101,
+   "mode": "simulated",
+   "phase": "completed",
+   "outcome": "awaiting_human_approval",
+   "started_at": "2026-10-11T14:20:10.386181+00:00",
+   "finished_at": "2026-10-11T14:20:11.636584+00:00",
+   "error": null,
+   "awaiting_human_action": true,
+   "proposals_awaiting_decision": [
+    {
+     "id": 1,
+     "kind": "payment",
+     "status": "proposed",
+     "ticket_id": 101,
+     "invoice_id": 501,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 840.0,
+     "amount_basis": "invoice_amount",
+     "account": "checking",
+     "rationale": "Invoice 501 is 3 days overdue and blocks the vendor",
+     "proposed_by": "accounting",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.594454+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.594454+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    }
+   ],
+   "proposals_decided": [],
+   "drafts_unsent": [],
+   "ticket_status": "open",
+   "ticket_resolved": false,
+   "usage": {
+    "requests": 10,
+    "input_tokens": 1731,
+    "output_tokens": 271,
+    "tool_calls": 7,
+    "source": "offline test model: synthetic counts, NOT real model usage"
+   },
+   "agent_report": {
+    "summary": "Size S tees are out of stock. Bulldog Print Co is blocked by unpaid invoice #501; a payment proposal for $840 awaits human approval.",
+    "facts": [],
+    "proposals_created": [],
+    "drafts_created": [],
+    "estimates": [],
+    "needs_human": [
+     "Approve or reject payment proposal for invoice #501"
+    ],
+    "unknowns": [
+     "Whether the tees billed on invoice #501 were delivered is not recorded"
+    ],
+    "delegations": [
+     "inventory: stock and vendor status",
+     "accounting: invoice #501"
+    ]
+   },
+   "agent_report_source": "entry agent's final report (its own claim; verify against events)",
+   "events": 22,
+   "events_url": "/api/events?run_id=daa5d9a6-aed3-45c6-9df1-d36450b54382"
+  }
+ },
+ "events_101": {
+  "status": 200,
+  "body": {
+   "events": [
+    {
+     "seq": 1,
+     "run_seq": 1,
+     "event_id": "6f40abfb-b851-4f39-8fb9-bfe3041a0360",
+     "ts_utc": "2026-10-11T14:20:10.386181+00:00",
+     "event_type": "run_started",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": null,
+     "description": "Run started (simulated, entry agent boss)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "model": "offline test models: scripted-accounting, scripted-boss, scripted-customer_service, scripted-facilities, scripted-inventory",
+      "entry_agent": "boss",
+      "ticket_id": 101,
+      "task": "Handle desk ticket 101 only. Read it with get_ticket(101), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "budget": {
+       "max_depth": 4,
+       "max_delegations": 12,
+       "request_limit": 40,
+       "total_tokens_limit": 60000,
+       "tool_calls_limit": 60,
+       "max_output_tokens": 1200,
+       "wall_clock_seconds": 300.0,
+       "request_timeout_seconds": 60.0,
+       "max_http_retries": 1
+      },
+      "database_location": "default",
+      "working_db": "C:\\Users\\DrRya\\AppData\\Local\\Temp\\cc_fixtures_1lhoxfo0\\hw5\\data\\campus_customs_new.db",
+      "live_authorization": null,
+      "offline_network_guard": true,
+      "responses_file": "run_responses/daa5d9a6-aed3-45c6-9df1-d36450b54382.jsonl"
+     }
+    },
+    {
+     "seq": 2,
+     "run_seq": 2,
+     "event_id": "6235acd4-4b0e-4da8-8c5f-8a10b8911411",
+     "ts_utc": "2026-10-11T14:20:10.470844+00:00",
+     "event_type": "agent_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Handle desk ticket 101 only. Read it with get_ticket(101), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Handle desk ticket 101 only. Read it with get_ticket(101), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "delegation_id": null
+     }
+    },
+    {
+     "seq": 3,
+     "run_seq": 3,
+     "event_id": "31bd2a2c-2a90-466f-a251-fce146b19a61",
+     "ts_utc": "2026-10-11T14:20:10.490674+00:00",
+     "event_type": "tool_call_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss called get_ticket",
+     "tool": "get_ticket",
+     "args": {
+      "ticket_id": 101
+     },
+     "call_id": "13e4be42-0c28-494d-96db-a88b5fd0739e",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 4,
+     "run_seq": 4,
+     "event_id": "0d526962-c8e6-4fe9-8d8b-3904fbb1da3e",
+     "ts_utc": "2026-10-11T14:20:11.485437+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "get_ticket returned to boss: ok",
+     "tool": "get_ticket",
+     "args": null,
+     "call_id": "13e4be42-0c28-494d-96db-a88b5fd0739e",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"drafts\":[],\"human_judgment\":[],\"pending_actions\":[],\"ticket\":{\"created_at\":\"2026-08-31T09:15:00-04:00\",\"id\":101,\"invoice_id\":501,\"lease_id\":null,\"linked_invoice\":{\"amount\":840.0,\"description\":\"Rush reprint CC-TEE-WHITE S\",\"due_date\":\"2026-08-28\",\"id\":501,\"lead_days\"...",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 5,
+     "run_seq": 5,
+     "event_id": "fed7acce-7f13-4704-b114-39df9cda7ae7",
+     "ts_utc": "2026-10-11T14:20:11.492683+00:00",
+     "event_type": "delegation_requested",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss delegated to inventory",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "boss",
+     "delegated_to": "inventory",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "inventory",
+      "task": "Check size S tee stock and the restock path for ticket 101",
+      "delegation_id": "0b3709c9-62f0-4fdd-8726-a3313e29d946"
+     }
+    },
+    {
+     "seq": 6,
+     "run_seq": 6,
+     "event_id": "7740b820-a1cb-400b-928b-978856546203",
+     "ts_utc": "2026-10-11T14:20:11.495997+00:00",
+     "event_type": "agent_started",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "inventory"
+     ],
+     "description": "inventory started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Check size S tee stock and the restock path for ticket 101",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Check size S tee stock and the restock path for ticket 101",
+      "delegation_id": "0b3709c9-62f0-4fdd-8726-a3313e29d946"
+     }
+    },
+    {
+     "seq": 7,
+     "run_seq": 7,
+     "event_id": "ecd07073-20b0-4c6f-9e7b-8dda04a07f95",
+     "ts_utc": "2026-10-11T14:20:11.506556+00:00",
+     "event_type": "tool_call_started",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "inventory"
+     ],
+     "description": "inventory called check_inventory",
+     "tool": "check_inventory",
+     "args": {
+      "sku": "CC-TEE-WHITE"
+     },
+     "call_id": "7805f459-b1d4-476f-9c70-b118f158baef",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 8,
+     "run_seq": 8,
+     "event_id": "944367f1-b765-4dcf-9ec2-8d61fddbce61",
+     "ts_utc": "2026-10-11T14:20:11.515289+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "inventory"
+     ],
+     "description": "check_inventory returned to inventory: ok",
+     "tool": "check_inventory",
+     "args": null,
+     "call_id": "7805f459-b1d4-476f-9c70-b118f158baef",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"products\":[{\"list_price\":28.0,\"location\":\"Aisle B\",\"name\":\"Classic Bulldog Tee\",\"sizes\":[{\"qty\":0,\"size\":\"S\"},{\"qty\":5,\"size\":\"M\"},{\"qty\":3,\"size\":\"L\"},{\"qty\":2,\"size\":\"XL\"}],\"sku\":\"CC-TEE-WHITE\",\"total_qty\":10,\"unit_cost\":8.0}]}",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 9,
+     "run_seq": 9,
+     "event_id": "484477bd-7d86-4025-acd2-e7183f4cb3ba",
+     "ts_utc": "2026-10-11T14:20:11.523062+00:00",
+     "event_type": "tool_call_started",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "inventory"
+     ],
+     "description": "inventory called list_vendors",
+     "tool": "list_vendors",
+     "args": {},
+     "call_id": "b2554cf3-315a-4b26-9c1a-523b1530e7ed",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 10,
+     "run_seq": 10,
+     "event_id": "d08accaa-57c5-4831-914d-f403e3a9c9b7",
+     "ts_utc": "2026-10-11T14:20:11.530072+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "inventory"
+     ],
+     "description": "list_vendors returned to inventory: ok",
+     "tool": "list_vendors",
+     "args": null,
+     "call_id": "b2554cf3-315a-4b26-9c1a-523b1530e7ed",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"human_judgment\":[\"Specialty is stored text; whether a vendor can supply a product is a human judgment.\"],\"unknowns\":[],\"vendors\":[{\"blocked\":true,\"blocked_reason\":\"R3: open unpaid invoice(s) 501; no new shipments until paid\",\"computed\":{\"earliest_arrival_if_ordered_...",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 11,
+     "run_seq": 11,
+     "event_id": "edbf65de-faab-4d80-85b7-416badaa431a",
+     "ts_utc": "2026-10-11T14:20:11.536360+00:00",
+     "event_type": "agent_finished",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "inventory"
+     ],
+     "description": "inventory finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[],\"proposals_created\":[],\"summary\":\"Size S on hand is 0. Bulldog Print Co is blocked by open invoice #501; no second order proposed until fulfillment is clarified.\",\"unknowns\":[]}",
+     "said_summary": "Size S on hand is 0. Bulldog Print Co is blocked by open invoice #501; no second order proposed until fulfillment is clarified.",
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": "0b3709c9-62f0-4fdd-8726-a3313e29d946",
+      "response_record": {
+       "file": "run_responses/daa5d9a6-aed3-45c6-9df1-d36450b54382.jsonl",
+       "record_seq": 2,
+       "kind": "agent_response",
+       "record_hash": "0929cdf1fda1993053ff2acaba1db5f83a7c0d051fbe1f652abfca3583afb25a"
+      }
+     }
+    },
+    {
+     "seq": 12,
+     "run_seq": 12,
+     "event_id": "2512dbe3-4a20-498c-9395-26bd8a1d748b",
+     "ts_utc": "2026-10-11T14:20:11.539929+00:00",
+     "event_type": "delegation_completed",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "inventory reported back to boss",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": "boss",
+     "delegated_to": "inventory",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "inventory",
+      "delegation_id": "0b3709c9-62f0-4fdd-8726-a3313e29d946"
+     }
+    },
+    {
+     "seq": 13,
+     "run_seq": 13,
+     "event_id": "88ed20dc-4cfe-4621-a69c-b1bd3e61db80",
+     "ts_utc": "2026-10-11T14:20:11.547081+00:00",
+     "event_type": "delegation_requested",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss delegated to accounting",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "boss",
+     "delegated_to": "accounting",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "accounting",
+      "task": "Review invoice 501 and prepare its payment if appropriate",
+      "delegation_id": "6a67b123-1a1e-457b-a577-2edf68184a98"
+     }
+    },
+    {
+     "seq": 14,
+     "run_seq": 14,
+     "event_id": "15b4e72d-8f12-4718-aa23-1e8c3b10d42a",
+     "ts_utc": "2026-10-11T14:20:11.549845+00:00",
+     "event_type": "agent_started",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Review invoice 501 and prepare its payment if appropriate",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Review invoice 501 and prepare its payment if appropriate",
+      "delegation_id": "6a67b123-1a1e-457b-a577-2edf68184a98"
+     }
+    },
+    {
+     "seq": 15,
+     "run_seq": 15,
+     "event_id": "d07e6bf5-f401-4dd0-8976-d3026df0ff9a",
+     "ts_utc": "2026-10-11T14:20:11.561728+00:00",
+     "event_type": "tool_call_started",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting called get_financial_position",
+     "tool": "get_financial_position",
+     "args": {},
+     "call_id": "8f8d15c6-a1d4-43cf-b1a9-334676220978",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 16,
+     "run_seq": 16,
+     "event_id": "359cc209-4953-4d4a-95e8-5c8976e85415",
+     "ts_utc": "2026-10-11T14:20:11.571193+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "get_financial_position returned to accounting: ok",
+     "tool": "get_financial_position",
+     "args": null,
+     "call_id": "8f8d15c6-a1d4-43cf-b1a9-334676220978",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"cash_accounts\":[{\"as_of\":\"2026-08-31\",\"balance\":3400.0,\"name\":\"checking\"}],\"computed\":{\"cash_after_all_obligations\":160.0,\"note\":\"Hypothetical arithmetic, not stored facts. Obligations = all open invoices + next rent on each lease. cash_after_all_obligations is what...",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 17,
+     "run_seq": 17,
+     "event_id": "dd6fd49c-b2ad-4a2f-9945-678ce675f0d7",
+     "ts_utc": "2026-10-11T14:20:11.578438+00:00",
+     "event_type": "tool_call_started",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting called propose_payment",
+     "tool": "propose_payment",
+     "args": {
+      "kind": "invoice",
+      "ref_id": 501,
+      "amount": 840,
+      "ticket_id": 101,
+      "rationale": "Invoice 501 is 3 days overdue and blocks the vendor"
+     },
+     "call_id": "cae7b477-2bf1-4bc6-b6e9-063b69f2fb43",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 18,
+     "run_seq": 18,
+     "event_id": "f8bb38b7-af13-44a7-8cff-db5d3800d134",
+     "ts_utc": "2026-10-11T14:20:11.606817+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "propose_payment returned to accounting: ok",
+     "tool": "propose_payment",
+     "args": null,
+     "call_id": "cae7b477-2bf1-4bc6-b6e9-063b69f2fb43",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"checks\":[{\"detail\":\"840.00 <= stored balance 3400.00\",\"result\":\"pass\",\"rule\":\"R1\"},{\"detail\":\"cash if all open payment proposals were executed: 2560.00\",\"result\":\"pass\",\"rule\":\"R1-competing\"},{\"detail\":\"invoice 501 3 days overdue as of 2026-08-31\",\"result\":\"info\",\"r...",
+     "links": {
+      "action_id": 1,
+      "audit_db_event_id": 1
+     },
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 19,
+     "run_seq": 19,
+     "event_id": "7b511ad2-7888-4605-a21f-aebe402642ad",
+     "ts_utc": "2026-10-11T14:20:11.617027+00:00",
+     "event_type": "agent_finished",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[],\"proposals_created\":[],\"summary\":\"Payment proposal created for invoice #501 ($840).\",\"unknowns\":[]}",
+     "said_summary": "Payment proposal created for invoice #501 ($840).",
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": "6a67b123-1a1e-457b-a577-2edf68184a98",
+      "response_record": {
+       "file": "run_responses/daa5d9a6-aed3-45c6-9df1-d36450b54382.jsonl",
+       "record_seq": 3,
+       "kind": "agent_response",
+       "record_hash": "585596155f998e3886783750621cc5f1c72000965881f5ef1d3ef957f5ed1531"
+      }
+     }
+    },
+    {
+     "seq": 20,
+     "run_seq": 20,
+     "event_id": "457ecb6b-299c-4974-9126-66a5a8d36c50",
+     "ts_utc": "2026-10-11T14:20:11.621058+00:00",
+     "event_type": "delegation_completed",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "accounting reported back to boss",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": "boss",
+     "delegated_to": "accounting",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "accounting",
+      "delegation_id": "6a67b123-1a1e-457b-a577-2edf68184a98"
+     }
+    },
+    {
+     "seq": 21,
+     "run_seq": 21,
+     "event_id": "c87adac7-c1e2-4604-a45e-8aa5a1542cae",
+     "ts_utc": "2026-10-11T14:20:11.630713+00:00",
+     "event_type": "agent_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[\"inventory: stock and vendor status\",\"accounting: invoice #501\"],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[\"Approve or reject payment proposal for invoice #501\"],\"proposals_created\":[],\"summary\":\"Size S tees are out of stock. Bulldog Print Co is blocked by unpai...",
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": null,
+      "response_record": {
+       "file": "run_responses/daa5d9a6-aed3-45c6-9df1-d36450b54382.jsonl",
+       "record_seq": 4,
+       "kind": "agent_response",
+       "record_hash": "e4a5a14bfed0b9f32c51e7c12853a1aacc3dd08742ac6e727fcdad64e9bb7bae"
+      }
+     }
+    },
+    {
+     "seq": 22,
+     "run_seq": 22,
+     "event_id": "660c669b-ddd5-4661-a605-8084ad6a0bda",
+     "ts_utc": "2026-10-11T14:20:11.636584+00:00",
+     "event_type": "run_finished",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": null,
+     "description": "Run finished: completed",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok",
+      "run_status": "completed"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": {
+      "requests": 10,
+      "input_tokens": 1731,
+      "output_tokens": 271,
+      "tool_calls": 7,
+      "source": "offline test model: synthetic counts, NOT real model usage"
+     },
+     "details": {}
+    }
+   ],
+   "next_after_seq": 22,
+   "has_more": false,
+   "trail_events": 22,
+   "trail_valid": true,
+   "source": "output/audit_trail.json (hash chain verified on every read)"
+  }
+ },
+ "ticket_101_after_run": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "lease_id": null,
+    "invoice_id": 501,
+    "status": "open",
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "linked_invoice": {
+     "id": 501,
+     "amount": 840.0,
+     "due_date": "2026-08-28",
+     "status": "open",
+     "description": "Rush reprint CC-TEE-WHITE S",
+     "vendor_id": 1,
+     "vendor_name": "Bulldog Print Co",
+     "specialty": "apparel reprint",
+     "lead_days": 5
+    },
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 1,
+     "kind": "payment",
+     "status": "proposed",
+     "ticket_id": 101,
+     "invoice_id": 501,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 840.0,
+     "amount_basis": "invoice_amount",
+     "account": "checking",
+     "rationale": "Invoice 501 is 3 days overdue and blocks the vendor",
+     "proposed_by": "accounting",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.594454+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.594454+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    }
+   ],
+   "drafts": [],
+   "runs": [
+    {
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "awaiting_human_approval",
+     "started_at": "2026-10-11T14:20:10.386181+00:00",
+     "finished_at": "2026-10-11T14:20:11.636584+00:00"
+    }
+   ],
+   "inventory": {
+    "sku": "CC-TEE-WHITE",
+    "name": "Classic Bulldog Tee",
+    "location": "Aisle B",
+    "unit_cost": 8.0,
+    "list_price": 28.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 0
+     },
+     {
+      "size": "M",
+      "qty": 5
+     },
+     {
+      "size": "L",
+      "qty": 3
+     },
+     {
+      "size": "XL",
+      "qty": 2
+     }
+    ],
+    "requested_size": "S",
+    "requested_qty": 1,
+    "on_hand_requested_size": 0,
+    "computed": {
+     "shortfall": 1,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "run_102_accepted": {
+  "status": 202,
+  "body": {
+   "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+   "ticket_id": 102,
+   "phase": "queued",
+   "mode": "simulated",
+   "status_url": "/api/runs/4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+   "events_url": "/api/events?run_id=4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+   "note": "Poll the status and events URLs. A finished run never resolves the ticket or approves anything."
+  }
+ },
+ "run_102_completed": {
+  "status": 200,
+  "body": {
+   "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+   "ticket_id": 102,
+   "mode": "simulated",
+   "phase": "completed",
+   "outcome": "awaiting_human_approval",
+   "started_at": "2026-10-11T14:20:11.722395+00:00",
+   "finished_at": "2026-10-11T14:20:11.940062+00:00",
+   "error": null,
+   "awaiting_human_action": true,
+   "proposals_awaiting_decision": [
+    {
+     "id": 2,
+     "kind": "payment",
+     "status": "proposed",
+     "ticket_id": 102,
+     "invoice_id": null,
+     "lease_id": 1,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 2400.0,
+     "amount_basis": "lease_rent",
+     "account": "checking",
+     "rationale": "Monthly rent for the Chapel Street shop",
+     "proposed_by": "accounting",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.896987+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.896987+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    }
+   ],
+   "proposals_decided": [],
+   "drafts_unsent": [
+    {
+     "id": 1,
+     "ticket_id": 102,
+     "recipient": "Elm City Properties",
+     "subject": "Re: Rent due",
+     "created_by": "facilities",
+     "created_at": "2026-10-11T14:20:11.847935+00:00",
+     "sent": false
+    }
+   ],
+   "ticket_status": "open",
+   "ticket_resolved": false,
+   "usage": {
+    "requests": 8,
+    "input_tokens": 1100,
+    "output_tokens": 231,
+    "tool_calls": 5,
+    "source": "offline test model: synthetic counts, NOT real model usage"
+   },
+   "agent_report": {
+    "summary": "Rent of $2,400 is due 2026-09-02. A payment proposal and an unsent draft to Elm City Properties await human review.",
+    "facts": [],
+    "proposals_created": [],
+    "drafts_created": [],
+    "estimates": [],
+    "needs_human": [
+     "Approve or reject the rent payment",
+     "Review the unsent landlord draft"
+    ],
+    "unknowns": [],
+    "delegations": []
+   },
+   "agent_report_source": "entry agent's final report (its own claim; verify against events)",
+   "events": 18,
+   "events_url": "/api/events?run_id=4d9af582-2852-47b0-b365-cf0fe6bb0fe6"
+  }
+ },
+ "events_102": {
+  "status": 200,
+  "body": {
+   "events": [
+    {
+     "seq": 23,
+     "run_seq": 1,
+     "event_id": "7acabb1d-9adf-482b-9664-3dc908ca832b",
+     "ts_utc": "2026-10-11T14:20:11.722395+00:00",
+     "event_type": "run_started",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": null,
+     "description": "Run started (simulated, entry agent boss)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "model": "offline test models: scripted-accounting, scripted-boss, scripted-customer_service, scripted-facilities, scripted-inventory",
+      "entry_agent": "boss",
+      "ticket_id": 102,
+      "task": "Handle desk ticket 102 only. Read it with get_ticket(102), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "budget": {
+       "max_depth": 4,
+       "max_delegations": 12,
+       "request_limit": 40,
+       "total_tokens_limit": 60000,
+       "tool_calls_limit": 60,
+       "max_output_tokens": 1200,
+       "wall_clock_seconds": 300.0,
+       "request_timeout_seconds": 60.0,
+       "max_http_retries": 1
+      },
+      "database_location": "default",
+      "working_db": "C:\\Users\\DrRya\\AppData\\Local\\Temp\\cc_fixtures_1lhoxfo0\\hw5\\data\\campus_customs_new.db",
+      "live_authorization": null,
+      "offline_network_guard": true,
+      "responses_file": "run_responses/4d9af582-2852-47b0-b365-cf0fe6bb0fe6.jsonl"
+     }
+    },
+    {
+     "seq": 24,
+     "run_seq": 2,
+     "event_id": "ddbb1e5e-ae69-420f-bd9d-241817bc0a1c",
+     "ts_utc": "2026-10-11T14:20:11.791328+00:00",
+     "event_type": "agent_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Handle desk ticket 102 only. Read it with get_ticket(102), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Handle desk ticket 102 only. Read it with get_ticket(102), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "delegation_id": null
+     }
+    },
+    {
+     "seq": 25,
+     "run_seq": 3,
+     "event_id": "769adacd-89c6-4ba7-ae63-2724727682fd",
+     "ts_utc": "2026-10-11T14:20:11.808609+00:00",
+     "event_type": "tool_call_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss called get_ticket",
+     "tool": "get_ticket",
+     "args": {
+      "ticket_id": 102
+     },
+     "call_id": "2fb53bb1-0d26-40ce-94d4-200fe990242d",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 26,
+     "run_seq": 4,
+     "event_id": "24de459a-a25e-4019-ad75-862fa6b038fd",
+     "ts_utc": "2026-10-11T14:20:11.816746+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "get_ticket returned to boss: ok",
+     "tool": "get_ticket",
+     "args": null,
+     "call_id": "2fb53bb1-0d26-40ce-94d4-200fe990242d",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"drafts\":[],\"human_judgment\":[],\"pending_actions\":[],\"ticket\":{\"created_at\":\"2026-08-31T11:05:00-04:00\",\"id\":102,\"invoice_id\":null,\"lease_id\":1,\"linked_invoice\":null,\"linked_lease\":{\"id\":1,\"landlord\":\"Elm City Properties\",\"monthly_rent\":2400.0,\"next_due\":\"2026-09-02\"...",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 27,
+     "run_seq": 5,
+     "event_id": "a7118de1-e384-4aa8-a6e0-88c9aa0d098e",
+     "ts_utc": "2026-10-11T14:20:11.823667+00:00",
+     "event_type": "delegation_requested",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss delegated to facilities",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "boss",
+     "delegated_to": "facilities",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "facilities",
+      "task": "Draft an acknowledgement to the landlord for ticket 102",
+      "delegation_id": "47e2814f-6cd9-43a2-bdbc-db90d6d9da36"
+     }
+    },
+    {
+     "seq": 28,
+     "run_seq": 6,
+     "event_id": "f630abbf-4fa0-4293-ac10-52f3b1275776",
+     "ts_utc": "2026-10-11T14:20:11.826749+00:00",
+     "event_type": "agent_started",
+     "actor": "facilities",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "facilities"
+     ],
+     "description": "facilities started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Draft an acknowledgement to the landlord for ticket 102",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Draft an acknowledgement to the landlord for ticket 102",
+      "delegation_id": "47e2814f-6cd9-43a2-bdbc-db90d6d9da36"
+     }
+    },
+    {
+     "seq": 29,
+     "run_seq": 7,
+     "event_id": "885fef1d-b5e9-4c45-b75e-4998f467aaff",
+     "ts_utc": "2026-10-11T14:20:11.839745+00:00",
+     "event_type": "tool_call_started",
+     "actor": "facilities",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "facilities"
+     ],
+     "description": "facilities called draft_message",
+     "tool": "draft_message",
+     "args": {
+      "ticket_id": 102,
+      "subject": "Re: Rent due",
+      "body": "Thank you for the reminder. The rent payment is being reviewed internally."
+     },
+     "call_id": "efc3aaf6-4184-44bd-8b69-ace0a1c46fac",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 30,
+     "run_seq": 8,
+     "event_id": "3899e89e-0f66-4de5-9aa4-9a66a28ff950",
+     "ts_utc": "2026-10-11T14:20:11.856793+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "facilities",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "facilities"
+     ],
+     "description": "draft_message returned to facilities: ok",
+     "tool": "draft_message",
+     "args": null,
+     "call_id": "efc3aaf6-4184-44bd-8b69-ace0a1c46fac",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"checks\":[],\"created\":true,\"draft\":{\"channel\":\"email\",\"recipient\":\"Elm City Properties\",\"recipient_source\":\"leases.landlord\",\"related_action_id\":null,\"subject\":\"Re: Rent due\",\"ticket_id\":102},\"human_judgment\":[\"R7: this message will never be sent by the system. A hum...",
+     "links": {
+      "draft_id": 1,
+      "audit_db_event_id": 2
+     },
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 31,
+     "run_seq": 9,
+     "event_id": "061e5084-f65e-4db8-b59e-ffc550071c73",
+     "ts_utc": "2026-10-11T14:20:11.865654+00:00",
+     "event_type": "agent_finished",
+     "actor": "facilities",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "facilities"
+     ],
+     "description": "facilities finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[],\"proposals_created\":[],\"summary\":\"Unsent draft to the landlord stored for review.\",\"unknowns\":[]}",
+     "said_summary": "Unsent draft to the landlord stored for review.",
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": "47e2814f-6cd9-43a2-bdbc-db90d6d9da36",
+      "response_record": {
+       "file": "run_responses/4d9af582-2852-47b0-b365-cf0fe6bb0fe6.jsonl",
+       "record_seq": 2,
+       "kind": "agent_response",
+       "record_hash": "c034027e883c5baec199146269f56de810cc3ef47508086676b63e71c20cc96f"
+      }
+     }
+    },
+    {
+     "seq": 32,
+     "run_seq": 10,
+     "event_id": "60531318-808a-4dd5-bbc4-fec31f9ffdbf",
+     "ts_utc": "2026-10-11T14:20:11.869135+00:00",
+     "event_type": "delegation_completed",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "facilities reported back to boss",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": "boss",
+     "delegated_to": "facilities",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "facilities",
+      "delegation_id": "47e2814f-6cd9-43a2-bdbc-db90d6d9da36"
+     }
+    },
+    {
+     "seq": 33,
+     "run_seq": 11,
+     "event_id": "98ed002e-ee9b-455e-a244-acea4f1de0c5",
+     "ts_utc": "2026-10-11T14:20:11.877353+00:00",
+     "event_type": "delegation_requested",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss delegated to accounting",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "boss",
+     "delegated_to": "accounting",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "accounting",
+      "task": "Prepare the September rent payment for lease 1",
+      "delegation_id": "8e17eccb-45cf-482e-9efd-8a41e7924407"
+     }
+    },
+    {
+     "seq": 34,
+     "run_seq": 12,
+     "event_id": "144ac310-9e58-4c9e-a685-bebf868d5826",
+     "ts_utc": "2026-10-11T14:20:11.880573+00:00",
+     "event_type": "agent_started",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Prepare the September rent payment for lease 1",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Prepare the September rent payment for lease 1",
+      "delegation_id": "8e17eccb-45cf-482e-9efd-8a41e7924407"
+     }
+    },
+    {
+     "seq": 35,
+     "run_seq": 13,
+     "event_id": "4e718f7b-e8cb-4081-8404-e0d7169768e6",
+     "ts_utc": "2026-10-11T14:20:11.890323+00:00",
+     "event_type": "tool_call_started",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting called propose_payment",
+     "tool": "propose_payment",
+     "args": {
+      "kind": "lease",
+      "ref_id": 1,
+      "amount": 2400,
+      "ticket_id": 102,
+      "rationale": "Monthly rent for the Chapel Street shop"
+     },
+     "call_id": "8fa0ff4d-4364-41b6-9465-b29f798d9966",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 36,
+     "run_seq": 14,
+     "event_id": "ac0bd5a0-04f6-4aba-9e88-b8f987a1914b",
+     "ts_utc": "2026-10-11T14:20:11.906030+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "propose_payment returned to accounting: ok",
+     "tool": "propose_payment",
+     "args": null,
+     "call_id": "8fa0ff4d-4364-41b6-9465-b29f798d9966",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"checks\":[{\"detail\":\"2400.00 <= stored balance 3400.00\",\"result\":\"pass\",\"rule\":\"R1\"},{\"detail\":\"cash if all open payment proposals were executed: 160.00\",\"result\":\"pass\",\"rule\":\"R1-competing\"},{\"detail\":\"lease 1 rent due 2026-09-02 (2 days from 2026-08-31)\",\"result\":...",
+     "links": {
+      "action_id": 2,
+      "audit_db_event_id": 3
+     },
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 37,
+     "run_seq": 15,
+     "event_id": "01ab4d1d-8289-4fcf-8569-e86df162e5eb",
+     "ts_utc": "2026-10-11T14:20:11.916257+00:00",
+     "event_type": "agent_finished",
+     "actor": "accounting",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss",
+      "accounting"
+     ],
+     "description": "accounting finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[],\"proposals_created\":[],\"summary\":\"Rent payment proposal created ($2,400).\",\"unknowns\":[]}",
+     "said_summary": "Rent payment proposal created ($2,400).",
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": "8e17eccb-45cf-482e-9efd-8a41e7924407",
+      "response_record": {
+       "file": "run_responses/4d9af582-2852-47b0-b365-cf0fe6bb0fe6.jsonl",
+       "record_seq": 3,
+       "kind": "agent_response",
+       "record_hash": "ea15e837b4bc8b32be3cb382c08c8909fabf207356cd8190c168d216286c5f35"
+      }
+     }
+    },
+    {
+     "seq": 38,
+     "run_seq": 16,
+     "event_id": "2200542e-9762-4601-963d-06252becea1e",
+     "ts_utc": "2026-10-11T14:20:11.921001+00:00",
+     "event_type": "delegation_completed",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "accounting reported back to boss",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": "boss",
+     "delegated_to": "accounting",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "accounting",
+      "delegation_id": "8e17eccb-45cf-482e-9efd-8a41e7924407"
+     }
+    },
+    {
+     "seq": 39,
+     "run_seq": 17,
+     "event_id": "cd3f1916-4f30-4845-b435-f2b7e3573a34",
+     "ts_utc": "2026-10-11T14:20:11.932333+00:00",
+     "event_type": "agent_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[\"Approve or reject the rent payment\",\"Review the unsent landlord draft\"],\"proposals_created\":[],\"summary\":\"Rent of $2,400 is due 2026-09-02. A payment proposal and an unsent draft to Elm City Properties await human rev...",
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": null,
+      "response_record": {
+       "file": "run_responses/4d9af582-2852-47b0-b365-cf0fe6bb0fe6.jsonl",
+       "record_seq": 4,
+       "kind": "agent_response",
+       "record_hash": "d52cce9b51fc48bc98cf6606d6f492d18297dc5061c2dd073a0fb429c947bd28"
+      }
+     }
+    },
+    {
+     "seq": 40,
+     "run_seq": 18,
+     "event_id": "877bbccc-e112-4ee2-81cb-8bcb95a044e2",
+     "ts_utc": "2026-10-11T14:20:11.940062+00:00",
+     "event_type": "run_finished",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "ticket_id": 102,
+     "chain": null,
+     "description": "Run finished: completed",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok",
+      "run_status": "completed"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": {
+      "requests": 8,
+      "input_tokens": 1100,
+      "output_tokens": 231,
+      "tool_calls": 5,
+      "source": "offline test model: synthetic counts, NOT real model usage"
+     },
+     "details": {}
+    }
+   ],
+   "next_after_seq": 40,
+   "has_more": false,
+   "trail_events": 40,
+   "trail_valid": true,
+   "source": "output/audit_trail.json (hash chain verified on every read)"
+  }
+ },
+ "ticket_102_after_run": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 102,
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "subject": "Rent due",
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "lease_id": 1,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Email: shop rent due in 2 days.",
+    "created_at": "2026-08-31T11:05:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": {
+     "id": 1,
+     "space_name": "Chapel Street shop",
+     "landlord": "Elm City Properties",
+     "monthly_rent": 2400.0,
+     "next_due": "2026-09-02",
+     "notes": null
+    },
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 2,
+     "kind": "payment",
+     "status": "proposed",
+     "ticket_id": 102,
+     "invoice_id": null,
+     "lease_id": 1,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 2400.0,
+     "amount_basis": "lease_rent",
+     "account": "checking",
+     "rationale": "Monthly rent for the Chapel Street shop",
+     "proposed_by": "accounting",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.896987+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.896987+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    }
+   ],
+   "drafts": [
+    {
+     "id": 1,
+     "ticket_id": 102,
+     "recipient": "Elm City Properties",
+     "recipient_source": "leases.landlord",
+     "channel": "email",
+     "subject": "Re: Rent due",
+     "body": "Thank you for the reminder. The rent payment is being reviewed internally.",
+     "related_action_id": null,
+     "warnings": [],
+     "status": "draft",
+     "created_by": "facilities",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "call_id": "efc3aaf6-4184-44bd-8b69-ace0a1c46fac",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.847935+00:00",
+     "sent": false
+    }
+   ],
+   "runs": [
+    {
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "awaiting_human_approval",
+     "started_at": "2026-10-11T14:20:11.722395+00:00",
+     "finished_at": "2026-10-11T14:20:11.940062+00:00"
+    }
+   ],
+   "inventory": null
+  }
+ },
+ "run_103_accepted": {
+  "status": 202,
+  "body": {
+   "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+   "ticket_id": 103,
+   "phase": "queued",
+   "mode": "simulated",
+   "status_url": "/api/runs/4c775c5e-56a9-446b-afec-6468d5115770",
+   "events_url": "/api/events?run_id=4c775c5e-56a9-446b-afec-6468d5115770",
+   "note": "Poll the status and events URLs. A finished run never resolves the ticket or approves anything."
+  }
+ },
+ "run_103_completed": {
+  "status": 200,
+  "body": {
+   "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+   "ticket_id": 103,
+   "mode": "simulated",
+   "phase": "completed",
+   "outcome": "awaiting_human_approval",
+   "started_at": "2026-10-11T14:20:12.024168+00:00",
+   "finished_at": "2026-10-11T14:20:12.278201+00:00",
+   "error": null,
+   "awaiting_human_action": true,
+   "proposals_awaiting_decision": [
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "unit_price": 45.0,
+     "amount": 900.0,
+     "amount_basis": "quoted_unit_price",
+     "account": null,
+     "rationale": "Bulk discount within the price policy",
+     "proposed_by": "customer_service",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.166184+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.166184+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 4,
+     "kind": "purchase",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 12,
+     "unit_price": null,
+     "amount": 264.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Cover the 12-unit shortfall",
+     "proposed_by": "inventory",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.211230+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid.",
+      "Estimated cost 264.00 exceeds cash remaining if all open payment proposals were executed (160.00)."
+     ],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.211230+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [
+       501
+      ],
+      "blocked_now": true,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "proposals_decided": [],
+   "drafts_unsent": [],
+   "ticket_status": "open",
+   "ticket_resolved": false,
+   "usage": {
+    "requests": 9,
+    "input_tokens": 1443,
+    "output_tokens": 279,
+    "tool_calls": 6,
+    "source": "offline test model: synthetic counts, NOT real model usage"
+   },
+   "agent_report": {
+    "summary": "8 of 20 hoodies are in stock (12 short). A $45 quote and a restock proposal await human decisions; no vendor is confirmed to supply navy hoodies.",
+    "facts": [],
+    "proposals_created": [],
+    "drafts_created": [],
+    "estimates": [
+     "Restock of 12 at unit cost $22 = $264 (estimate, not a vendor quote)"
+    ],
+    "needs_human": [
+     "Decide on the $45 quote",
+     "Decide on the restock proposal"
+    ],
+    "unknowns": [],
+    "delegations": []
+   },
+   "agent_report_source": "entry agent's final report (its own claim; verify against events)",
+   "events": 20,
+   "events_url": "/api/events?run_id=4c775c5e-56a9-446b-afec-6468d5115770"
+  }
+ },
+ "events_103": {
+  "status": 200,
+  "body": {
+   "events": [
+    {
+     "seq": 41,
+     "run_seq": 1,
+     "event_id": "d91057f7-012e-44db-b77f-76203c0fcc6c",
+     "ts_utc": "2026-10-11T14:20:12.024168+00:00",
+     "event_type": "run_started",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": null,
+     "description": "Run started (simulated, entry agent boss)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "model": "offline test models: scripted-accounting, scripted-boss, scripted-customer_service, scripted-facilities, scripted-inventory",
+      "entry_agent": "boss",
+      "ticket_id": 103,
+      "task": "Handle desk ticket 103 only. Read it with get_ticket(103), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "budget": {
+       "max_depth": 4,
+       "max_delegations": 12,
+       "request_limit": 40,
+       "total_tokens_limit": 60000,
+       "tool_calls_limit": 60,
+       "max_output_tokens": 1200,
+       "wall_clock_seconds": 300.0,
+       "request_timeout_seconds": 60.0,
+       "max_http_retries": 1
+      },
+      "database_location": "default",
+      "working_db": "C:\\Users\\DrRya\\AppData\\Local\\Temp\\cc_fixtures_1lhoxfo0\\hw5\\data\\campus_customs_new.db",
+      "live_authorization": null,
+      "offline_network_guard": true,
+      "responses_file": "run_responses/4c775c5e-56a9-446b-afec-6468d5115770.jsonl"
+     }
+    },
+    {
+     "seq": 42,
+     "run_seq": 2,
+     "event_id": "5879cc24-2ccc-4984-9538-28483a6e63ec",
+     "ts_utc": "2026-10-11T14:20:12.088204+00:00",
+     "event_type": "agent_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Handle desk ticket 103 only. Read it with get_ticket(103), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Handle desk ticket 103 only. Read it with get_ticket(103), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "delegation_id": null
+     }
+    },
+    {
+     "seq": 43,
+     "run_seq": 3,
+     "event_id": "7ad16374-8b95-4409-81a8-52cbc8f42714",
+     "ts_utc": "2026-10-11T14:20:12.103110+00:00",
+     "event_type": "tool_call_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss called get_ticket",
+     "tool": "get_ticket",
+     "args": {
+      "ticket_id": 103
+     },
+     "call_id": "74099a65-a90a-4569-8b98-20caccda8c7b",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 44,
+     "run_seq": 4,
+     "event_id": "f48f2a64-b331-45dd-a454-f7c1532ad57b",
+     "ts_utc": "2026-10-11T14:20:12.112620+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss"
+     ],
+     "description": "get_ticket returned to boss: ok",
+     "tool": "get_ticket",
+     "args": null,
+     "call_id": "74099a65-a90a-4569-8b98-20caccda8c7b",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"drafts\":[],\"human_judgment\":[],\"pending_actions\":[],\"ticket\":{\"created_at\":\"2026-08-31T16:55:00-04:00\",\"id\":103,\"invoice_id\":null,\"lease_id\":null,\"linked_invoice\":null,\"linked_lease\":null,\"notes\":\"Student org wants 20 hoodies, size M, asking for a bulk discount.\",\"q...",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 45,
+     "run_seq": 5,
+     "event_id": "af618aac-31cc-4a1d-af5d-0778ee713671",
+     "ts_utc": "2026-10-11T14:20:12.120146+00:00",
+     "event_type": "delegation_requested",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss delegated to customer_service",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "boss",
+     "delegated_to": "customer_service",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "customer_service",
+      "task": "Prepare a quote for 20 navy hoodies, size M, for ticket 103",
+      "delegation_id": "50d61b70-25f9-4dbb-8fa0-5be5b9f1cb4e"
+     }
+    },
+    {
+     "seq": 46,
+     "run_seq": 6,
+     "event_id": "6f24b08d-07fb-4fc2-b413-8962121722c0",
+     "ts_utc": "2026-10-11T14:20:12.123556+00:00",
+     "event_type": "agent_started",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "customer_service started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Prepare a quote for 20 navy hoodies, size M, for ticket 103",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Prepare a quote for 20 navy hoodies, size M, for ticket 103",
+      "delegation_id": "50d61b70-25f9-4dbb-8fa0-5be5b9f1cb4e"
+     }
+    },
+    {
+     "seq": 47,
+     "run_seq": 7,
+     "event_id": "27c8f2e0-6aa5-41ee-83c0-dcc45d484e25",
+     "ts_utc": "2026-10-11T14:20:12.136467+00:00",
+     "event_type": "tool_call_started",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "customer_service called check_inventory",
+     "tool": "check_inventory",
+     "args": {
+      "sku": "CC-HOOD-NAVY"
+     },
+     "call_id": "a95fe2ae-5682-4152-827a-3a527f637a99",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 48,
+     "run_seq": 8,
+     "event_id": "a7dc02d1-3b0c-44ad-8b9b-e2a230d11ac3",
+     "ts_utc": "2026-10-11T14:20:12.144620+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "check_inventory returned to customer_service: ok",
+     "tool": "check_inventory",
+     "args": null,
+     "call_id": "a95fe2ae-5682-4152-827a-3a527f637a99",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"products\":[{\"list_price\":58.0,\"location\":\"Aisle A\",\"name\":\"Basic Hoodie Big Yale\",\"sizes\":[{\"qty\":4,\"size\":\"S\"},{\"qty\":8,\"size\":\"M\"},{\"qty\":14,\"size\":\"L\"},{\"qty\":6,\"size\":\"XL\"}],\"sku\":\"CC-HOOD-NAVY\",\"total_qty\":32,\"unit_cost\":22.0}]}",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 49,
+     "run_seq": 9,
+     "event_id": "376e293e-aded-4be9-b75b-8ddc851ca647",
+     "ts_utc": "2026-10-11T14:20:12.152957+00:00",
+     "event_type": "tool_call_started",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "customer_service called propose_quote",
+     "tool": "propose_quote",
+     "args": {
+      "ticket_id": 103,
+      "sku": "CC-HOOD-NAVY",
+      "size": "M",
+      "qty": 20,
+      "unit_price": 45,
+      "rationale": "Bulk discount within the price policy"
+     },
+     "call_id": "60fd1ebd-c4b5-4a0d-932d-2ff27466c459",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 50,
+     "run_seq": 10,
+     "event_id": "dc3d8c0c-1dfb-41dd-99ff-a05358bb130f",
+     "ts_utc": "2026-10-11T14:20:12.175320+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "propose_quote returned to customer_service: ok",
+     "tool": "propose_quote",
+     "args": null,
+     "call_id": "60fd1ebd-c4b5-4a0d-932d-2ff27466c459",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"checks\":[{\"detail\":\"45.00 >= unit cost 22.00\",\"result\":\"pass\",\"rule\":\"policy:quote_floor\"},{\"detail\":\"45.00 <= list price 58.00\",\"result\":\"pass\",\"rule\":\"policy:quote_cap\"},{\"detail\":\"CC-HOOD-NAVY/M x 20\",\"result\":\"pass\",\"rule\":\"policy:quote_matches_ticket\"}],\"comput...",
+     "links": {
+      "action_id": 3,
+      "audit_db_event_id": 4
+     },
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 51,
+     "run_seq": 11,
+     "event_id": "d6c67ffc-89f8-4830-9a22-70943c4c54e7",
+     "ts_utc": "2026-10-11T14:20:12.181853+00:00",
+     "event_type": "delegation_requested",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "customer_service delegated to inventory",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "customer_service",
+     "delegated_to": "inventory",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "inventory",
+      "task": "Propose a restock of 12 navy hoodies, size M",
+      "delegation_id": "6265a646-9a64-4a20-a985-c2988125ae11"
+     }
+    },
+    {
+     "seq": 52,
+     "run_seq": 12,
+     "event_id": "d0145160-5128-47c8-bb78-8f8ea57008fa",
+     "ts_utc": "2026-10-11T14:20:12.186014+00:00",
+     "event_type": "agent_started",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service",
+      "inventory"
+     ],
+     "description": "inventory started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Propose a restock of 12 navy hoodies, size M",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Propose a restock of 12 navy hoodies, size M",
+      "delegation_id": "6265a646-9a64-4a20-a985-c2988125ae11"
+     }
+    },
+    {
+     "seq": 53,
+     "run_seq": 13,
+     "event_id": "5d4fca0f-85b8-4ca8-8b48-1a2ad050a47d",
+     "ts_utc": "2026-10-11T14:20:12.200868+00:00",
+     "event_type": "tool_call_started",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service",
+      "inventory"
+     ],
+     "description": "inventory called propose_purchase",
+     "tool": "propose_purchase",
+     "args": {
+      "vendor_id": 1,
+      "sku": "CC-HOOD-NAVY",
+      "size": "M",
+      "qty": 12,
+      "ticket_id": 103,
+      "rationale": "Cover the 12-unit shortfall"
+     },
+     "call_id": "ed38a286-61f4-4332-a16c-4c527fdc9607",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 54,
+     "run_seq": 14,
+     "event_id": "4194e8be-a332-41d4-a772-cff002a92a0c",
+     "ts_utc": "2026-10-11T14:20:12.222799+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service",
+      "inventory"
+     ],
+     "description": "propose_purchase returned to inventory: ok",
+     "tool": "propose_purchase",
+     "args": null,
+     "call_id": "ed38a286-61f4-4332-a16c-4c527fdc9607",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"checks\":[{\"detail\":\"vendor blocked by invoice(s) [501]\",\"result\":\"warn\",\"rule\":\"R3\"},{\"detail\":\"estimate 264.00 vs cash if all open payment proposals executed 160.00\",\"result\":\"warn\",\"rule\":\"R1-informational\"}],\"computed\":{\"earliest_arrival_if_ordered_today\":null,\"e...",
+     "links": {
+      "action_id": 4,
+      "audit_db_event_id": 5
+     },
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 55,
+     "run_seq": 15,
+     "event_id": "aeef1fc9-0f47-41fa-8948-5622bf88b851",
+     "ts_utc": "2026-10-11T14:20:12.233057+00:00",
+     "event_type": "agent_finished",
+     "actor": "inventory",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service",
+      "inventory"
+     ],
+     "description": "inventory finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[],\"proposals_created\":[],\"summary\":\"Restock proposal created; the vendor is blocked by invoice #501.\",\"unknowns\":[]}",
+     "said_summary": "Restock proposal created; the vendor is blocked by invoice #501.",
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": "6265a646-9a64-4a20-a985-c2988125ae11",
+      "response_record": {
+       "file": "run_responses/4c775c5e-56a9-446b-afec-6468d5115770.jsonl",
+       "record_seq": 2,
+       "kind": "agent_response",
+       "record_hash": "7aee0d1a53968fd5a4f1c903de4341fa1851b86f99c96b106ef0265d8031264c"
+      }
+     }
+    },
+    {
+     "seq": 56,
+     "run_seq": 16,
+     "event_id": "bfd8a526-52a5-4864-925c-58095bb6320d",
+     "ts_utc": "2026-10-11T14:20:12.238818+00:00",
+     "event_type": "delegation_completed",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "inventory reported back to customer_service",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": "customer_service",
+     "delegated_to": "inventory",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "inventory",
+      "delegation_id": "6265a646-9a64-4a20-a985-c2988125ae11"
+     }
+    },
+    {
+     "seq": 57,
+     "run_seq": 17,
+     "event_id": "64c56889-f913-48f6-b8de-293fb9194695",
+     "ts_utc": "2026-10-11T14:20:12.252564+00:00",
+     "event_type": "agent_finished",
+     "actor": "customer_service",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss",
+      "customer_service"
+     ],
+     "description": "customer_service finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[],\"facts\":[],\"needs_human\":[],\"proposals_created\":[],\"summary\":\"Quote proposal at $45 per hoodie created.\",\"unknowns\":[]}",
+     "said_summary": "Quote proposal at $45 per hoodie created.",
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": "50d61b70-25f9-4dbb-8fa0-5be5b9f1cb4e",
+      "response_record": {
+       "file": "run_responses/4c775c5e-56a9-446b-afec-6468d5115770.jsonl",
+       "record_seq": 3,
+       "kind": "agent_response",
+       "record_hash": "fe851429e42f91f639866f9de4d6b7399843a104debc9b30bde3f034a14703d3"
+      }
+     }
+    },
+    {
+     "seq": 58,
+     "run_seq": 18,
+     "event_id": "50228ec4-5464-4e59-afa8-90cac431ec24",
+     "ts_utc": "2026-10-11T14:20:12.259361+00:00",
+     "event_type": "delegation_completed",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss"
+     ],
+     "description": "customer_service reported back to boss",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": "boss",
+     "delegated_to": "customer_service",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "customer_service",
+      "delegation_id": "50d61b70-25f9-4dbb-8fa0-5be5b9f1cb4e"
+     }
+    },
+    {
+     "seq": 59,
+     "run_seq": 19,
+     "event_id": "3b0ccb56-f903-41c5-9cae-25412d44cfc1",
+     "ts_utc": "2026-10-11T14:20:12.269121+00:00",
+     "event_type": "agent_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss finished (ok)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": "{\"delegations\":[],\"drafts_created\":[],\"estimates\":[\"Restock of 12 at unit cost $22 = $264 (estimate, not a vendor quote)\"],\"facts\":[],\"needs_human\":[\"Decide on the $45 quote\",\"Decide on the restock proposal\"],\"proposals_created\":[],\"summary\":\"8 of 20 hoodies are in stock (12 short). A $45 quote a...",
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "agent_reported_proposals": [],
+      "agent_reported_drafts": [],
+      "note": "self-reported by the agent; verified IDs are on tool_call_finished events",
+      "delegation_id": null,
+      "response_record": {
+       "file": "run_responses/4c775c5e-56a9-446b-afec-6468d5115770.jsonl",
+       "record_seq": 4,
+       "kind": "agent_response",
+       "record_hash": "dd41c10c46f639e96a8b3bb8bdf32fa5c2540986f0595077841c8b31b4e35679"
+      }
+     }
+    },
+    {
+     "seq": 60,
+     "run_seq": 20,
+     "event_id": "2babf1f7-12a7-4dc5-81e1-980bfab16f4d",
+     "ts_utc": "2026-10-11T14:20:12.278201+00:00",
+     "event_type": "run_finished",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "ticket_id": 103,
+     "chain": null,
+     "description": "Run finished: completed",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": {
+      "status": "ok",
+      "run_status": "completed"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": {
+      "requests": 9,
+      "input_tokens": 1443,
+      "output_tokens": 279,
+      "tool_calls": 6,
+      "source": "offline test model: synthetic counts, NOT real model usage"
+     },
+     "details": {}
+    }
+   ],
+   "next_after_seq": 60,
+   "has_more": false,
+   "trail_events": 60,
+   "trail_valid": true,
+   "source": "output/audit_trail.json (hash chain verified on every read)"
+  }
+ },
+ "ticket_103_after_run": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "lease_id": null,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "unit_price": 45.0,
+     "amount": 900.0,
+     "amount_basis": "quoted_unit_price",
+     "account": null,
+     "rationale": "Bulk discount within the price policy",
+     "proposed_by": "customer_service",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.166184+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.166184+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 4,
+     "kind": "purchase",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 12,
+     "unit_price": null,
+     "amount": 264.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Cover the 12-unit shortfall",
+     "proposed_by": "inventory",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.211230+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid.",
+      "Estimated cost 264.00 exceeds cash remaining if all open payment proposals were executed (160.00)."
+     ],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.211230+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [
+       501
+      ],
+      "blocked_now": true,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "drafts": [],
+   "runs": [
+    {
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "awaiting_human_approval",
+     "started_at": "2026-10-11T14:20:12.024168+00:00",
+     "finished_at": "2026-10-11T14:20:12.278201+00:00"
+    }
+   ],
+   "inventory": {
+    "sku": "CC-HOOD-NAVY",
+    "name": "Basic Hoodie Big Yale",
+    "location": "Aisle A",
+    "unit_cost": 22.0,
+    "list_price": 58.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 4
+     },
+     {
+      "size": "M",
+      "qty": 8
+     },
+     {
+      "size": "L",
+      "qty": 14
+     },
+     {
+      "size": "XL",
+      "qty": 6
+     }
+    ],
+    "requested_size": "M",
+    "requested_qty": 20,
+    "on_hand_requested_size": 8,
+    "computed": {
+     "shortfall": 12,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "events_page_first": {
+  "status": 200,
+  "body": {
+   "events": [
+    {
+     "seq": 1,
+     "run_seq": 1,
+     "event_id": "6f40abfb-b851-4f39-8fb9-bfe3041a0360",
+     "ts_utc": "2026-10-11T14:20:10.386181+00:00",
+     "event_type": "run_started",
+     "actor": "system",
+     "actor_kind": "system",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": null,
+     "description": "Run started (simulated, entry agent boss)",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "model": "offline test models: scripted-accounting, scripted-boss, scripted-customer_service, scripted-facilities, scripted-inventory",
+      "entry_agent": "boss",
+      "ticket_id": 101,
+      "task": "Handle desk ticket 101 only. Read it with get_ticket(101), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "budget": {
+       "max_depth": 4,
+       "max_delegations": 12,
+       "request_limit": 40,
+       "total_tokens_limit": 60000,
+       "tool_calls_limit": 60,
+       "max_output_tokens": 1200,
+       "wall_clock_seconds": 300.0,
+       "request_timeout_seconds": 60.0,
+       "max_http_retries": 1
+      },
+      "database_location": "default",
+      "working_db": "C:\\Users\\DrRya\\AppData\\Local\\Temp\\cc_fixtures_1lhoxfo0\\hw5\\data\\campus_customs_new.db",
+      "live_authorization": null,
+      "offline_network_guard": true,
+      "responses_file": "run_responses/daa5d9a6-aed3-45c6-9df1-d36450b54382.jsonl"
+     }
+    },
+    {
+     "seq": 2,
+     "run_seq": 2,
+     "event_id": "6235acd4-4b0e-4da8-8c5f-8a10b8911411",
+     "ts_utc": "2026-10-11T14:20:10.470844+00:00",
+     "event_type": "agent_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss started work",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": "Handle desk ticket 101 only. Read it with get_ticket(101), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "task": "Handle desk ticket 101 only. Read it with get_ticket(101), check what is already proposed, investigate with your tools, and delegate to the responsible specialists. Report what is proposed, what is blocked, and what a human must decide. Do not work on other tickets.",
+      "delegation_id": null
+     }
+    },
+    {
+     "seq": 3,
+     "run_seq": 3,
+     "event_id": "31bd2a2c-2a90-466f-a251-fce146b19a61",
+     "ts_utc": "2026-10-11T14:20:10.490674+00:00",
+     "event_type": "tool_call_started",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss called get_ticket",
+     "tool": "get_ticket",
+     "args": {
+      "ticket_id": 101
+     },
+     "call_id": "13e4be42-0c28-494d-96db-a88b5fd0739e",
+     "outcome": null,
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 4,
+     "run_seq": 4,
+     "event_id": "0d526962-c8e6-4fe9-8d8b-3904fbb1da3e",
+     "ts_utc": "2026-10-11T14:20:11.485437+00:00",
+     "event_type": "tool_call_finished",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "get_ticket returned to boss: ok",
+     "tool": "get_ticket",
+     "args": null,
+     "call_id": "13e4be42-0c28-494d-96db-a88b5fd0739e",
+     "outcome": {
+      "status": "ok"
+     },
+     "delegated_by": null,
+     "delegated_to": null,
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": "{\"business_date\":\"2026-08-31\",\"drafts\":[],\"human_judgment\":[],\"pending_actions\":[],\"ticket\":{\"created_at\":\"2026-08-31T09:15:00-04:00\",\"id\":101,\"invoice_id\":501,\"lease_id\":null,\"linked_invoice\":{\"amount\":840.0,\"description\":\"Rush reprint CC-TEE-WHITE S\",\"due_date\":\"2026-08-28\",\"id\":501,\"lead_days\"...",
+     "links": null,
+     "usage": null,
+     "details": {}
+    },
+    {
+     "seq": 5,
+     "run_seq": 5,
+     "event_id": "fed7acce-7f13-4704-b114-39df9cda7ae7",
+     "ts_utc": "2026-10-11T14:20:11.492683+00:00",
+     "event_type": "delegation_requested",
+     "actor": "boss",
+     "actor_kind": "agent",
+     "mode": "simulated",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "ticket_id": 101,
+     "chain": [
+      "boss"
+     ],
+     "description": "boss delegated to inventory",
+     "tool": null,
+     "args": null,
+     "call_id": null,
+     "outcome": null,
+     "delegated_by": "boss",
+     "delegated_to": "inventory",
+     "task": null,
+     "said": null,
+     "said_summary": null,
+     "result_summary": null,
+     "links": null,
+     "usage": null,
+     "details": {
+      "to": "inventory",
+      "task": "Check size S tee stock and the restock path for ticket 101",
+      "delegation_id": "0b3709c9-62f0-4fdd-8726-a3313e29d946"
+     }
+    }
+   ],
+   "next_after_seq": 5,
+   "has_more": true,
+   "trail_events": 60,
+   "trail_valid": true,
+   "source": "output/audit_trail.json (hash chain verified on every read)"
+  }
+ },
+ "tickets_after_runs": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "open_count": 3,
+   "resolved_count": 0,
+   "tickets": [
+    {
+     "id": 101,
+     "type": "customer_order",
+     "requester": "Tauhid Zaman",
+     "subject": "Bulldog tee",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-TEE-WHITE",
+     "size": "S",
+     "qty": 1,
+     "invoice_id": 501,
+     "lease_id": null,
+     "notes": "Needs a tee in size S.",
+     "created_at": "2026-08-31T09:15:00-04:00",
+     "proposals": {
+      "proposed": 1,
+      "approved": 0,
+      "executed": 0,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 1,
+     "drafts": 0,
+     "latest_run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "latest_run_phase": "completed",
+     "resolution": null
+    },
+    {
+     "id": 102,
+     "type": "rent_notice",
+     "requester": "Elm City Properties",
+     "subject": "Rent due",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "invoice_id": null,
+     "lease_id": 1,
+     "notes": "Email: shop rent due in 2 days.",
+     "created_at": "2026-08-31T11:05:00-04:00",
+     "proposals": {
+      "proposed": 1,
+      "approved": 0,
+      "executed": 0,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 1,
+     "drafts": 1,
+     "latest_run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "latest_run_phase": "completed",
+     "resolution": null
+    },
+    {
+     "id": 103,
+     "type": "price_override",
+     "requester": "Yale AI Club",
+     "subject": "Bulk hoodie discount",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "invoice_id": null,
+     "lease_id": null,
+     "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+     "created_at": "2026-08-31T16:55:00-04:00",
+     "proposals": {
+      "proposed": 2,
+      "approved": 0,
+      "executed": 0,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 2,
+     "drafts": 0,
+     "latest_run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "latest_run_phase": "completed",
+     "resolution": null
+    }
+   ]
+  }
+ },
+ "pending_after_runs": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "count": 4,
+   "actions": [
+    {
+     "id": 1,
+     "kind": "payment",
+     "status": "proposed",
+     "ticket_id": 101,
+     "invoice_id": 501,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 840.0,
+     "amount_basis": "invoice_amount",
+     "account": "checking",
+     "rationale": "Invoice 501 is 3 days overdue and blocks the vendor",
+     "proposed_by": "accounting",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.594454+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.594454+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 2,
+     "kind": "payment",
+     "status": "proposed",
+     "ticket_id": 102,
+     "invoice_id": null,
+     "lease_id": 1,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 2400.0,
+     "amount_basis": "lease_rent",
+     "account": "checking",
+     "rationale": "Monthly rent for the Chapel Street shop",
+     "proposed_by": "accounting",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.896987+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.896987+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "unit_price": 45.0,
+     "amount": 900.0,
+     "amount_basis": "quoted_unit_price",
+     "account": null,
+     "rationale": "Bulk discount within the price policy",
+     "proposed_by": "customer_service",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.166184+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.166184+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 4,
+     "kind": "purchase",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 12,
+     "unit_price": null,
+     "amount": 264.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Cover the 12-unit shortfall",
+     "proposed_by": "inventory",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.211230+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid.",
+      "Estimated cost 264.00 exceeds cash remaining if all open payment proposals were executed (160.00)."
+     ],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.211230+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [
+       501
+      ],
+      "blocked_now": true,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+  }
+ },
+ "cash_after_runs": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "checking_balance": 3400.0,
+   "checking_as_of": "2026-08-31",
+   "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+   "accounts": [
+    {
+     "name": "checking",
+     "balance": 3400.0,
+     "as_of": "2026-08-31"
+    }
+   ],
+   "payments_executed": [],
+   "not_counted_as_cash": {
+    "proposed_payments_total": 3240.0,
+    "approved_unexecuted_payments_total": 0,
+    "proposed_or_approved_purchase_estimates": 264.0,
+    "proposed_purchase_estimates": 264.0,
+    "approved_unexecuted_purchases_total": 0,
+    "proposed_or_approved_quotes_total": 900.0,
+    "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+   },
+   "available": {
+    "for_obligations": 3400.0,
+    "for_purchases": 3400.0,
+    "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+   }
+  }
+ },
+ "resolve_103_refused_undecided": {
+  "status": 409,
+  "body": {
+   "error": {
+    "code": "REFUSED_RULE",
+    "message": "Proposal(s) [3, 4] on ticket 103 still await a decision; approve or reject them first"
+   }
+  }
+ },
+ "approve_purchase_blocked_vendor": {
+  "status": 200,
+  "body": {
+   "result": "purchase_approved",
+   "decision_id": "33c01d3c-e40f-474c-a770-070dd6d4f714",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "approved",
+   "warnings": [
+    "R3: Bulldog Print Co has open unpaid invoice(s) [501] and ships nothing until they are paid. This approval only authorizes the purchase; executing it (spending cash) will be refused until they are paid."
+   ],
+   "links": {
+    "action_id": 4,
+    "audit_db_event_ids": [
+     6
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 4,
+   "kind": "purchase",
+   "meaning": "Approved as an authorization only. No money has moved and nothing is ordered or shipped. Spending cash needs the separate 'Execute purchase' step with a confirmed amount and supplier. The amount shown is an estimate, not a vendor quote.",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "ticket_103_purchase_approved": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "lease_id": null,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "unit_price": 45.0,
+     "amount": 900.0,
+     "amount_basis": "quoted_unit_price",
+     "account": null,
+     "rationale": "Bulk discount within the price policy",
+     "proposed_by": "customer_service",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.166184+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.166184+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 4,
+     "kind": "purchase",
+     "status": "approved",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 12,
+     "unit_price": null,
+     "amount": 264.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Cover the 12-unit shortfall",
+     "proposed_by": "inventory",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.211230+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid.",
+      "Estimated cost 264.00 exceeds cash remaining if all open payment proposals were executed (160.00)."
+     ],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:12.419746+00:00",
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.211230+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [
+       501
+      ],
+      "blocked_now": true,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "drafts": [],
+   "runs": [
+    {
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "awaiting_human_approval",
+     "started_at": "2026-10-11T14:20:12.024168+00:00",
+     "finished_at": "2026-10-11T14:20:12.278201+00:00"
+    }
+   ],
+   "inventory": {
+    "sku": "CC-HOOD-NAVY",
+    "name": "Basic Hoodie Big Yale",
+    "location": "Aisle A",
+    "unit_cost": 22.0,
+    "list_price": 58.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 4
+     },
+     {
+      "size": "M",
+      "qty": 8
+     },
+     {
+      "size": "L",
+      "qty": 14
+     },
+     {
+      "size": "XL",
+      "qty": 6
+     }
+    ],
+    "requested_size": "M",
+    "requested_qty": 20,
+    "on_hand_requested_size": 8,
+    "computed": {
+     "shortfall": 12,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "cash_with_approved_purchase": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "checking_balance": 3400.0,
+   "checking_as_of": "2026-08-31",
+   "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+   "accounts": [
+    {
+     "name": "checking",
+     "balance": 3400.0,
+     "as_of": "2026-08-31"
+    }
+   ],
+   "payments_executed": [],
+   "not_counted_as_cash": {
+    "proposed_payments_total": 3240.0,
+    "approved_unexecuted_payments_total": 0,
+    "proposed_or_approved_purchase_estimates": 264.0,
+    "proposed_purchase_estimates": 0,
+    "approved_unexecuted_purchases_total": 264.0,
+    "proposed_or_approved_quotes_total": 900.0,
+    "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+   },
+   "available": {
+    "for_obligations": 3400.0,
+    "for_purchases": 3136.0,
+    "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+   }
+  }
+ },
+ "execute_purchase_refused_r3": {
+  "status": 409,
+  "body": {
+   "error": {
+    "code": "REFUSED_RULE",
+    "message": "R3: Bulldog Print Co has open unpaid invoice(s) [501] and ships nothing until they are paid. Execution is refused until then (our implementation choice: R3 forbids shipment; we also refuse to pay for goods that cannot ship)."
+   }
+  }
+ },
+ "execute_purchase_missing_confirmation": {
+  "status": 422,
+  "body": {
+   "error": {
+    "code": "INVALID_INPUT",
+    "message": "The request is not valid.",
+    "problems": [
+     {
+      "field": "body.supplier_confirmed",
+      "message": "Input should be True"
+     }
+    ]
+   }
+  }
+ },
+ "approve_invalid_input": {
+  "status": 422,
+  "body": {
+   "error": {
+    "code": "INVALID_INPUT",
+    "message": "The request is not valid.",
+    "problems": [
+     {
+      "field": "body.confirm",
+      "message": "Field required"
+     }
+    ]
+   }
+  }
+ },
+ "approve_payment_501": {
+  "status": 200,
+  "body": {
+   "result": "payment_executed",
+   "decision_id": "8188b903-82a5-4d8d-94bb-a494273907cc",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "executed",
+   "warnings": [],
+   "links": {
+    "action_id": 1,
+    "payment_id": 1,
+    "audit_db_event_ids": [
+     7,
+     8
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 1,
+   "kind": "payment",
+   "payment": {
+    "payment_id": 1,
+    "kind": "invoice",
+    "ref_id": 501,
+    "amount": 840.0,
+    "account": "checking",
+    "paid_at": "2026-08-31",
+    "approved_by": "Dr. Ryan"
+   },
+   "cash": {
+    "account": "checking",
+    "balance_before": 3400.0,
+    "balance_after": 2560.0
+   },
+   "changes": {
+    "invoice_id": 501,
+    "status_before": "open",
+    "status_after": "paid"
+   },
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "approve_payment_501_again": {
+  "status": 409,
+  "body": {
+   "error": {
+    "code": "NOT_PENDING",
+    "message": "Proposal 1 is 'executed' (payment 1 on 2026-10-11T14:20:12.476764+00:00), not 'proposed'; a decision can be made only once"
+   }
+  }
+ },
+ "cash_after_501": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "checking_balance": 2560.0,
+   "checking_as_of": "2026-08-31",
+   "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+   "accounts": [
+    {
+     "name": "checking",
+     "balance": 2560.0,
+     "as_of": "2026-08-31"
+    }
+   ],
+   "payments_executed": [
+    {
+     "id": 1,
+     "kind": "invoice",
+     "ref_id": 501,
+     "amount": 840.0,
+     "account": "checking",
+     "paid_at": "2026-08-31",
+     "approved_by": "Dr. Ryan"
+    }
+   ],
+   "not_counted_as_cash": {
+    "proposed_payments_total": 2400.0,
+    "approved_unexecuted_payments_total": 0,
+    "proposed_or_approved_purchase_estimates": 264.0,
+    "proposed_purchase_estimates": 0,
+    "approved_unexecuted_purchases_total": 264.0,
+    "proposed_or_approved_quotes_total": 900.0,
+    "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+   },
+   "available": {
+    "for_obligations": 2560.0,
+    "for_purchases": 2296.0,
+    "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+   }
+  }
+ },
+ "ticket_103_after_501_paid": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "lease_id": null,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "proposed",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "unit_price": 45.0,
+     "amount": 900.0,
+     "amount_basis": "quoted_unit_price",
+     "account": null,
+     "rationale": "Bulk discount within the price policy",
+     "proposed_by": "customer_service",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.166184+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": null,
+     "decided_at": null,
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.166184+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 4,
+     "kind": "purchase",
+     "status": "approved",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 12,
+     "unit_price": null,
+     "amount": 264.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Cover the 12-unit shortfall",
+     "proposed_by": "inventory",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.211230+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid.",
+      "Estimated cost 264.00 exceeds cash remaining if all open payment proposals were executed (160.00)."
+     ],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:12.419746+00:00",
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.211230+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [],
+      "blocked_now": false,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "drafts": [],
+   "runs": [
+    {
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "awaiting_human_approval",
+     "started_at": "2026-10-11T14:20:12.024168+00:00",
+     "finished_at": "2026-10-11T14:20:12.278201+00:00"
+    }
+   ],
+   "inventory": {
+    "sku": "CC-HOOD-NAVY",
+    "name": "Basic Hoodie Big Yale",
+    "location": "Aisle A",
+    "unit_cost": 22.0,
+    "list_price": 58.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 4
+     },
+     {
+      "size": "M",
+      "qty": 8
+     },
+     {
+      "size": "L",
+      "qty": 14
+     },
+     {
+      "size": "XL",
+      "qty": 6
+     }
+    ],
+    "requested_size": "M",
+    "requested_qty": 20,
+    "on_hand_requested_size": 8,
+    "computed": {
+     "shortfall": 12,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "approve_quote": {
+  "status": 200,
+  "body": {
+   "result": "quote_approved",
+   "decision_id": "2461aea4-d8bb-4748-b571-54c743a8556e",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "approved",
+   "warnings": [],
+   "links": {
+    "action_id": 3,
+    "audit_db_event_ids": [
+     9
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 3,
+   "kind": "quote",
+   "meaning": "Approved internally. Nothing is sent (R7); customer acceptance is not recorded and no revenue or cash is added (R6).",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "approve_rent": {
+  "status": 200,
+  "body": {
+   "result": "payment_executed",
+   "decision_id": "361db527-b17e-4890-b4e3-3c95c5d649b1",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "executed",
+   "warnings": [],
+   "links": {
+    "action_id": 2,
+    "payment_id": 2,
+    "audit_db_event_ids": [
+     10,
+     11
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 2,
+   "kind": "payment",
+   "payment": {
+    "payment_id": 2,
+    "kind": "lease",
+    "ref_id": 1,
+    "amount": 2400.0,
+    "account": "checking",
+    "paid_at": "2026-08-31",
+    "approved_by": "Dr. Ryan"
+   },
+   "cash": {
+    "account": "checking",
+    "balance_before": 2560.0,
+    "balance_after": 160.0
+   },
+   "changes": {
+    "lease_id": 1,
+    "next_due_before": "2026-09-02",
+    "next_due_after": "2026-10-02"
+   },
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "cash_after_rent": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "checking_balance": 160.0,
+   "checking_as_of": "2026-08-31",
+   "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+   "accounts": [
+    {
+     "name": "checking",
+     "balance": 160.0,
+     "as_of": "2026-08-31"
+    }
+   ],
+   "payments_executed": [
+    {
+     "id": 1,
+     "kind": "invoice",
+     "ref_id": 501,
+     "amount": 840.0,
+     "account": "checking",
+     "paid_at": "2026-08-31",
+     "approved_by": "Dr. Ryan"
+    },
+    {
+     "id": 2,
+     "kind": "lease",
+     "ref_id": 1,
+     "amount": 2400.0,
+     "account": "checking",
+     "paid_at": "2026-08-31",
+     "approved_by": "Dr. Ryan"
+    }
+   ],
+   "not_counted_as_cash": {
+    "proposed_payments_total": 0,
+    "approved_unexecuted_payments_total": 0,
+    "proposed_or_approved_purchase_estimates": 264.0,
+    "proposed_purchase_estimates": 0,
+    "approved_unexecuted_purchases_total": 264.0,
+    "proposed_or_approved_quotes_total": 900.0,
+    "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+   },
+   "available": {
+    "for_obligations": 160.0,
+    "for_purchases": -104.0,
+    "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+   }
+  }
+ },
+ "execute_purchase_refused_cash": {
+  "status": 409,
+  "body": {
+   "error": {
+    "code": "REFUSED_RULE",
+    "message": "Cash constraint: 264.00 exceeds the cash available for purchases (160.00 = actual 160.00 \u2212 approved unexecuted payments 0.00 \u2212 other approved unexecuted purchases 0.00). Nothing was paid (R1; purchases yield to obligations)."
+   }
+  }
+ },
+ "reject_purchase": {
+  "status": 200,
+  "body": {
+   "result": "authorization_withdrawn",
+   "decision_id": "412b84dd-3313-4e02-8d7d-e1bf66fead56",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "rejected",
+   "warnings": [],
+   "links": {
+    "action_id": 4,
+    "audit_db_event_ids": [
+     12
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 4,
+   "kind": "purchase",
+   "meaning": "The purchase authorization was withdrawn before execution. It was never executed and nothing was paid.",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "ticket_103_purchase_withdrawn": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 103,
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "subject": "Bulk hoodie discount",
+    "sku": "CC-HOOD-NAVY",
+    "size": "M",
+    "qty": 20,
+    "lease_id": null,
+    "invoice_id": null,
+    "status": "open",
+    "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+    "created_at": "2026-08-31T16:55:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 3,
+     "kind": "quote",
+     "status": "approved",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "unit_price": 45.0,
+     "amount": 900.0,
+     "amount_basis": "quoted_unit_price",
+     "account": null,
+     "rationale": "Bulk discount within the price policy",
+     "proposed_by": "customer_service",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.166184+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:12.533999+00:00",
+     "decision_note": null,
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.166184+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 4,
+     "kind": "purchase",
+     "status": "rejected",
+     "ticket_id": 103,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 12,
+     "unit_price": null,
+     "amount": 264.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Cover the 12-unit shortfall",
+     "proposed_by": "inventory",
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:12.211230+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid.",
+      "Estimated cost 264.00 exceeds cash remaining if all open payment proposals were executed (160.00)."
+     ],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:12.611590+00:00",
+     "decision_note": "No confirmed hoodie supplier",
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:12.211230+00:00"
+     },
+     "withdrawal": {
+      "authorized_by": "Dr. Ryan",
+      "authorized_at": "2026-10-11T14:20:12.419746+00:00",
+      "authorization_note": null,
+      "withdrawn_by": "Dr. Ryan",
+      "withdrawn_at": "2026-10-11T14:20:12.611590+00:00",
+      "withdrawal_note": "No confirmed hoodie supplier",
+      "executed": false,
+      "paid": false,
+      "source": "audit.db action_rejected event (the authorization's own action_approved event is also kept)"
+     },
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [],
+      "blocked_now": false,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "drafts": [],
+   "runs": [
+    {
+     "run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "completed_nothing_proposed",
+     "started_at": "2026-10-11T14:20:12.024168+00:00",
+     "finished_at": "2026-10-11T14:20:12.278201+00:00"
+    }
+   ],
+   "inventory": {
+    "sku": "CC-HOOD-NAVY",
+    "name": "Basic Hoodie Big Yale",
+    "location": "Aisle A",
+    "unit_cost": 22.0,
+    "list_price": 58.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 4
+     },
+     {
+      "size": "M",
+      "qty": 8
+     },
+     {
+      "size": "L",
+      "qty": 14
+     },
+     {
+      "size": "XL",
+      "qty": 6
+     }
+    ],
+    "requested_size": "M",
+    "requested_qty": 20,
+    "on_hand_requested_size": 8,
+    "computed": {
+     "shortfall": 12,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "resolve_102": {
+  "status": 200,
+  "body": {
+   "result": "ticket_resolved",
+   "decision_id": "45ba3b6f-7eb0-4aa5-88db-abc52c63c768",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "resolved",
+   "warnings": [],
+   "links": {
+    "ticket_id": 102,
+    "audit_db_event_ids": [
+     13
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "ticket_id": 102,
+   "resolution_basis": "business_outcome",
+   "business_outcome_confirmed": true,
+   "unverified_outcomes": [],
+   "resolution_summary": "Landlord confirmed receipt of the September rent",
+   "system_records_at_resolution": {
+    "proposals": [
+     {
+      "action_id": 2,
+      "kind": "payment",
+      "status": "executed",
+      "amount": 2400.0,
+      "payment_id": 2
+     }
+    ],
+    "unsent_drafts": 1
+   },
+   "not_verified_by_system": [
+    "delivery, shipment or receipt of any goods",
+    "customer acceptance of a quote, order or price",
+    "that any message was sent (drafts are never sent by this system)",
+    "any payment, refund or arrangement made outside this system"
+   ],
+   "meaning": "Dr. Ryan confirmed that the underlying business issue is resolved. This is their statement, recorded for attribution; the system has not verified the items listed in not_verified_by_system. Agents cannot change ticket status.",
+   "business_outcome_confirmed_by": "Dr. Ryan",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "tickets_after_decisions": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "open_count": 2,
+   "resolved_count": 1,
+   "tickets": [
+    {
+     "id": 101,
+     "type": "customer_order",
+     "requester": "Tauhid Zaman",
+     "subject": "Bulldog tee",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-TEE-WHITE",
+     "size": "S",
+     "qty": 1,
+     "invoice_id": 501,
+     "lease_id": null,
+     "notes": "Needs a tee in size S.",
+     "created_at": "2026-08-31T09:15:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 1,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "latest_run_phase": "completed",
+     "resolution": null
+    },
+    {
+     "id": 102,
+     "type": "rent_notice",
+     "requester": "Elm City Properties",
+     "subject": "Rent due",
+     "status": "resolved",
+     "is_open": false,
+     "is_resolved": true,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "invoice_id": null,
+     "lease_id": 1,
+     "notes": "Email: shop rent due in 2 days.",
+     "created_at": "2026-08-31T11:05:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 1,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 1,
+     "latest_run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "latest_run_phase": "completed",
+     "resolution": {
+      "basis": "business_outcome",
+      "business_outcome_confirmed": true,
+      "unverified_outcomes": [],
+      "resolved_by": "Dr. Ryan",
+      "resolved_at": "2026-10-11T14:20:12.653002+00:00",
+      "summary": "Landlord confirmed receipt of the September rent",
+      "source": "audit.db ticket_resolved event"
+     }
+    },
+    {
+     "id": 103,
+     "type": "price_override",
+     "requester": "Yale AI Club",
+     "subject": "Bulk hoodie discount",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "invoice_id": null,
+     "lease_id": null,
+     "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+     "created_at": "2026-08-31T16:55:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 1,
+      "executed": 0,
+      "rejected": 1,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "latest_run_phase": "completed",
+     "resolution": null
+    }
+   ]
+  }
+ },
+ "ticket_102_resolved": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 102,
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "subject": "Rent due",
+    "sku": null,
+    "size": null,
+    "qty": null,
+    "lease_id": 1,
+    "invoice_id": null,
+    "status": "resolved",
+    "notes": "Email: shop rent due in 2 days.",
+    "created_at": "2026-08-31T11:05:00-04:00",
+    "linked_invoice": null,
+    "linked_lease": {
+     "id": 1,
+     "space_name": "Chapel Street shop",
+     "landlord": "Elm City Properties",
+     "monthly_rent": 2400.0,
+     "next_due": "2026-10-02",
+     "notes": null
+    },
+    "is_open": false,
+    "is_resolved": true,
+    "resolution": {
+     "basis": "business_outcome",
+     "business_outcome_confirmed": true,
+     "unverified_outcomes": [],
+     "resolved_by": "Dr. Ryan",
+     "resolved_at": "2026-10-11T14:20:12.653002+00:00",
+     "summary": "Landlord confirmed receipt of the September rent",
+     "source": "audit.db ticket_resolved event"
+    }
+   },
+   "pending_actions": [
+    {
+     "id": 2,
+     "kind": "payment",
+     "status": "executed",
+     "ticket_id": 102,
+     "invoice_id": null,
+     "lease_id": 1,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 2400.0,
+     "amount_basis": "lease_rent",
+     "account": "checking",
+     "rationale": "Monthly rent for the Chapel Street shop",
+     "proposed_by": "accounting",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.896987+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:12.559284+00:00",
+     "decision_note": null,
+     "executed_at": "2026-10-11T14:20:12.559284+00:00",
+     "payment_id": 2,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.896987+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    }
+   ],
+   "drafts": [
+    {
+     "id": 1,
+     "ticket_id": 102,
+     "recipient": "Elm City Properties",
+     "recipient_source": "leases.landlord",
+     "channel": "email",
+     "subject": "Re: Rent due",
+     "body": "Thank you for the reminder. The rent payment is being reviewed internally.",
+     "related_action_id": null,
+     "warnings": [],
+     "status": "draft",
+     "created_by": "facilities",
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "call_id": "efc3aaf6-4184-44bd-8b69-ace0a1c46fac",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.847935+00:00",
+     "sent": false
+    }
+   ],
+   "runs": [
+    {
+     "run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "ticket_resolved_by_human",
+     "started_at": "2026-10-11T14:20:11.722395+00:00",
+     "finished_at": "2026-10-11T14:20:11.940062+00:00"
+    }
+   ],
+   "inventory": null
+  }
+ },
+ "pending_after_decisions": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "count": 0,
+   "actions": [],
+   "note": "Proposals move no money. Approving a payment executes it; approving a purchase or quote only authorizes it (nothing is ordered or sent)."
+  }
+ },
+ "run_resolved_ticket": {
+  "status": 409,
+  "body": {
+   "error": {
+    "code": "TICKET_NOT_OPEN",
+    "message": "Ticket 102 is 'resolved'; only open tickets are run."
+   }
+  }
+ },
+ "audit_after_decisions": {
+  "status": 200,
+  "body": {
+   "consistent": true,
+   "run_active": false,
+   "json_trail": {
+    "events": 80,
+    "valid": true,
+    "problems": [],
+    "exists": true
+   },
+   "audit_db": {
+    "events": 13,
+    "valid": true,
+    "problems": []
+   },
+   "incomplete": [],
+   "cross_reference_problems": [],
+   "note": "The JSON trail and the SQLite databases cannot be committed atomically together. Gaps are detected here and reconciled from audit.db and the working copy's reset stamp, never assumed."
+  }
+ },
+ "run_failed_accepted": {
+  "status": 202,
+  "body": {
+   "run_id": "a85a5c71-3d9d-4f23-8fc1-82c1190387c0",
+   "ticket_id": 101,
+   "phase": "queued",
+   "mode": "simulated",
+   "status_url": "/api/runs/a85a5c71-3d9d-4f23-8fc1-82c1190387c0",
+   "events_url": "/api/events?run_id=a85a5c71-3d9d-4f23-8fc1-82c1190387c0",
+   "note": "Poll the status and events URLs. A finished run never resolves the ticket or approves anything."
+  }
+ },
+ "run_failed": {
+  "status": 200,
+  "body": {
+   "run_id": "a85a5c71-3d9d-4f23-8fc1-82c1190387c0",
+   "ticket_id": 101,
+   "mode": "simulated",
+   "phase": "failed",
+   "outcome": "failed",
+   "started_at": "2026-10-11T14:20:12.718141+00:00",
+   "finished_at": "2026-10-11T14:20:12.831948+00:00",
+   "error": "RuntimeError: model unavailable",
+   "awaiting_human_action": false,
+   "proposals_awaiting_decision": [],
+   "proposals_decided": [],
+   "drafts_unsent": [],
+   "ticket_status": "open",
+   "ticket_resolved": false,
+   "usage": {
+    "requests": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "tool_calls": 0,
+    "source": "offline test model: synthetic counts, NOT real model usage"
+   },
+   "agent_report": null,
+   "agent_report_source": null,
+   "events": 5,
+   "events_url": "/api/events?run_id=a85a5c71-3d9d-4f23-8fc1-82c1190387c0"
+  }
+ },
+ "resolve_101_simulated": {
+  "status": 200,
+  "body": {
+   "result": "ticket_resolved",
+   "decision_id": "984fb740-d0f8-4168-bb43-abac227d38f9",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "resolved",
+   "warnings": [],
+   "links": {
+    "ticket_id": 101,
+    "audit_db_event_ids": [
+     14
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "ticket_id": 101,
+   "resolution_basis": "simulated_workflow_complete",
+   "business_outcome_confirmed": false,
+   "unverified_outcomes": [
+    "delivery",
+    "customer_acceptance"
+   ],
+   "resolution_summary": "Invoice #501 paid in the simulation; delivery of the size S tee and customer acceptance are not recorded or verified",
+   "system_records_at_resolution": {
+    "proposals": [
+     {
+      "action_id": 1,
+      "kind": "payment",
+      "status": "executed",
+      "amount": 840.0,
+      "payment_id": 1
+     }
+    ],
+    "unsent_drafts": 0
+   },
+   "not_verified_by_system": [
+    "delivery, shipment or receipt of any goods",
+    "customer acceptance of a quote, order or price",
+    "that any message was sent (drafts are never sent by this system)",
+    "any payment, refund or arrangement made outside this system"
+   ],
+   "meaning": "Dr. Ryan confirmed that the desk's workflow for ticket 101 is complete in this simulation. They did NOT confirm the business outcome; unverified: physical production, shipment, delivery or receipt of goods; acceptance by the customer or counterparty (of a quote, order, price or alternative). Agents cannot change ticket status.",
+   "workflow_complete_confirmed_by": "Dr. Ryan",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "tickets_after_simulated_resolution": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "open_count": 1,
+   "resolved_count": 2,
+   "tickets": [
+    {
+     "id": 101,
+     "type": "customer_order",
+     "requester": "Tauhid Zaman",
+     "subject": "Bulldog tee",
+     "status": "resolved",
+     "is_open": false,
+     "is_resolved": true,
+     "sku": "CC-TEE-WHITE",
+     "size": "S",
+     "qty": 1,
+     "invoice_id": 501,
+     "lease_id": null,
+     "notes": "Needs a tee in size S.",
+     "created_at": "2026-08-31T09:15:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 1,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": "a85a5c71-3d9d-4f23-8fc1-82c1190387c0",
+     "latest_run_phase": "failed",
+     "resolution": {
+      "basis": "simulated_workflow_complete",
+      "business_outcome_confirmed": false,
+      "unverified_outcomes": [
+       "delivery",
+       "customer_acceptance"
+      ],
+      "resolved_by": "Dr. Ryan",
+      "resolved_at": "2026-10-11T14:20:12.895887+00:00",
+      "summary": "Invoice #501 paid in the simulation; delivery of the size S tee and customer acceptance are not recorded or verified",
+      "source": "audit.db ticket_resolved event"
+     }
+    },
+    {
+     "id": 102,
+     "type": "rent_notice",
+     "requester": "Elm City Properties",
+     "subject": "Rent due",
+     "status": "resolved",
+     "is_open": false,
+     "is_resolved": true,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "invoice_id": null,
+     "lease_id": 1,
+     "notes": "Email: shop rent due in 2 days.",
+     "created_at": "2026-08-31T11:05:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 0,
+      "executed": 1,
+      "rejected": 0,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 1,
+     "latest_run_id": "4d9af582-2852-47b0-b365-cf0fe6bb0fe6",
+     "latest_run_phase": "completed",
+     "resolution": {
+      "basis": "business_outcome",
+      "business_outcome_confirmed": true,
+      "unverified_outcomes": [],
+      "resolved_by": "Dr. Ryan",
+      "resolved_at": "2026-10-11T14:20:12.653002+00:00",
+      "summary": "Landlord confirmed receipt of the September rent",
+      "source": "audit.db ticket_resolved event"
+     }
+    },
+    {
+     "id": 103,
+     "type": "price_override",
+     "requester": "Yale AI Club",
+     "subject": "Bulk hoodie discount",
+     "status": "open",
+     "is_open": true,
+     "is_resolved": false,
+     "sku": "CC-HOOD-NAVY",
+     "size": "M",
+     "qty": 20,
+     "invoice_id": null,
+     "lease_id": null,
+     "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+     "created_at": "2026-08-31T16:55:00-04:00",
+     "proposals": {
+      "proposed": 0,
+      "approved": 1,
+      "executed": 0,
+      "rejected": 1,
+      "failed": 0
+     },
+     "awaiting_human_decision": 0,
+     "drafts": 0,
+     "latest_run_id": "4c775c5e-56a9-446b-afec-6468d5115770",
+     "latest_run_phase": "completed",
+     "resolution": null
+    }
+   ]
+  }
+ },
+ "ticket_101_resolved_simulated": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "lease_id": null,
+    "invoice_id": 501,
+    "status": "resolved",
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "linked_invoice": {
+     "id": 501,
+     "amount": 840.0,
+     "due_date": "2026-08-28",
+     "status": "paid",
+     "description": "Rush reprint CC-TEE-WHITE S",
+     "vendor_id": 1,
+     "vendor_name": "Bulldog Print Co",
+     "specialty": "apparel reprint",
+     "lead_days": 5
+    },
+    "linked_lease": null,
+    "is_open": false,
+    "is_resolved": true,
+    "resolution": {
+     "basis": "simulated_workflow_complete",
+     "business_outcome_confirmed": false,
+     "unverified_outcomes": [
+      "delivery",
+      "customer_acceptance"
+     ],
+     "resolved_by": "Dr. Ryan",
+     "resolved_at": "2026-10-11T14:20:12.895887+00:00",
+     "summary": "Invoice #501 paid in the simulation; delivery of the size S tee and customer acceptance are not recorded or verified",
+     "source": "audit.db ticket_resolved event"
+    }
+   },
+   "pending_actions": [
+    {
+     "id": 1,
+     "kind": "payment",
+     "status": "executed",
+     "ticket_id": 101,
+     "invoice_id": 501,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 840.0,
+     "amount_basis": "invoice_amount",
+     "account": "checking",
+     "rationale": "Invoice 501 is 3 days overdue and blocks the vendor",
+     "proposed_by": "accounting",
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:11.594454+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:12.476764+00:00",
+     "decision_note": null,
+     "executed_at": "2026-10-11T14:20:12.476764+00:00",
+     "payment_id": 1,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:11.594454+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    }
+   ],
+   "drafts": [],
+   "runs": [
+    {
+     "run_id": "daa5d9a6-aed3-45c6-9df1-d36450b54382",
+     "mode": "simulated",
+     "phase": "completed",
+     "outcome": "ticket_resolved_by_human",
+     "started_at": "2026-10-11T14:20:10.386181+00:00",
+     "finished_at": "2026-10-11T14:20:11.636584+00:00"
+    },
+    {
+     "run_id": "a85a5c71-3d9d-4f23-8fc1-82c1190387c0",
+     "mode": "simulated",
+     "phase": "failed",
+     "outcome": "failed",
+     "started_at": "2026-10-11T14:20:12.718141+00:00",
+     "finished_at": "2026-10-11T14:20:12.831948+00:00"
+    }
+   ],
+   "inventory": {
+    "sku": "CC-TEE-WHITE",
+    "name": "Classic Bulldog Tee",
+    "location": "Aisle B",
+    "unit_cost": 8.0,
+    "list_price": 28.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 0
+     },
+     {
+      "size": "M",
+      "qty": 5
+     },
+     {
+      "size": "L",
+      "qty": 3
+     },
+     {
+      "size": "XL",
+      "qty": 2
+     }
+    ],
+    "requested_size": "S",
+    "requested_qty": 1,
+    "on_hand_requested_size": 0,
+    "computed": {
+     "shortfall": 1,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ },
+ "run_interrupted": {
+  "status": 200,
+  "body": {
+   "run_id": "6c7851eb-594a-4b77-89d8-1da81a2c4029",
+   "ticket_id": 101,
+   "mode": "simulated",
+   "phase": "interrupted",
+   "outcome": "interrupted",
+   "started_at": "2026-10-11T14:20:12.949187+00:00",
+   "finished_at": null,
+   "error": null,
+   "awaiting_human_action": false,
+   "proposals_awaiting_decision": [],
+   "proposals_decided": [],
+   "drafts_unsent": [],
+   "ticket_status": "resolved",
+   "ticket_resolved": true,
+   "usage": null,
+   "agent_report": null,
+   "agent_report_source": null,
+   "events": 1,
+   "events_url": "/api/events?run_id=6c7851eb-594a-4b77-89d8-1da81a2c4029"
+  }
+ },
+ "approve_tee_purchase": {
+  "status": 200,
+  "body": {
+   "result": "purchase_approved",
+   "decision_id": "b5a0e5d8-7b87-4f53-baa5-3795e30dabb8",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "approved",
+   "warnings": [
+    "R3: Bulldog Print Co has open unpaid invoice(s) [501] and ships nothing until they are paid. This approval only authorizes the purchase; executing it (spending cash) will be refused until they are paid."
+   ],
+   "links": {
+    "action_id": 1,
+    "audit_db_event_ids": [
+     3
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 1,
+   "kind": "purchase",
+   "meaning": "Approved as an authorization only. No money has moved and nothing is ordered or shipped. Spending cash needs the separate 'Execute purchase' step with a confirmed amount and supplier. The amount shown is an estimate, not a vendor quote.",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "approve_payment_501_sandbox2": {
+  "status": 200,
+  "body": {
+   "result": "payment_executed",
+   "decision_id": "bb4efb27-b35f-4151-b6dc-af2d46c9631e",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "executed",
+   "warnings": [],
+   "links": {
+    "action_id": 2,
+    "payment_id": 1,
+    "audit_db_event_ids": [
+     4,
+     5
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 2,
+   "kind": "payment",
+   "payment": {
+    "payment_id": 1,
+    "kind": "invoice",
+    "ref_id": 501,
+    "amount": 840.0,
+    "account": "checking",
+    "paid_at": "2026-08-31",
+    "approved_by": "Dr. Ryan"
+   },
+   "cash": {
+    "account": "checking",
+    "balance_before": 3400.0,
+    "balance_after": 2560.0
+   },
+   "changes": {
+    "invoice_id": 501,
+    "status_before": "open",
+    "status_after": "paid"
+   },
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "execute_purchase_ok": {
+  "status": 200,
+  "body": {
+   "result": "purchase_executed",
+   "decision_id": "a5b3f6fd-7cf6-4762-a739-f17c4c643985",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "executed",
+   "warnings": [],
+   "links": {
+    "action_id": 1,
+    "payment_id": 2,
+    "audit_db_event_ids": [
+     6
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 1,
+   "kind": "purchase",
+   "payment": {
+    "payment_id": 2,
+    "kind": "purchase",
+    "ref_id": 1,
+    "amount": 80.0,
+    "account": "checking",
+    "paid_at": "2026-08-31",
+    "approved_by": "Dr. Ryan"
+   },
+   "cash": {
+    "account": "checking",
+    "balance_before": 2560.0,
+    "balance_after": 2480.0,
+    "available_for_purchases_before": 2560.0,
+    "approved_unexecuted_payments": 0.0,
+    "approved_unexecuted_purchases": 0.0
+   },
+   "execution": {
+    "amount_basis": "recorded_unit_cost_estimate",
+    "basis_meaning": "the database cost estimate (quantity \u00d7 stored unit cost), confirmed by the person as the actual amount; not a supplier quote",
+    "amount_confirmed_by_person": true,
+    "supplier_confirmed_by_person": true,
+    "confirmation_note": null,
+    "database_estimate": 80.0,
+    "proposal_estimate": 80.0,
+    "difference_from_database_estimate": 0.0,
+    "vendor_id": 1,
+    "vendor": "Bulldog Print Co",
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 10,
+    "authorized_by": "Dr. Ryan",
+    "authorized_at": "2026-10-11T14:20:13.090971+00:00",
+    "executed_by": "Dr. Ryan",
+    "executed_at": "2026-10-11T14:20:13.129712+00:00",
+    "inventory_changed": false,
+    "not_verified": [
+     "delivery or receipt of the goods",
+     "the supplier's agreement",
+     "the supplier's price (unless the database estimate was used)"
+    ]
+   },
+   "meaning": "Dr. Ryan executed the purchase: 80.00 was paid from checking for the order. Paying is not delivery: inventory is unchanged, and receipt of the goods is not recorded.",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "execute_purchase_again": {
+  "status": 409,
+  "body": {
+   "error": {
+    "code": "NOT_PENDING",
+    "message": "Purchase 1 is 'executed': it was already executed (payment 2)"
+   }
+  }
+ },
+ "reject_plain_purchase": {
+  "status": 200,
+  "body": {
+   "result": "rejected",
+   "decision_id": "52b53448-d65b-499b-b30f-8e3f004b52ee",
+   "decided_by": "Dr. Ryan",
+   "business_date": "2026-08-31",
+   "status": "rejected",
+   "warnings": [],
+   "links": {
+    "action_id": 3,
+    "audit_db_event_ids": [
+     8
+    ]
+   },
+   "audit_trail_recorded": true,
+   "notice": "LOCAL PROTOTYPE: not an authenticated approval system. The name entered is recorded for attribution only.",
+   "action_id": 3,
+   "kind": "purchase",
+   "meaning": "Rejected. Nothing is executed; cash and records are unchanged apart from this decision.",
+   "earlier_gaps_reconciled": 0,
+   "reconciliation_pending": false
+  }
+ },
+ "cash_after_purchase": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "checking_balance": 2480.0,
+   "checking_as_of": "2026-08-31",
+   "source": "cash_accounts table (stored balance after executed payments and executed purchases only)",
+   "accounts": [
+    {
+     "name": "checking",
+     "balance": 2480.0,
+     "as_of": "2026-08-31"
+    }
+   ],
+   "payments_executed": [
+    {
+     "id": 1,
+     "kind": "invoice",
+     "ref_id": 501,
+     "amount": 840.0,
+     "account": "checking",
+     "paid_at": "2026-08-31",
+     "approved_by": "Dr. Ryan"
+    },
+    {
+     "id": 2,
+     "kind": "purchase",
+     "ref_id": 1,
+     "amount": 80.0,
+     "account": "checking",
+     "paid_at": "2026-08-31",
+     "approved_by": "Dr. Ryan"
+    }
+   ],
+   "not_counted_as_cash": {
+    "proposed_payments_total": 0,
+    "approved_unexecuted_payments_total": 0,
+    "proposed_or_approved_purchase_estimates": 0,
+    "proposed_purchase_estimates": 0,
+    "approved_unexecuted_purchases_total": 0,
+    "proposed_or_approved_quotes_total": 0,
+    "note": "Information only. Proposals and approved-but-unexecuted purchases move no money; purchase figures are estimates; quotes add no revenue (R6). The balance changes only when a person executes a payment (by approving it) or executes an approved purchase."
+   },
+   "available": {
+    "for_obligations": 2480.0,
+    "for_purchases": 2480.0,
+    "note": "Computed, not stored. Invoice and rent payments may use actual cash minus approved unexecuted payments; purchases may use that minus approved unexecuted purchases (purchases yield to obligations). Commitments are never deducted from the stored balance."
+   }
+  }
+ },
+ "ticket_101_purchase_executed": {
+  "status": 200,
+  "body": {
+   "business_date": "2026-08-31",
+   "ticket": {
+    "id": 101,
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "subject": "Bulldog tee",
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "qty": 1,
+    "lease_id": null,
+    "invoice_id": 501,
+    "status": "open",
+    "notes": "Needs a tee in size S.",
+    "created_at": "2026-08-31T09:15:00-04:00",
+    "linked_invoice": {
+     "id": 501,
+     "amount": 840.0,
+     "due_date": "2026-08-28",
+     "status": "paid",
+     "description": "Rush reprint CC-TEE-WHITE S",
+     "vendor_id": 1,
+     "vendor_name": "Bulldog Print Co",
+     "specialty": "apparel reprint",
+     "lead_days": 5
+    },
+    "linked_lease": null,
+    "is_open": true,
+    "is_resolved": false,
+    "resolution": null
+   },
+   "pending_actions": [
+    {
+     "id": 1,
+     "kind": "purchase",
+     "status": "executed",
+     "ticket_id": 101,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-TEE-WHITE",
+     "size": "S",
+     "qty": 10,
+     "unit_price": null,
+     "amount": 80.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "Restock size S tees (estimate, supplier unconfirmed)",
+     "proposed_by": "inventory",
+     "run_id": "ebc3bd50-74eb-4c6b-98ae-2dbb02243585",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:13.030842+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": true,
+     "blocking_invoice_ids": [
+      501
+     ],
+     "alternative_to": [],
+     "warnings": [
+      "R3: Bulldog Print Co has open unpaid invoice(s) [501]. No shipment, order placement, or receipt is possible until they are paid."
+     ],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:13.090971+00:00",
+     "decision_note": null,
+     "executed_at": "2026-10-11T14:20:13.129712+00:00",
+     "payment_id": 2,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:13.030842+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [],
+      "blocked_now": false,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    },
+    {
+     "id": 2,
+     "kind": "payment",
+     "status": "executed",
+     "ticket_id": 101,
+     "invoice_id": 501,
+     "lease_id": null,
+     "vendor_id": null,
+     "sku": null,
+     "size": null,
+     "qty": null,
+     "unit_price": null,
+     "amount": 840.0,
+     "amount_basis": "invoice_amount",
+     "account": "checking",
+     "rationale": "Invoice 501 is overdue and blocks the vendor",
+     "proposed_by": "accounting",
+     "run_id": "6e43a364-2f20-43c7-b159-3c9d2abdd845",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:13.039865+00:00",
+     "fundable_at_proposal": true,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:13.109385+00:00",
+     "decision_note": null,
+     "executed_at": "2026-10-11T14:20:13.109385+00:00",
+     "payment_id": 1,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:13.039865+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": null
+    },
+    {
+     "id": 3,
+     "kind": "purchase",
+     "status": "rejected",
+     "ticket_id": 101,
+     "invoice_id": null,
+     "lease_id": null,
+     "vendor_id": 1,
+     "sku": "CC-TEE-WHITE",
+     "size": "S",
+     "qty": 4,
+     "unit_price": null,
+     "amount": 32.0,
+     "amount_basis": "estimate_unit_cost",
+     "account": null,
+     "rationale": "A smaller alternative restock (estimate)",
+     "proposed_by": "inventory",
+     "run_id": "9f7e98bc-1e77-4cb0-b791-6e9d9a912845",
+     "business_date": "2026-08-31",
+     "created_at": "2026-10-11T14:20:13.154863+00:00",
+     "fundable_at_proposal": null,
+     "vendor_blocked": false,
+     "blocking_invoice_ids": [],
+     "alternative_to": [],
+     "warnings": [],
+     "decided_by": "Dr. Ryan",
+     "decided_at": "2026-10-11T14:20:13.171293+00:00",
+     "decision_note": "Not needed",
+     "executed_at": null,
+     "payment_id": null,
+     "warnings_recorded_at": {
+      "business_date": "2026-08-31",
+      "created_at": "2026-10-11T14:20:13.154863+00:00"
+     },
+     "withdrawal": null,
+     "current_vendor_status": {
+      "vendor_id": 1,
+      "vendor": "Bulldog Print Co",
+      "open_invoice_ids": [],
+      "blocked_now": false,
+      "as_of": "2026-08-31",
+      "source": "invoices table (current)"
+     }
+    }
+   ],
+   "drafts": [],
+   "runs": [],
+   "inventory": {
+    "sku": "CC-TEE-WHITE",
+    "name": "Classic Bulldog Tee",
+    "location": "Aisle B",
+    "unit_cost": 8.0,
+    "list_price": 28.0,
+    "sizes": [
+     {
+      "size": "S",
+      "qty": 0
+     },
+     {
+      "size": "M",
+      "qty": 5
+     },
+     {
+      "size": "L",
+      "qty": 3
+     },
+     {
+      "size": "XL",
+      "qty": 2
+     }
+    ],
+    "requested_size": "S",
+    "requested_qty": 1,
+    "on_hand_requested_size": 0,
+    "computed": {
+     "shortfall": 1,
+     "note": "Arithmetic on stored values (requested quantity minus stock on hand). Not a forecast."
+    },
+    "source": "inventory and pricing tables (stored values)"
+   }
+  }
+ }
+}

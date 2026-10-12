@@ -1,0 +1,71 @@
+[10/11/26 15:57:21] Error calling tool 'check_inventory'                       
+[10/11/26 15:57:22] Error calling tool 'check_inventory'                       
+
+
++-----------------------------------------------------------------------------+
+|                                                                             |
+|                                                                             |
+|                        \u2584\u2580\u2580 \u2584\u2580\u2588 \u2588\u2580\u2580 \u2580\u2588\u2580 \u2588\u2580\u2584\u2580\u2588 \u2588\u2580\u2580 \u2588\u2580\u2588                        |
+|                        \u2588\u2580  \u2588\u2580\u2588 \u2584\u2584\u2588  \u2588  \u2588 \u2580 \u2588 \u2588\u2584\u2584 \u2588\u2580\u2580                        |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                FastMCP 4.1.0                                |
+|                            https://gofastmcp.com                            |
+|                                                                             |
+|                 \U0001f5a5  Server:      campus-customs, 4.1.0                       |
+|                 \U0001f680 Deploy free: https://horizon.prefect.io                  |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+[10/11/26 15:57:23] INFO     Starting MCP server               transport.py:241
+                             'campus-customs' with transport                   
+                             'stdio'                                           
+PASS  server points at working copy (campus_customs_new.db)
+PASS  the original three tools plus the approved Problem 5 tools are registered: ['check_inventory', 'draft_message', 'get_financial_position', 'get_open_tickets', 'get_ticket', 'list_pending_actions', 'list_vendors', 'propose_payment', 'propose_purchase', 'propose_quote']
+PASS  the original three (and all read tools) are annotated read-only; proposal tools are not
+PASS  [current] check_inventory returns all 10 inventory rows exactly
+PASS  [current] check_inventory prices match pricing table
+PASS  [current] check_inventory(sku) filters to one product; tee size S matches DB (ticket 101)
+PASS  [current] check_inventory rejects an unknown SKU with an error
+PASS  [current] business date comes from desk
+PASS  [current] total cash matches DB (160.0)
+PASS  [current] open invoices match DB
+PASS  [current] cash after obligations = cash - open invoices - rent
+PASS  [current] days overdue for every open invoice = SQLite date math {}
+PASS  [current] vendors with open invoices match DB (rule R3)
+PASS  [current] invoice 501 stored facts: $840.00, due 2026-08-28, Bulldog Print Co
+PASS  [current] invoice 501 is PAID: exactly one $840.00 payment, not listed as open, vendor no longer blocked (R3)
+PASS  [current] get_open_tickets returns every open ticket and only those
+PASS  [current] ticket 101 carries invoice 501 and its vendor
+PASS  [current] ticket 102 carries lease 1
+PASS  [current] ticket 103 has no linked invoice or lease
+PASS  [current] get_ticket reports each ticket's stored status
+PASS  baseline copy of the original matches the recorded SHA-256
+PASS  [baseline] check_inventory returns all 10 inventory rows exactly
+PASS  [baseline] check_inventory prices match pricing table
+PASS  [baseline] check_inventory(sku) filters to one product; tee size S matches DB (ticket 101)
+PASS  [baseline] check_inventory rejects an unknown SKU with an error
+PASS  [baseline] business date comes from desk
+PASS  [baseline] total cash matches DB (3400.0)
+PASS  [baseline] open invoices match DB
+PASS  [baseline] cash after obligations = cash - open invoices - rent
+PASS  [baseline] days overdue for every open invoice = SQLite date math {501: 3}
+PASS  [baseline] vendors with open invoices match DB (rule R3)
+PASS  [baseline] invoice 501 stored facts: $840.00, due 2026-08-28, Bulldog Print Co
+PASS  [baseline] invoice 501 is OPEN: listed, 3 days overdue, no payment, vendor blocked (R3)
+PASS  [baseline] get_open_tickets returns every open ticket and only those
+PASS  [baseline] ticket 101 carries invoice 501 and its vendor
+PASS  [baseline] ticket 102 carries lease 1
+PASS  [baseline] ticket 103 has no linked invoice or lease
+PASS  [baseline] get_ticket reports each ticket's stored status
+PASS  [baseline] original state: $3,400.00 checking; tickets 101, 102, 103 open
+PASS  [baseline] invoice 501 open and 3 days overdue on 2026-08-31; Bulldog Print Co blocked (R3)
+PASS  [baseline] cash after all obligations = 3,400 - 840 - 2,400 = $160.00 (hypothetical, as in Problem 3)
+PASS  server starts as a stdio subprocess and answers tool calls
+PASS  server connection refuses writes (attempt to write a readonly database)
+PASS  original DB unchanged (sha256 23686a90d698...)
+PASS  working DB unchanged by read-only tools (sha256 a8dfed929f59...)
+
+45/45 checks passed

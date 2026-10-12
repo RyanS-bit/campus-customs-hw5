@@ -1,0 +1,46 @@
+[10/10/26 22:01:30] Error calling tool 'check_inventory'                       
+
+
++-----------------------------------------------------------------------------+
+|                                                                             |
+|                                                                             |
+|                        \u2584\u2580\u2580 \u2584\u2580\u2588 \u2588\u2580\u2580 \u2580\u2588\u2580 \u2588\u2580\u2584\u2580\u2588 \u2588\u2580\u2580 \u2588\u2580\u2588                        |
+|                        \u2588\u2580  \u2588\u2580\u2588 \u2584\u2584\u2588  \u2588  \u2588 \u2580 \u2588 \u2588\u2584\u2584 \u2588\u2580\u2580                        |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                FastMCP 4.1.0                                |
+|                            https://gofastmcp.com                            |
+|                                                                             |
+|                 \U0001f5a5  Server:      campus-customs, 4.1.0                       |
+|                 \U0001f680 Deploy free: https://horizon.prefect.io                  |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+[10/10/26 22:01:32] INFO     Starting MCP server               transport.py:241
+                             'campus-customs' with transport                   
+                             'stdio'                                           
+PASS  server points at working copy (campus_customs_new.db)
+PASS  the original three tools plus the approved Problem 5 tools are registered: ['check_inventory', 'draft_message', 'get_financial_position', 'get_open_tickets', 'get_ticket', 'list_pending_actions', 'list_vendors', 'propose_payment', 'propose_purchase', 'propose_quote']
+PASS  the original three (and all read tools) are annotated read-only; proposal tools are not
+PASS  check_inventory returns all 10 inventory rows exactly
+PASS  check_inventory prices match pricing table
+PASS  check_inventory(sku) filters to one product; tee size S matches DB (ticket 101)
+PASS  check_inventory rejects an unknown SKU with an error
+PASS  business date comes from desk
+PASS  total cash matches DB (3400.0)
+PASS  open invoices match DB
+PASS  cash after obligations = cash - open invoices - rent
+PASS  invoice 501 days overdue = 3 (SQLite date math)
+PASS  vendors with open invoices match DB (rule R3)
+PASS  get_open_tickets returns every open ticket
+PASS  ticket 101 carries invoice 501 and its vendor
+PASS  ticket 102 carries lease 1
+PASS  ticket 103 has no linked invoice or lease
+PASS  server starts as a stdio subprocess and answers tool calls
+PASS  server connection refuses writes (attempt to write a readonly database)
+PASS  original DB unchanged (sha256 23686a90d698...)
+PASS  working DB unchanged by read-only tools (sha256 d6b0e89a6467...)
+
+21/21 checks passed
