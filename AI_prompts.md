@@ -6033,3 +6033,45 @@ Verification only. No files were changed during it; this entry was added afterwa
 > Preserve all existing evidence and do not run agents, reset databases, or modify unrelated projects.
 >
 > If any additional security warnings or unexpected issues arise, stop and ask me before proceeding.
+
+### Prompt 3
+
+**Why a follow-up was needed:** Dr. Ryan acknowledged progress while the publication checks were running.
+
+> ok great
+
+### Claude's notes (prompts 1–3): published and verified (2026-10-11, 22:05 EDT)
+
+- **Pre-checks for prompt 2:**
+  - **Identity:** the folder is the Homework 5 project (README title; `CLAUDE.md`).
+  - **Contents:** compared with the follow-up 12 fingerprints, only `.gitignore` and `AI_prompts.md` had changed (authorized edits). All three databases and `audit_trail.json` are byte-identical.
+  - **Hooks:** `.git/hooks` holds only Git's inactive `.sample` templates.
+  - **Configuration:** the repository config holds only defaults plus `core.autocrlf=false`. The effective settings are Git for Windows defaults and the GitHub CLI credential helper. The Git LFS filters do not apply, because `.gitattributes` assigns no filter.
+- **`safe.directory`:**
+  - It was passed per command only, with the `hw5` path. No global setting and no folder ownership or permissions were changed.
+  - Disclosure: one local `git clone` used `safe.directory=*` for that single command. It changed no setting.
+- **README:**
+  - The status line now says Problems 1–11 are complete and gives the repository URL.
+  - A note explains that the repository root is the `hw5/` folder.
+  - Rows were added for `.gitattributes` and `output/github_url.txt`, and the `.gitignore` row now mentions `.claude/`.
+- **Final scan (209 files):**
+  - The configured key value is in no file.
+  - Credential patterns found the same two false positives (a dummy test key; part of an event ID).
+  - No `CC_LIVE_AUTHORIZATION` is preset anywhere, and `.env.example` contains only comments.
+  - `data.zip` holds exactly `data/campus_customs.db` (same SHA-256).
+- **Pre-push test:**
+  - I made a local commit and cloned it with `core.autocrlf=true`. All 209 files are byte-identical to the project.
+  - In that clone, with no API key or live authorization in the environment: 669 tests passed, `verify_tools.py` 45/45, `verify_audit.py` consistent.
+- **Published:**
+  - Repository: https://github.com/RyanS-bit/campus-customs-hw5 (public), branch `main`.
+  - First commit: `b35290114efc1ee919cb8e39d008a3a5bb2c27f7`, 209 files.
+- **Verification from GitHub:**
+  - **Access:** the page returns HTTP 200 without credentials. The API reports `visibility: public`, and the remote head equals the local commit.
+  - **Root:** `.env.example`, `.gitattributes`, `.gitignore`, `.mcp.json`, `AI_prompts.md`, `CLAUDE.md`, `README.md`, `backend/`, `data/`, `data.zip`, `frontend/`, `mcp_server/`, `output/`, `requirements.txt`, `scripts/`, `tests/`.
+  - **Clone contents:** an anonymous clone (credential helper disabled) has all 209 files, byte-identical to the project.
+  - **Required files:** `.mcp.json`, `data.zip`, all three databases, `output/github_url.txt` and the deliverables are present.
+  - **Absent:** `.claude/`, `.env`, `.venv/`, `tsbuildinfo`, caches and backups.
+  - **Scan:** a credential scan of the clone found nothing new.
+  - **Live runs:** they stay off by default; the backend reads `CC_LIVE_AUTHORIZATION` only from the process environment (`backend/main.py:415`).
+- **Then:** this log entry is pushed as a second commit, so the published log is complete.
+- **Not done:** no reset, no agent run, no model call, no evidence regenerated. The existing course repository and other projects are untouched; the only addition is the separate `hw5/.git`.
